@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Check-in Visitas</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Tela Login -->
+    <string name="title_activity_login">Login</string>
+    <string name="titulo"></string>
+    <string name="usuario">Usuário:</string>
+    <string name="senha">Senha:</string>
+    <string name="perfil">Perfil:</string>
+    <string name="btnLogar">Entrar</string>
+    <string name="btnCadastrar">Cadastrar</string>
+    <string name="msg_erro_invalido_login">Usuário ou senha inválidos</string>
+    <string name="msg_erro_validacao_login">Preencha os campos vazios!!!</string>
+
+    <!-- Tele Menu Geral -->
+    <string name="title_activity_menu_geral">Menu</string>
+    <string name="btnCadVendedor">Cadastrar de vendedor</string>
+    <string name="btnCadVisita">Cadastrar de visita</string>
+    <string name="btnLstVisita">Listar visitas</string>
+    <string name="btnVoltar">Voltar</string>
+    <string name="btnConfirmar">Confirmar</string>
+
+    <!-- Tela Cadastro de Vendedor -->
+    <string name="title_activity_cad_vendedor"></string>
+    <string name="subTitulo">Cadastro de vendedor</string>
+    <string name="btnCancelar">Cancelar</string>
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+
+    <!-- Tela Cadastro de Visitas -->
+    <string name="title_activity_cad_visita">Cadastro de Visitas</string>
+    <string name="cliente">Cliente</string>
+    <string name="vendedor">Vendedor</string>
+    <string name="endereco">Endereço</string>
+    <string name="data">Data</string>
+    <string name="hora">Hora</string>
+
+    <!-- Tela Lista Visitas -->
+    <string name="title_activity_lst">Lista de Visitas</string>
+    <string name="checkin">Marcar Visita Realizada</string>
+    <string name="menu_mapa">Mapa</string>
+    <string name="alterarFoto">Atualizar foto</string>
+
+    <!-- Tela Cadastro de Usuarios -->
+    <string name="title_activity_cad_usuario">Cadastro de Usuário</string>
+
+</resources>

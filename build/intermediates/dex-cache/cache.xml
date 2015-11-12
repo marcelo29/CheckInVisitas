@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/masasp29/Google Drive/5Semestre/Android II/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8f11f56e350eacabf2273f646d981356eea0ed77">
+        <dex dex="/Users/masasp29/Google Drive/5Semestre/Android II/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-77da7e84b15a9b28c906bdc8028ae3c65dcb8ff5.jar" />
+    </item>
+    <item
+        jar="/Users/masasp29/Documents/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="/Users/masasp29/Google Drive/5Semestre/Android II/CheckVisita/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-bf5bfd4f73592063c29326840d5cc8f9fb61aaca.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,13 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="20dp"
+    android:shape="rectangle">
+
+    <solid android:color="#a9a0b4" />
+
+    <corners
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp" />
+
+</shape><!-- From: file:/Users/masasp29/Google%20Drive/5Semestre/Android%20II/CheckVisita/app/src/main/res/drawable-xhdpi/screen_border_txtview.xml -->
