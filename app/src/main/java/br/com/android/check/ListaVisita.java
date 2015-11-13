@@ -44,6 +44,10 @@ public class ListaVisita extends Activity {
 
         user = new SessaoDAO(this).getUsuario();
 
+        if (user.getPerfil().equals("vendedor")) {
+            btnMarcaVisita.setVisibility(View.INVISIBLE);
+        }
+
         vdao = new VisitaDAO(this);
 
         atualizaLista();
@@ -51,21 +55,25 @@ public class ListaVisita extends Activity {
         btnMarcaVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int qtdMarcada = 0, posicaoMarcada = 0;
+                int qtdMarcada = 0;
+                int posicaoMarcada = 0;
+
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getSituacao() == 1) {
                         qtdMarcada++;
                         posicaoMarcada = i;
                     }
                 }
+
                 if (qtdMarcada == 1) {
                     vdao.visitaRealizada(lista.get(posicaoMarcada).getId());
                     new Util().showMessage(ctx, "Visita concluída");
                 } else if (qtdMarcada > 1) {
-                    new Util().showMessage(ctx, "Marque apenas um endereço para visualizar no mapa.");
+                    new Util().showMessage(ctx, "Marque apenas uma visita para realizar.");
                 } else {
-                    new Util().showMessage(ctx, "Marque um endereço para visualizar no mapa.");
+                    new Util().showMessage(ctx, "Marque uma visita para realizar.");
                 }
+
                 atualizaLista();
             }
         });
@@ -91,24 +99,27 @@ public class ListaVisita extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_mapa:
-                int qtdMarcada = 0, posicaoMarcada = 0;
+                int marcadas = 0, posicaoMarcada = 0;
+
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getSituacao() == 1) {
-                        qtdMarcada++;
+                        marcadas++;
                         posicaoMarcada = i;
                     }
                 }
-                if (qtdMarcada == 1) {
+                if (marcadas == 1) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(
                             Uri.parse("geo:0,0?z=14&q=" + lista.get(posicaoMarcada).getEndereco()));
                     startActivity(intent);
-                } else if (qtdMarcada > 1) {
+                } else if (marcadas > 1) {
                     new Util().showMessage(ctx, "Marque apenas um endereço para visualizar no mapa.");
                 } else {
                     new Util().showMessage(ctx, "Marque um endereço para visualizar no mapa.");
                 }
+
                 atualizaLista();
+
                 return false;
             default:
                 return super.onOptionsItemSelected(item);

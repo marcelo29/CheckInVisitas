@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MenuGeral extends Activity {
 
-    private RadioButton rdCadVendedor, rdCadVisita, rdLstVisita, rdVoltar;
+    private RadioButton rdCadVendedor, rdCadAdmin, rdCadVisita, rdLstVisita, rdVoltar;
     private RadioGroup rgMenu;
     private Button btnConfirmar;
     private Context ctx;
@@ -28,6 +28,7 @@ public class MenuGeral extends Activity {
 
         rdCadVendedor = (RadioButton) findViewById(R.id.rdCadVendedor);
         rdCadVisita = (RadioButton) findViewById(R.id.rdCadVisita);
+        rdCadAdmin = (RadioButton) findViewById(R.id.rdCadAdmin);
         rdLstVisita = (RadioButton) findViewById(R.id.rdLstVisita);
         rdVoltar = (RadioButton) findViewById(R.id.rdVoltar);
 
@@ -42,26 +43,29 @@ public class MenuGeral extends Activity {
             public void onClick(View v) {
                 switch (rgMenu.getCheckedRadioButtonId()) {
                     case R.id.rdCadVendedor:
-                        mudaTela(CadVendedor.class);
+                        carregaLayout(ctx, CadVendedor.class);
                         break;
                     case R.id.rdCadVisita:
-                        mudaTela(CadVisita.class);
+                        carregaLayout(ctx, CadVisita.class);
+                        break;
+                    case R.id.rdCadAdmin:
+                        carregaLayout(ctx, CadUsuario.class);
                         break;
                     case R.id.rdLstVisita:
-                        mudaTela(ListaVisita.class);
+                        carregaLayout(ctx, ListaVisita.class);
                         break;
                     case R.id.rdVoltar:
-                        mudaTela(Login.class);
+                        carregaLayout(ctx, Login.class);
                         break;
                     default:
-                        Toast.makeText(ctx, "Nenhuma opcao foi escolhida verifique novamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ctx, "Nenhuma opção foi escolhida verifique novamente", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
         });
     }
 
-    private void mudaTela(Class classeDestino) {
+    private void carregaLayout(Context ctx, Class classeDestino) {
         Intent intent = new Intent(ctx, classeDestino);
         startActivity(intent);
     }

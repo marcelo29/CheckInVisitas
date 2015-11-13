@@ -19,6 +19,7 @@ public class ListaVisitaAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Visita> lista;
+    private static final int DISPONIVEL = 0, REALIZADA = 1;
 
     public ListaVisitaAdapter(Context context, ArrayList<Visita> lista) {
         this.context = context;
@@ -63,17 +64,23 @@ public class ListaVisitaAdapter extends BaseAdapter {
 
             CheckBox chkLstVisita = (CheckBox) convertView.findViewById(R.id.chkLstVisita);
 
-            // ao alterar o checkbox ele faz
+            if (visita.getSituacao() == DISPONIVEL) {
+                chkLstVisita.setEnabled(true);
+            } else if (visita.getSituacao() == REALIZADA) {
+                chkLstVisita.setEnabled(false);
+            }
+
             chkLstVisita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        visita.setSituacao(1);
+                        visita.setSituacao(REALIZADA);
                     } else {
-                        visita.setSituacao(0);
+                        visita.setSituacao(DISPONIVEL);
                     }
                 }
             });
+
         }
         return convertView;
     }

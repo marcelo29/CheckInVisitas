@@ -18,20 +18,6 @@
         android:text="@string/subTitulo"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ImageView
-        android:id="@+id/imgVendedor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_assignment_ind_black_48dp" />
-
-    <TextView
-        android:id="@+id/txtImgVendedor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/alterarFoto" />
-
     <EditText
         android:id="@+id/edtNome"
         android:layout_width="match_parent"
@@ -47,6 +33,14 @@
         android:hint="@string/telefone"
         android:inputType="phone" />
 
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/senha"
+        android:inputType="textPassword" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,12 +52,12 @@
             android:id="@+id/btnCadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_alarm_add_black_36dp" />
+            android:text="@string/btnCadastrar" />
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_highlight_off_black_36dp" />
+            android:text="@string/btnCancelar" />
     </LinearLayout>
 </LinearLayout><!-- From: file:/Users/masasp29/Google%20Drive/5Semestre/Android%20II/CheckVisita/app/src/main/res/layout/activity_cad_vendedor.xml -->

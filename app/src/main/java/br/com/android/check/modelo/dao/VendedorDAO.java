@@ -27,13 +27,21 @@ public class VendedorDAO extends SQLiteOpenHelper {
 
     }
 
-    public void inserirVendedor(String nome, String telefone) {
+    public void inserirVendedor(String nome, String telefone, String senha) {
         ContentValues values = new ContentValues();
 
         values.put("nome", nome);
         values.put("telefone", telefone);
 
         getWritableDatabase().insert(DbOpenHelper.tbVendedor, null, values);
+
+        ContentValues cv = new ContentValues();
+
+        cv.put("login", nome);
+        cv.put("senha", senha);
+        cv.put("perfil", "vendedor");
+
+        getWritableDatabase().insert(DbOpenHelper.tbUsuario, null, cv);
     }
 
     public int retornaId(String nome) {

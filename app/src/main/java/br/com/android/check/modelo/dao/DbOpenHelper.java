@@ -10,7 +10,7 @@ import java.io.File;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
 
-    public static final int VERSION = 7;
+    public static final int VERSION = 9;
     public static final String DATABASE = "banco", tbUsuario = "usuario", tbVendedor = "vendedor",
             tbVisita = "visita";
     private Context ctx;
@@ -37,6 +37,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ddl);
 
         Log.i(DATABASE, "create ******* rolou");
+
+        db.execSQL("insert into usuario(login, senha, perfil) values('admin', 'admin', 'adm')");
     }
 
     // verifica se a base ja existe

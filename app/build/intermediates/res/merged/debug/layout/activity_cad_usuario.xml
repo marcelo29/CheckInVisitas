@@ -45,17 +45,6 @@
         android:layout_marginTop="10dp"
         android:inputType="textPassword" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/perfil" />
-
-    <Spinner
-        android:id="@+id/spnPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,13 +56,13 @@
             android:id="@+id/btnCadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_alarm_add_black_36dp" />
+            android:text="@string/btnCadastrar" />
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_highlight_off_black_36dp" />
+            android:text="@string/btnCancelar" />
     </LinearLayout>
 
 </LinearLayout><!-- From: file:/Users/masasp29/Google%20Drive/5Semestre/Android%20II/CheckVisita/app/src/main/res/layout/activity_cad_usuario.xml -->

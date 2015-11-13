@@ -1,7 +1,6 @@
 package br.com.android.check;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteException;
@@ -12,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
 import br.com.android.check.modelo.dao.DbOpenHelper;
 import br.com.android.check.modelo.dao.SessaoDAO;
@@ -23,7 +23,7 @@ public class Login extends Activity {
     // componentes da tela /
     private Context context;
     private EditText edtUsuario, edtSenha;
-    private Button btnLogar, btnCadastrar;
+    private Button btnLogar, btnCancelar;
     private DbOpenHelper db;
 
     @Override
@@ -42,29 +42,24 @@ public class Login extends Activity {
         btnLogar = (Button) findViewById(R.id.btnLogar);
         ChecarLogin();
 
-        btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
-        CadUsuario();
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        cancelar();
     }
 
-    private void CadUsuario() {
-        btnCadastrar.setOnClickListener(new OnClickListener() {
+    private void cancelar() {
+        btnCancelar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, CadUsuario.class);
-                startActivity(intent);
+                limpaCampos();
             }
         });
     }
 
     private void ChecarLogin() {
-        // evento chamando ao clicar do botao
         btnLogar.setOnClickListener(new OnClickListener() {
 
             @Override
-            // acao executado ao clicar do botao
             public void onClick(View v) {
-
-                // recupera usuario e senha digitados
                 Usuario usuario = new Usuario(edtUsuario.getText().toString(), edtSenha.getText().toString());
 
                 // chama o dao
@@ -72,37 +67,29 @@ public class Login extends Activity {
 
                 // valida os campos
                 boolean validacao = validacao(usuario.getLogin(), usuario.getSenha());
-
-                // monta um dialogo
-                AlertDialog.Builder dialogo = new AlertDialog.Builder(context);
-                // add botao ao dialogo
-                dialogo.setNeutralButton("Ok", null);
                 try {
-                    // verifica se bate usuario e senha
                     if (validacao) {
                         if (dao.Logar(usuario.getLogin(), usuario.getSenha())) {
-                            // registra perfil logado na sessao
-                            new SessaoDAO(Login.this).setUsuario(usuario.getLogin(), dao);
+                            new SessaoDAO(context).setUsuario(usuario.getLogin(), dao);
 
-                            // carrega novo layotu
-                            Intent intent = new Intent(context, MenuGeral.class);
-                            startActivity(intent);
-                            limpaCampos();
+                            Usuario usuarioLogado = new SessaoDAO(context).getUsuario();
+
+                            if (usuarioLogado.getPerfil().equals("adm")) {
+                                carregaLayout(context, MenuGeral.class);
+                                limpaCampos();
+                            } else if (usuarioLogado.getPerfil().equals("vendedor")) {
+                                carregaLayout(context, ListaVisita.class);
+                                limpaCampos();
+                            }
                         } else {
-                            // avisa q usuario e senha estao errados
-                            dialogo.setMessage(R.string.msg_erro_invalido_login);
-                            dialogo.show(); // exibe dialogo
+                            Util.showMessage(context, "Usuário ou senha inválidos.");
                         }
                     } else {
-                        // avisa q usuario e senha estao errados
-                        dialogo.setMessage(R.string.msg_erro_validacao_login);
-                        dialogo.show(); // exibe dialogo
+                        Util.showMessage(context, "Usuário ou senha em brancos.");
                     }
                 } catch (SQLiteException e) {
-                    // reportar erro
                     e.printStackTrace();
                 } finally {
-                    // garante a finalizacao da conexao com o banco
                     dao.close();
                 }
             }
@@ -110,12 +97,16 @@ public class Login extends Activity {
         });
     }
 
+    private void carregaLayout(Context context, Class layoutDestino) {
+        Intent intent = new Intent(context, layoutDestino);
+        startActivity(intent);
+        limpaCampos();
+    }
+
     // limpa os campos ao logar
     private void limpaCampos() {
         edtUsuario.setText("");
         edtSenha.setText("");
-        edtUsuario.setBackgroundColor(Color.WHITE);
-        edtSenha.setBackgroundColor(Color.WHITE);
     }
 
     // validas os campos

@@ -20,6 +20,7 @@
     <string name="title_activity_menu_geral">Menu</string>
     <string name="btnCadVendedor">Cadastrar de vendedor</string>
     <string name="btnCadVisita">Cadastrar de visita</string>
+    <string name="btnCadAdmin">Cadastro de Administradores</string>
     <string name="btnLstVisita">Listar visitas</string>
     <string name="btnVoltar">Voltar</string>
     <string name="btnConfirmar">Confirmar</string>

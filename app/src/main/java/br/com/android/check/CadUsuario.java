@@ -6,12 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-
-import java.util.ArrayList;
 
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
@@ -22,7 +18,6 @@ public class CadUsuario extends Activity {
     private Context context;
     private Button btnCadastrar, btnCancelar;
     private EditText edtUsuario, edtSenha;
-    private Spinner spnPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +33,6 @@ public class CadUsuario extends Activity {
 
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         Cancelar();
-
-        spnPerfil = (Spinner) findViewById(R.id.spnPerfil);
-
-        preencheSpnPerfil();
-    }
-
-    private void preencheSpnPerfil() {
-        ArrayList<String> perfils = new ArrayList<String>();
-        perfils.add("");
-        perfils.add("adm");
-        perfils.add("user");
-        ArrayAdapter<String> adpPerfils = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, perfils);
-        spnPerfil.setAdapter(adpPerfils);
     }
 
     private void Cadastrar() {
@@ -58,7 +40,6 @@ public class CadUsuario extends Activity {
             @Override
             public void onClick(View v) {
                 Usuario usuario = new Usuario(edtUsuario.getText().toString(), edtSenha.getText().toString());
-                usuario.setPerfil(spnPerfil.getSelectedItem().toString());
                 boolean validacao = validacao(usuario.getLogin(), usuario.getSenha(), usuario.getPerfil());
                 if (validacao) {
                     UsuarioDAO dao = new UsuarioDAO(context);
@@ -83,10 +64,9 @@ public class CadUsuario extends Activity {
     private void limpaCampos() {
         edtUsuario.setText("");
         edtSenha.setText("");
-        spnPerfil.setSelection(0);
+
         edtUsuario.setBackgroundColor(Color.WHITE);
         edtSenha.setBackgroundColor(Color.WHITE);
-        spnPerfil.setBackgroundColor(Color.WHITE);
     }
 
     // validas os campos
@@ -105,13 +85,6 @@ public class CadUsuario extends Activity {
             edtSenha.setBackgroundColor(Color.RED);
         } else {
             edtSenha.setBackgroundColor(Color.WHITE);
-        }
-
-        if (perfil == null || perfil.equals("")) {
-            validacao = false;
-            spnPerfil.setBackgroundColor(Color.RED);
-        } else {
-            spnPerfil.setBackgroundColor(Color.WHITE);
         }
 
         return validacao;

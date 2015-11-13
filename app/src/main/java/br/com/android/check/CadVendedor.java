@@ -33,8 +33,8 @@ public class CadVendedor extends Activity {
                 if (componentes.validacao()) {
                     VendedorDAO dao = new VendedorDAO(ctx);
                     Vendedor vendedor = componentes.getVendedor();
-                    dao.inserirVendedor(vendedor.getNome(), vendedor.getTelefone());
-                    new Util().showMessage(ctx, "Cadastro de vendedor realizado com sucesso.");
+                    dao.inserirVendedor(vendedor.getNome(), vendedor.getTelefone(), vendedor.getSenha());
+                    Util.showMessage(ctx, "Cadastro de vendedor realizado com sucesso.");
                     componentes.limpaCampos();
                 }
             }

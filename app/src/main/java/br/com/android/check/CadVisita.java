@@ -37,7 +37,7 @@ public class CadVisita extends Activity {
         edtData = (EditText) findViewById(R.id.edtData);
         edtHora = (EditText) findViewById(R.id.edtHora);
 
-        // A construcao do objeto spinner e separada em varias etapas sendo um exempo de padrao Builder
+
         ArrayList<String> strVendedores = populaVendedor();
         ArrayAdapter<String> adpVendedores = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
                 strVendedores);

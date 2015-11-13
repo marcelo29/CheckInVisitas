@@ -1,11 +1,12 @@
 package br.com.android.check.library;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 
-public class Util {
+public class Util extends Activity {
 
-    public void showMessage(Context ctx, String msg) {
+    public static void showMessage(Context ctx, String msg) {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
         dialogo.setMessage(msg);
         dialogo.setNeutralButton("Ok", null);

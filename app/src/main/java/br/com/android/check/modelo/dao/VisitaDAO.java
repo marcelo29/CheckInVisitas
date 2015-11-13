@@ -19,10 +19,8 @@ import br.com.android.check.modelo.bean.Visita;
  */
 public class VisitaDAO extends SQLiteOpenHelper {
 
-    // possuo varios objetos sendo manipulados em memoria com informacao repetidad
     private Context ctx;
 
-    // informacao q se repeti
     public VisitaDAO(Context context) {
         super(context, DbOpenHelper.DATABASE, null, DbOpenHelper.VERSION);
         this.ctx = context;
@@ -62,13 +60,13 @@ public class VisitaDAO extends SQLiteOpenHelper {
         ArrayList<Visita> lista = new ArrayList<Visita>();
 
         String select = "select vis._id, vis.cliente, vis.endereco, vis.telefone, vis.data, vis.hora, " +
-                "vis.idVendedor from visita vis, vendedor ved where situacao = 0";
+                "vis.idVendedor, vis.situacao from visita vis, vendedor ved where"; //situacao = 0";
 
-        if (user.getPerfil().equals("user")) {
-            select += " and vis.idVendedor = " + user.getId();
+        if (user.getPerfil().equals("vendedor")) {
+            select += " ved.nome = '" + user.getLogin() + "' and";
         }
 
-        select += " and vis.idVendedor = ved._id";
+        select += " vis.idVendedor = ved._id";
 
         Cursor cursor = getReadableDatabase().rawQuery(select, null);
 
@@ -79,6 +77,7 @@ public class VisitaDAO extends SQLiteOpenHelper {
                 visita.setCliente(cursor.getString(1));
                 visita.setEndereco(cursor.getString(2));
                 visita.setTelefone(cursor.getString(3));
+                visita.setSituacao(cursor.getInt(7));
 
                 Datas util = new Datas();
                 Date data = util.convertStringEmData(cursor.getString(4), "dd/MM/yyyy");
