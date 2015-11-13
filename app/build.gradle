@@ -19,8 +19,7 @@ android {
 }
 
 dependencies {
-    //compile 'com.android.support:appcompat-v7:18.0.0'
-    compile 'com.code-troopers.betterpickers:library:2.2.1'
+    compile 'com.wdullaer:materialdatetimepicker:2.0.1'
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.android.support:design:23.0.0'

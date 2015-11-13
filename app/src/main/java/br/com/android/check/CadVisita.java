@@ -1,23 +1,29 @@
 package br.com.android.check;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Vendedor;
 import br.com.android.check.modelo.dao.VendedorDAO;
 import br.com.android.check.modelo.dao.VisitaDAO;
 
-public class CadVisita extends Activity {
+public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     private EditText edtCliente, edtEnderedo, edtTelefone, edtData, edtHora;
     private Button btnCadastrar, btnCancelar;
@@ -37,7 +43,6 @@ public class CadVisita extends Activity {
         edtData = (EditText) findViewById(R.id.edtData);
         edtHora = (EditText) findViewById(R.id.edtHora);
 
-
         ArrayList<String> strVendedores = populaVendedor();
         ArrayAdapter<String> adpVendedores = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
                 strVendedores);
@@ -45,7 +50,15 @@ public class CadVisita extends Activity {
         spnVendedores.setAdapter(adpVendedores);
 
         btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
 
+        cadastrar();
+        cancelar();
+        exibeRelogio();
+        exibeCalendario();
+    }
+
+    private void cadastrar() {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,22 +66,73 @@ public class CadVisita extends Activity {
                     VisitaDAO visita = new VisitaDAO(ctx);
                     int idVendedor = new VendedorDAO(ctx).retornaId(spnVendedores.getSelectedItem().toString());
                     visita.inserirVisita(cliente, endereco, telefone, data, hora, idVendedor);
-                    new Util().showMessage(ctx, "Visita cadastra com sucesso");
-                    cancelar();
+                    Util.showMessage(ctx, "Visita cadastra com sucesso");
+                    limparCampos();
                 }
-            }
-        });
-
-        btnCancelar = (Button) findViewById(R.id.btnCancelar);
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelar();
             }
         });
     }
 
     private void cancelar() {
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limparCampos();
+            }
+        });
+    }
+
+    private void exibeCalendario() {
+        edtData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        CadVisita.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+
+                dpd.setThemeDark(true);
+                dpd.vibrate(true);
+                dpd.dismissOnPause(true);
+                dpd.showYearPickerFirst(false);
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+                return false;
+            }
+        });
+    }
+
+    private void exibeRelogio() {
+        edtHora.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Calendar now = Calendar.getInstance();
+
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        CadVisita.this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        true
+                );
+
+                tpd.enableSeconds(true);
+                tpd.setThemeDark(true);
+                tpd.vibrate(true);
+                tpd.dismissOnPause(true);
+                tpd.enableSeconds(true);
+
+                tpd.show(getFragmentManager(), "Timepickerdialog");
+
+                return false;
+            }
+        });
+    }
+
+    private void limparCampos() {
         edtCliente.setBackgroundColor(Color.WHITE);
         edtCliente.setText("");
         edtEnderedo.setBackgroundColor(Color.WHITE);
@@ -139,4 +203,28 @@ public class CadVisita extends Activity {
         return lista;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TimePickerDialog tpd = (TimePickerDialog) getFragmentManager().findFragmentByTag("Timepickerdialog");
+        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+
+        if (tpd != null) tpd.setOnTimeSetListener(this);
+        if (dpd != null) dpd.setOnDateSetListener(this);
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String time = "" + dayOfMonth + "/" + monthOfYear + "/" + year + "";
+        edtData.setText(time);
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String hourString = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
+        String minuteString = minute < 10 ? "0" + minute : "" + minute;
+        String secondString = second < 10 ? "0" + second : "" + second;
+        String time = "" + hourString + ":" + minuteString + ":" + secondString + "";
+        edtHora.setText(time);
+    }
 }

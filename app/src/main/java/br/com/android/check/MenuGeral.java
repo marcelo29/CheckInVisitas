@@ -1,9 +1,9 @@
 package br.com.android.check;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class MenuGeral extends Activity {
+public class MenuGeral extends AppCompatActivity {
 
     private RadioButton rdCadVendedor, rdCadAdmin, rdCadVisita, rdLstVisita, rdVoltar;
     private RadioGroup rgMenu;
