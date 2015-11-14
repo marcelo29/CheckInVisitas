@@ -19,9 +19,6 @@ import br.com.android.check.modelo.dao.DbOpenHelper;
 import br.com.android.check.modelo.dao.SessaoDAO;
 import br.com.android.check.modelo.dao.VisitaDAO;
 
-/**
- * Created by masasp29 on 25/10/15.
- */
 public class ListaVisita extends AppCompatActivity {
 
     private ListView lstVisita;
