@@ -2642,7 +2642,7 @@ containing a value of this type.
         public static final int ic_cast_on_2_light=0x7f020068;
         public static final int ic_cast_on_light=0x7f020069;
         public static final int ic_check_circle_black_36dp=0x7f02006a;
-        public static final int ic_explore_white_36dp=0x7f02006b;
+        public static final int ic_explore_black_36dp=0x7f02006b;
         public static final int ic_gps_fixed_black_18dp=0x7f02006c;
         public static final int ic_gps_fixed_white_24dp=0x7f02006d;
         public static final int ic_highlight_off_black_36dp=0x7f02006e;
@@ -2719,7 +2719,8 @@ containing a value of this type.
         public static final int btnCancelar=0x7f0c0086;
         public static final int btnConfirmar=0x7f0c009a;
         public static final int btnLogar=0x7f0c0093;
-        public static final int btnMarcaVisita=0x7f0c0090;
+        public static final int btnMarcaVisita=0x7f0c008f;
+        public static final int btnVerNoMapa=0x7f0c0090;
         public static final int buttonPanel=0x7f0c0068;
         public static final int buttons=0x7f0c00cb;
         public static final int buyButton=0x7f0c0045;
@@ -2740,7 +2741,6 @@ containing a value of this type.
         public static final int clip_horizontal=0x7f0c002a;
         public static final int clip_vertical=0x7f0c002b;
         public static final int collapseActionView=0x7f0c0038;
-        public static final int container=0x7f0c0089;
         public static final int contentPanel=0x7f0c0063;
         public static final int custom=0x7f0c0067;
         public static final int customPanel=0x7f0c0066;
@@ -2759,10 +2759,10 @@ containing a value of this type.
         public static final int donate_with_google=0x7f0c004d;
         public static final int done_background=0x7f0c00ab;
         public static final int edit_query=0x7f0c0074;
-        public static final int edtCliente=0x7f0c008a;
-        public static final int edtData=0x7f0c008b;
-        public static final int edtEndereco=0x7f0c008d;
-        public static final int edtHora=0x7f0c008c;
+        public static final int edtCliente=0x7f0c0089;
+        public static final int edtData=0x7f0c008a;
+        public static final int edtEndereco=0x7f0c008c;
+        public static final int edtHora=0x7f0c008b;
         public static final int edtNome=0x7f0c0087;
         public static final int edtSenha=0x7f0c0084;
         public static final int edtTelefone=0x7f0c0088;
@@ -2799,14 +2799,13 @@ containing a value of this type.
         public static final int listMode=0x7f0c000b;
         public static final int list_item=0x7f0c005c;
         public static final int logo_only=0x7f0c004e;
-        public static final int lstVisita=0x7f0c008f;
+        public static final int lstVisita=0x7f0c008e;
         public static final int match_parent=0x7f0c0047;
         public static final int media_actions=0x7f0c00d1;
         public static final int media_route_control_frame=0x7f0c00c3;
         public static final int media_route_list=0x7f0c00bf;
         public static final int media_route_volume_layout=0x7f0c00c9;
         public static final int media_route_volume_slider=0x7f0c00ca;
-        public static final int menu_mapa=0x7f0c00dc;
         public static final int middle=0x7f0c0031;
         public static final int mini=0x7f0c002f;
         public static final int minutes=0x7f0c00b4;
@@ -2865,7 +2864,7 @@ containing a value of this type.
         public static final int snackbar_action=0x7f0c00a3;
         public static final int snackbar_text=0x7f0c00a2;
         public static final int split_action_bar=0x7f0c0008;
-        public static final int spnVendedor=0x7f0c008e;
+        public static final int spnVendedor=0x7f0c008d;
         public static final int src_atop=0x7f0c0027;
         public static final int src_in=0x7f0c0028;
         public static final int src_over=0x7f0c0029;

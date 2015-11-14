@@ -18,14 +18,14 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/screen_border_txtview"
         android:gravity="center"
-        android:text="@string/title_activity_cad_usuario"
+        android:text="@string/btnCadAdmin"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/usuario"
-        android:textColor="#de000000" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/edtUsuario"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/senha"
-        android:textColor="#de000000" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/edtSenha"

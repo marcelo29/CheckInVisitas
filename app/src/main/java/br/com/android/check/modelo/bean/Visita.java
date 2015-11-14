@@ -9,6 +9,7 @@ public class Visita {
     private Date data;
     private String hora;
     private Vendedor vendedor;
+    private Boolean chkMarcado = false;
 
     public Visita() {
 
@@ -76,5 +77,13 @@ public class Visita {
 
     public void setSituacao(int situacao) {
         this.situacao = situacao;
+    }
+
+    public Boolean getChkMarcado() {
+        return chkMarcado;
+    }
+
+    public void setChkMarcado(Boolean chkMarcado) {
+        this.chkMarcado = chkMarcado;
     }
 }

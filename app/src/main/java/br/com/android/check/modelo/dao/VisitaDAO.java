@@ -50,8 +50,9 @@ public class VisitaDAO extends SQLiteOpenHelper {
         getWritableDatabase().insert(DbOpenHelper.tbVisita, null, values);
     }
 
-    public void visitaRealizada(int id) {
-        String update = "update " + DbOpenHelper.tbVisita + " set situacao = 1 where _id = " + id;
+    public void visitaRealizada(Visita visita) {
+        String update = "update " + DbOpenHelper.tbVisita + " set situacao =" + visita.getSituacao() +
+                " where _id = " + visita.getId();
 
         getWritableDatabase().execSQL(update);
     }

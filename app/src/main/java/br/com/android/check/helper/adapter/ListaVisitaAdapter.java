@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import br.com.android.check.Datas;
 import br.com.android.check.R;
 import br.com.android.check.modelo.bean.Visita;
+import br.com.android.check.modelo.dao.DbOpenHelper;
 
 public class ListaVisitaAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Visita> lista;
-    private static final int DISPONIVEL = 0, REALIZADA = 1;
 
     public ListaVisitaAdapter(Context context, ArrayList<Visita> lista) {
         this.context = context;
@@ -62,11 +62,11 @@ public class ListaVisitaAdapter extends BaseAdapter {
 
             ((TextView) convertView.findViewById(R.id.txtVendedor)).setText(visita.getVendedor().getNome());
 
-            CheckBox chkLstVisita = (CheckBox) convertView.findViewById(R.id.chkLstVisita);
+            final CheckBox chkLstVisita = (CheckBox) convertView.findViewById(R.id.chkLstVisita);
 
-            if (visita.getSituacao() == DISPONIVEL) {
+            if (visita.getSituacao() == DbOpenHelper.DISPONIVEL) {
                 chkLstVisita.setEnabled(true);
-            } else if (visita.getSituacao() == REALIZADA) {
+            } else if (visita.getSituacao() == DbOpenHelper.REALIZADA) {
                 chkLstVisita.setEnabled(false);
             }
 
@@ -74,9 +74,11 @@ public class ListaVisitaAdapter extends BaseAdapter {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        visita.setSituacao(REALIZADA);
+                        //visita.setSituacao(REALIZADA);
+                        visita.setChkMarcado(true);
                     } else {
-                        visita.setSituacao(DISPONIVEL);
+                        //visita.setSituacao(DISPONIVEL);
+                        visita.setChkMarcado(false);
                     }
                 }
             });

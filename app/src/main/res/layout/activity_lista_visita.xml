@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="br.com.android.check.ListaVisita">
 
     <ListView
         android:id="@+id/lstVisita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/btnMarcaVisita"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:background="@drawable/ic_check_circle_black_36dp" />
+        android:layout_gravity="right">
+
+        <Button
+            android:id="@+id/btnMarcaVisita"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/ic_check_circle_black_36dp" />
+
+        <Button
+            android:id="@+id/btnVerNoMapa"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/ic_explore_black_36dp" />
+
+    </LinearLayout>
 </LinearLayout>

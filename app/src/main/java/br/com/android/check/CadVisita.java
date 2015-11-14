@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,7 +28,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     private Button btnCadastrar, btnCancelar;
     private Spinner spnVendedores;
     private Context ctx;
-    private String cliente, endereco, telefone, data, hora;
+    private String cliente, endereco, telefone, data, hora, vendedor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,16 +99,15 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
                 dpd.dismissOnPause(true);
                 dpd.showYearPickerFirst(false);
                 dpd.show(getFragmentManager(), "Datepickerdialog");
-
-                return false;
             }
         });
+
     }
 
     private void exibeRelogio() {
-        edtHora.setOnKeyListener(new View.OnKeyListener() {
+        edtHora.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            public void onClick(View v) {
                 Calendar now = Calendar.getInstance();
 
                 TimePickerDialog tpd = TimePickerDialog.newInstance(
@@ -123,11 +121,8 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
                 tpd.setThemeDark(true);
                 tpd.vibrate(true);
                 tpd.dismissOnPause(true);
-                tpd.enableSeconds(true);
 
                 tpd.show(getFragmentManager(), "Timepickerdialog");
-
-                return false;
             }
         });
     }
@@ -154,6 +149,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         telefone = edtTelefone.getText().toString();
         data = edtData.getText().toString();
         hora = edtHora.getText().toString();
+        String vendedor = spnVendedores.getSelectedItem().toString();
 
         if (cliente == null || cliente.equals("")) {
             edtCliente.setBackgroundColor(Color.RED);
@@ -190,12 +186,20 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
             edtHora.setBackgroundColor(Color.WHITE);
         }
 
+        if (vendedor == null || vendedor.equals("")) {
+            spnVendedores.setBackgroundColor(Color.RED);
+            valido = false;
+        } else {
+            spnVendedores.setBackgroundColor(Color.WHITE);
+        }
+
         return valido;
     }
 
     private ArrayList<String> populaVendedor() {
         VendedorDAO vdao = new VendedorDAO(CadVisita.this);
         ArrayList<String> lista = new ArrayList<String>();
+        lista.add("");
         ArrayList<Vendedor> vendedores = vdao.listaVendedores();
         for (int i = 0; i < vendedores.size(); i++) {
             lista.add(vendedores.get(i).getNome());
