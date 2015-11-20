@@ -64,20 +64,22 @@ public class ListaVisitaAdapter extends BaseAdapter {
 
             final CheckBox chkLstVisita = (CheckBox) convertView.findViewById(R.id.chkLstVisita);
 
-            if (visita.getSituacao() == DbOpenHelper.DISPONIVEL) {
+            if (visita.getSituacao() == DbOpenHelper.VISITA_DISPONIVEL) {
                 chkLstVisita.setEnabled(true);
-            } else if (visita.getSituacao() == DbOpenHelper.REALIZADA) {
+                ((TextView) convertView.findViewById(R.id.txtSituacao)).setText(R.string.em_andamento);
+            } else if (visita.getSituacao() == DbOpenHelper.VISITA_REALIZADA) {
                 chkLstVisita.setEnabled(false);
+                ((TextView) convertView.findViewById(R.id.txtSituacao)).setText(R.string.finalizada);
             }
 
             chkLstVisita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        //visita.setSituacao(REALIZADA);
+                        //visita.setSituacao(VISITA_REALIZADA);
                         visita.setChkMarcado(true);
                     } else {
-                        //visita.setSituacao(DISPONIVEL);
+                        //visita.setSituacao(VISITA_DISPONIVEL);
                         visita.setChkMarcado(false);
                     }
                 }

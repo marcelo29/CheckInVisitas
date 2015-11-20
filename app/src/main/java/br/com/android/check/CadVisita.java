@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -65,8 +66,10 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
                     VisitaDAO visita = new VisitaDAO(ctx);
                     int idVendedor = new VendedorDAO(ctx).retornaId(spnVendedores.getSelectedItem().toString());
                     visita.inserirVisita(cliente, endereco, telefone, data, hora, idVendedor);
-                    Util.showMessage(ctx, "Visita cadastra com sucesso");
+                    Util.showAviso(ctx, R.string.visita_cadastrada);
                     limparCampos();
+                } else {
+                    Util.showAviso(ctx, R.string.aviso_validacao_login);
                 }
             }
         });
@@ -82,6 +85,14 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     }
 
     private void exibeCalendario() {
+        edtData.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Util.showAviso(ctx, R.string.aviso_clique_data);
+                edtData.setText("");
+                return false;
+            }
+        });
         edtData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +116,14 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     }
 
     private void exibeRelogio() {
+        edtHora.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Util.showAviso(ctx, R.string.aviso_clique_hora);
+                edtHora.setText("");
+                return false;
+            }
+        });
         edtHora.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

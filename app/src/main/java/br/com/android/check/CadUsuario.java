@@ -15,14 +15,14 @@ import br.com.android.check.modelo.dao.UsuarioDAO;
 
 public class CadUsuario extends Activity {
 
-    private Context context;
+    private Context ctx;
     private Button btnCadastrar, btnCancelar;
     private EditText edtUsuario, edtSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.context = this;
+        this.ctx = this;
         setContentView(R.layout.activity_cad_usuario);
 
         edtUsuario = (EditText) findViewById(R.id.edtUsuario);
@@ -42,10 +42,12 @@ public class CadUsuario extends Activity {
                 Usuario usuario = new Usuario(edtUsuario.getText().toString(), edtSenha.getText().toString());
                 boolean validacao = validacao(usuario.getLogin(), usuario.getSenha(), usuario.getPerfil());
                 if (validacao) {
-                    UsuarioDAO dao = new UsuarioDAO(context);
+                    UsuarioDAO dao = new UsuarioDAO(ctx);
                     dao.insereUsuario(usuario.getLogin(), usuario.getSenha(), usuario.getPerfil());
-                    new Util().showMessage(context, "Cadastro de usuário realizado com sucesso.");
+                    Util.showAviso(ctx, R.string.usuario_cadastrado);
                     limpaCampos();
+                } else {
+                    Util.showAviso(ctx, R.string.aviso_validacao_login);
                 }
             }
         });

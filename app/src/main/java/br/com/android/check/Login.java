@@ -74,7 +74,7 @@ public class Login extends Activity {
 
                             Usuario usuarioLogado = new SessaoDAO(context).getUsuario();
 
-                            if (usuarioLogado.getPerfil().equals("adm")) {
+                            if (usuarioLogado.getPerfil().equals(DbOpenHelper.PERFIL_ADM)) {
                                 carregaLayout(context, MenuGeral.class);
                                 limpaCampos();
                             } else if (usuarioLogado.getPerfil().equals("vendedor")) {
@@ -82,10 +82,10 @@ public class Login extends Activity {
                                 limpaCampos();
                             }
                         } else {
-                            Util.showMessage(context, "Usuário ou senha inválidos.");
+                            Util.showAviso(context, R.string.aviso_login_invalido);
                         }
                     } else {
-                        Util.showMessage(context, "Usuário ou senha em brancos.");
+                        Util.showAviso(context, R.string.aviso_validacao_login);
                     }
                 } catch (SQLiteException e) {
                     e.printStackTrace();

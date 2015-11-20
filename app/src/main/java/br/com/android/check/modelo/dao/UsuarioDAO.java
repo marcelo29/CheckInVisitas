@@ -30,7 +30,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
 
         valores.put("login", login);
         valores.put("senha", senha);
-        valores.put("perfil", "admin");
+        valores.put("perfil", DbOpenHelper.PERFIL_ADM);
 
         getWritableDatabase().insert(DbOpenHelper.tbUsuario, null, valores);
     }

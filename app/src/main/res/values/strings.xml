@@ -13,8 +13,8 @@
     <string name="perfil">Perfil:</string>
     <string name="btnLogar">Entrar</string>
     <string name="btnCadastrar">Cadastrar</string>
-    <string name="msg_erro_invalido_login">Usuário ou senha inválidos</string>
-    <string name="msg_erro_validacao_login">Preencha os campos vazios!!!</string>
+    <string name="aviso_login_invalido">Usuário ou senha inválidos</string>
+    <string name="aviso_validacao_login">Preencha os campos vazios!!!</string>
 
     <!-- Tele Menu Geral -->
     <string name="title_activity_menu_geral">Menu</string>
@@ -31,6 +31,7 @@
     <string name="btnCancelar">Cancelar</string>
     <string name="nome">Nome</string>
     <string name="telefone">Telefone</string>
+    <string name="vendedor_cadastrado">Vendedor cadastro com sucesso</string>
 
     <!-- Tela Cadastro de Visitas -->
     <string name="title_activity_cad_visita">Cadastro de Visitas</string>
@@ -39,14 +40,21 @@
     <string name="endereco">Endereço</string>
     <string name="data">Data</string>
     <string name="hora">Hora</string>
+    <string name="aviso_clique_hora">Clique duplo para informar a hora</string>
+    <string name="aviso_clique_data">Clique duplo para informar a data</string>
+    <string name="visita_cadastrada">Visita cadastra com sucesso</string>
 
     <!-- Tela Lista Visitas -->
     <string name="title_activity_lst">Lista de Visitas</string>
     <string name="checkin">Marcar Visita Realizada</string>
     <string name="menu_mapa">Mapa</string>
     <string name="alterarFoto">Atualizar foto</string>
+    <string name="situacao">Situação</string>
+    <string name="em_andamento">Em andamento</string>
+    <string name="finalizada">Finalizada</string>
 
     <!-- Tela Cadastro de Usuarios -->
     <string name="title_activity_cad_usuario">Cadastro de Usuário</string>
+    <string name="usuario_cadastrado">Usuário cadastro com sucesso</string>
 
 </resources>

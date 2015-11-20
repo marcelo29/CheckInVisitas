@@ -10,9 +10,14 @@ import java.io.File;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
 
-    public static final int VERSION = 9, DISPONIVEL = 0, REALIZADA = 1;
+    public static final int VERSION = 10;
+
+    public static final int VISITA_DISPONIVEL = 0, VISITA_REALIZADA = 1;
+
     public static final String DATABASE = "banco", tbUsuario = "usuario", tbVendedor = "vendedor",
             tbVisita = "visita";
+
+    public static final String PERFIL_ADM = "adm";
 
     private Context ctx;
 

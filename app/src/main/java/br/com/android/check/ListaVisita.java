@@ -61,7 +61,7 @@ public class ListaVisita extends AppCompatActivity {
 
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getChkMarcado()) {
-                        if (lista.get(i).getSituacao() == DbOpenHelper.DISPONIVEL) {
+                        if (lista.get(i).getSituacao() == DbOpenHelper.VISITA_DISPONIVEL) {
                             marcadas++;
                             posicaoMarcada = i;
                         }
@@ -94,14 +94,14 @@ public class ListaVisita extends AppCompatActivity {
 
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getChkMarcado())
-                        if (lista.get(i).getSituacao() == DbOpenHelper.DISPONIVEL) {
+                        if (lista.get(i).getSituacao() == DbOpenHelper.VISITA_DISPONIVEL) {
                             qtdMarcada++;
                             posicaoMarcada = i;
                         }
                 }
 
                 if (qtdMarcada == 1) {
-                    lista.get(posicaoMarcada).setSituacao(DbOpenHelper.REALIZADA);
+                    lista.get(posicaoMarcada).setSituacao(DbOpenHelper.VISITA_REALIZADA);
                     vdao.visitaRealizada(lista.get(posicaoMarcada));
                     Util.showMessage(ctx, "Visita concluída");
                 } else if (qtdMarcada > 1) {
