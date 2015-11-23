@@ -1,9 +1,9 @@
 package br.com.android.check;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,7 +13,7 @@ import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
 import br.com.android.check.modelo.dao.UsuarioDAO;
 
-public class CadUsuario extends Activity {
+public class CadUsuario extends AppCompatActivity {
 
     private Context ctx;
     private Button btnCadastrar, btnCancelar;
@@ -40,12 +40,15 @@ public class CadUsuario extends Activity {
             @Override
             public void onClick(View v) {
                 Usuario usuario = new Usuario(edtUsuario.getText().toString(), edtSenha.getText().toString());
-                boolean validacao = validacao(usuario.getLogin(), usuario.getSenha(), usuario.getPerfil());
+                boolean validacao = validacao(usuario.getLogin(), usuario.getSenha());
                 if (validacao) {
-                    UsuarioDAO dao = new UsuarioDAO(ctx);
-                    dao.insereUsuario(usuario.getLogin(), usuario.getSenha(), usuario.getPerfil());
-                    Util.showAviso(ctx, R.string.usuario_cadastrado);
-                    limpaCampos();
+                    UsuarioDAO dao = new UsuarioDAO();
+                    if (dao.insereUsuario(usuario)) {
+                        Util.showAviso(ctx, R.string.usuario_cadastrado);
+                        limpaCampos();
+                    } else {
+                        Util.showAviso(ctx, R.string.aviso_erro_cadastro);
+                    }
                 } else {
                     Util.showAviso(ctx, R.string.aviso_validacao_login);
                 }
@@ -72,7 +75,7 @@ public class CadUsuario extends Activity {
     }
 
     // validas os campos
-    private boolean validacao(String usuario, String senha, String perfil) {
+    private boolean validacao(String usuario, String senha) {
         boolean validacao = true;
 
         if (usuario == null || usuario.equals("")) {

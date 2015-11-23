@@ -1,108 +1,96 @@
 package br.com.android.check.modelo.dao;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.os.StrictMode;
 import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 
 import br.com.android.check.modelo.bean.Vendedor;
+import br.com.android.check.ws.ConfiguracoesWS;
+import br.com.android.check.ws.WebServiceCliente;
 
-public class VendedorDAO extends SQLiteOpenHelper {
+public class VendedorDAO {
 
-    public VendedorDAO(Context ctx) {
-        super(ctx, DbOpenHelper.DATABASE, null, DbOpenHelper.VERSION);
+    //ws ok
+    private String url = ConfiguracoesWS.URL_APLICACAO + "vendedor/";
+
+    public VendedorDAO() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll()
+                .build();
+        StrictMode.setThreadPolicy(policy);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
-
-    public void inserirVendedor(String nome, String telefone, String senha) {
-        ContentValues values = new ContentValues();
-
-        values.put("nome", nome);
-        values.put("telefone", telefone);
-
-        getWritableDatabase().insert(DbOpenHelper.tbVendedor, null, values);
-
-        ContentValues cv = new ContentValues();
-
-        cv.put("login", nome);
-        cv.put("senha", senha);
-        cv.put("perfil", "vendedor");
-
-        getWritableDatabase().insert(DbOpenHelper.tbUsuario, null, cv);
-    }
-
-    public int retornaId(String nome) {
-        Cursor cursor = getReadableDatabase().query(DbOpenHelper.tbVendedor, null, "nome = ?",
-                new String[]{nome}, null, null, null);
-
+    public Boolean inserirVendedor(Vendedor vendedor) {
+        Boolean flag = false;
         try {
-            cursor.moveToFirst();
+            String vendedorJson = new Gson().toJson(vendedor);
+            String[] resposta = new WebServiceCliente().post(url + "inserir", vendedorJson);
 
-            return cursor.getInt(0);
-        } catch (Exception e) {
-            Log.e(this.toString(), e.getMessage());
-            return 0;
-        } finally {
-            cursor.close();
-        }
-    }
-
-    public Vendedor getVendedor(int idVendedor) {
-        String select = "select nome from vendedor where _id = " + idVendedor;
-
-        Cursor cursor = getReadableDatabase().rawQuery(select, null);
-
-        try {
-            cursor.moveToFirst();
-
-            Vendedor vendedor = new Vendedor();
-            vendedor.setId(idVendedor);
-            vendedor.setNome(cursor.getString(0));
-
-            return vendedor;
+            if (resposta[0].equals("200")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
-        } finally {
-            cursor.close();
         }
+        return flag;
     }
 
-    // lista vendedores
-    public ArrayList<Vendedor> listaVendedores() {
-        Cursor cursor = getReadableDatabase().query(DbOpenHelper.tbVendedor, null, null, new String[]{}, null, null, null);
+    public Vendedor retornaVendedorPorNome(String nome) {
+        Vendedor vendedor = null;
+        try {
+            String[] resposta = new WebServiceCliente().get(url + "retornaVendedorPorNome/" + nome, false);
+            vendedor = new Gson().fromJson(resposta[1], Vendedor.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vendedor;
+    }
 
-        ArrayList<Vendedor> lista = new ArrayList<Vendedor>();
+    public ArrayList<Vendedor> listaVendedores() {
+        ArrayList<Vendedor> lista = new ArrayList<>();
 
         try {
-            while (cursor.moveToNext()) {
-                Vendedor vendedor = new Vendedor();
+            String[] resposta = new WebServiceCliente().get(url + "lista", false);
 
-                vendedor.setId(cursor.getInt(0));
-                vendedor.setNome(cursor.getString(1));
-                vendedor.setTelefone(cursor.getString(2));
+            if (resposta[0].equals("200")) {
+                String json = resposta[1];
 
-                lista.add(vendedor);
+                if (json.equals("null")) {
+                    return null;
+                }
+
+                if (!json.contains("[")) {
+                    StringBuilder stringBuilder = new StringBuilder(json);
+                    stringBuilder.insert(10, "[");
+                    stringBuilder.insert(json.length(), "]");
+
+                    json = stringBuilder.toString();
+                }
+
+                Gson g = new Gson();
+
+                JsonParser parser = new JsonParser();
+
+                JsonArray array = null;
+
+                array = parser.parse(json).getAsJsonObject().getAsJsonArray("vendedores");
+
+                for (int i = 0; i < array.size(); i++) {
+                    Vendedor vendedor = g.fromJson(array.get(i), Vendedor.class);
+                    lista.add(vendedor);
+                }
             }
-            return lista;
         } catch (Exception e) {
-            Log.e(this.toString(), e.getMessage());
-            return null;
-        } finally {
-            cursor.close();
+            Log.e("ErroListaVendedor", e.getMessage());
         }
+
+        return lista;
     }
+
 }

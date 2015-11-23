@@ -1,102 +1,110 @@
 package br.com.android.check.modelo.dao;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.os.StrictMode;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import br.com.android.check.Datas;
 import br.com.android.check.modelo.bean.Usuario;
-import br.com.android.check.modelo.bean.Vendedor;
 import br.com.android.check.modelo.bean.Visita;
+import br.com.android.check.ws.ConfiguracoesWS;
+import br.com.android.check.ws.WebServiceCliente;
 
 /**
  * Created by masasp29 on 20/10/15.
  */
-public class VisitaDAO extends SQLiteOpenHelper {
+public class VisitaDAO {
 
-    private Context ctx;
+    //ws
+    private String url = ConfiguracoesWS.URL_APLICACAO + "visita/";
 
-    public VisitaDAO(Context context) {
-        super(context, DbOpenHelper.DATABASE, null, DbOpenHelper.VERSION);
-        this.ctx = context;
+    public VisitaDAO() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll()
+                .build();
+        StrictMode.setThreadPolicy(policy);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
+    public Boolean inserirVisita(Visita visita) {
+        Boolean flag = false;
+        try {
+            Gson gson = new Gson();
 
+            String vendedorJson = gson.toJson(visita);
+            String[] resposta = new WebServiceCliente().post(url + "inserir", vendedorJson);
+
+            if (resposta[0].equals("200")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public Boolean finalizaVisita(Visita visita) {
+        Boolean flag = false;
+        try {
+            Gson gson = new Gson();
 
-    }
+            String vendedorJson = gson.toJson(visita);
+            String[] resposta = new WebServiceCliente().post(url + "finalizaVisita", vendedorJson);
 
-    public void inserirVisita(String cliente, String endereco, String telefone, String data, String hora, int idVendedor) {
-        ContentValues values = new ContentValues();
-
-        values.put("cliente", cliente);
-        values.put("endereco", endereco);
-        values.put("telefone", telefone);
-        values.put("data", data);
-        values.put("hora", hora);
-        values.put("idVendedor", idVendedor);
-        values.put("situacao", 0); // 0 para visita nao realizada
-
-        getWritableDatabase().insert(DbOpenHelper.tbVisita, null, values);
-    }
-
-    public void visitaRealizada(Visita visita) {
-        String update = "update " + DbOpenHelper.tbVisita + " set situacao =" + visita.getSituacao() +
-                " where _id = " + visita.getId();
-
-        getWritableDatabase().execSQL(update);
+            if (resposta[0].equals("200")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 
     public ArrayList<Visita> listar(Usuario user) {
-        ArrayList<Visita> lista = new ArrayList<Visita>();
-
-        String select = "select vis._id, vis.cliente, vis.endereco, vis.telefone, vis.data, vis.hora, " +
-                "vis.idVendedor, vis.situacao from visita vis, vendedor ved where"; //situacao = 0";
-
-        if (user.getPerfil().equals("vendedor")) {
-            select += " ved.nome = '" + user.getLogin() + "' and";
-        }
-
-        select += " vis.idVendedor = ved._id";
-
-        Cursor cursor = getReadableDatabase().rawQuery(select, null);
+        ArrayList<Visita> lista = new ArrayList<>();
 
         try {
-            while (cursor.moveToNext()) {
-                Visita visita = new Visita();
-                visita.setId(cursor.getInt(0));
-                visita.setCliente(cursor.getString(1));
-                visita.setEndereco(cursor.getString(2));
-                visita.setTelefone(cursor.getString(3));
-                visita.setSituacao(cursor.getInt(7));
+            String[] resposta = new WebServiceCliente().get(url + "lista/" + user.getLogin() + "/" + user.getPerfil(), false);
 
-                Datas util = new Datas();
-                Date data = util.convertStringEmData(cursor.getString(4), "dd/MM/yyyy");
+            if (resposta[0].equals("200")) {
+                String json = resposta[1];
 
-                visita.setData(data);
-                visita.setHora(cursor.getString(5));
+                if (json.equals("null")) {
+                    return null;
+                }
 
-                Vendedor vendedor = new VendedorDAO(ctx).getVendedor(cursor.getInt(6));
-                visita.setVendedor(vendedor);
-                lista.add(visita);
+                if (!json.contains("[")) {
+                    StringBuilder stringBuilder = new StringBuilder(json);
+                    stringBuilder.insert(10, "[");
+                    stringBuilder.insert(json.length(), "]");
+
+                    json = stringBuilder.toString();
+                }
+
+                Gson gson = new Gson();
+
+                JsonParser parser = new JsonParser();
+
+                JsonArray array = null;
+
+                array = parser.parse(json).getAsJsonObject().getAsJsonArray("visitas");
+
+                for (int i = 0; i < array.size(); i++) {
+                    Visita visita = gson.fromJson(array.get(i), Visita.class);
+                    lista.add(visita);
+                }
             }
-            return lista;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            cursor.close();
+            Log.e("ErroListaVisita", e.getMessage());
         }
+
+        return lista;
     }
 
 }

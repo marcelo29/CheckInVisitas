@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Vendedor;
+import br.com.android.check.modelo.bean.Visita;
 import br.com.android.check.modelo.dao.VendedorDAO;
 import br.com.android.check.modelo.dao.VisitaDAO;
 
@@ -63,11 +64,21 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
             @Override
             public void onClick(View v) {
                 if (validacao()) {
-                    VisitaDAO visita = new VisitaDAO(ctx);
-                    int idVendedor = new VendedorDAO(ctx).retornaId(spnVendedores.getSelectedItem().toString());
-                    visita.inserirVisita(cliente, endereco, telefone, data, hora, idVendedor);
-                    Util.showAviso(ctx, R.string.visita_cadastrada);
-                    limparCampos();
+
+                    VisitaDAO dao = new VisitaDAO();
+
+                    Vendedor vendedor = new VendedorDAO().retornaVendedorPorNome(spnVendedores.getSelectedItem().toString());
+
+                    Visita visita = new Visita(Visita.EM_ANDAMENTO, cliente, endereco, telefone, hora);
+                    visita.setData(data);
+                    visita.setVendedor(vendedor);
+
+                    if (dao.inserirVisita(visita)) {
+                        Util.showAviso(ctx, R.string.visita_cadastrada);
+                        limparCampos();
+                    } else {
+                        Util.showAviso(ctx, R.string.aviso_erro_cadastro);
+                    }
                 } else {
                     Util.showAviso(ctx, R.string.aviso_validacao_login);
                 }
@@ -216,7 +227,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     }
 
     private ArrayList<String> populaVendedor() {
-        VendedorDAO vdao = new VendedorDAO(CadVisita.this);
+        VendedorDAO vdao = new VendedorDAO();
         ArrayList<String> lista = new ArrayList<String>();
         lista.add("");
         ArrayList<Vendedor> vendedores = vdao.listaVendedores();

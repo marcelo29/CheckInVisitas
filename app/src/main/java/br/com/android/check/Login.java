@@ -1,11 +1,11 @@
 package br.com.android.check;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,27 +13,22 @@ import android.widget.EditText;
 
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
-import br.com.android.check.modelo.dao.DbOpenHelper;
 import br.com.android.check.modelo.dao.SessaoDAO;
 import br.com.android.check.modelo.dao.UsuarioDAO;
 
 // gerencia o login da aplicacoa
-public class Login extends Activity {
+public class Login extends AppCompatActivity {
 
     // componentes da tela /
     private Context context;
     private EditText edtUsuario, edtSenha;
     private Button btnLogar, btnCancelar;
-    private DbOpenHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = this;
         setContentView(R.layout.activity_login);
-
-        db = new DbOpenHelper(this);
-        db.onCreate(db.getWritableDatabase());
 
         // relaciona xml com codigo java
         edtUsuario = (EditText) findViewById(R.id.edtUsuario);
@@ -63,7 +58,7 @@ public class Login extends Activity {
                 Usuario usuario = new Usuario(edtUsuario.getText().toString(), edtSenha.getText().toString());
 
                 // chama o dao
-                UsuarioDAO dao = new UsuarioDAO(context);
+                UsuarioDAO dao = new UsuarioDAO();
 
                 // valida os campos
                 boolean validacao = validacao(usuario.getLogin(), usuario.getSenha());
@@ -74,10 +69,10 @@ public class Login extends Activity {
 
                             Usuario usuarioLogado = new SessaoDAO(context).getUsuario();
 
-                            if (usuarioLogado.getPerfil().equals(DbOpenHelper.PERFIL_ADM)) {
+                            if (usuarioLogado.getPerfil().equals(dao.PERFIL_ADM)) {
                                 carregaLayout(context, MenuGeral.class);
                                 limpaCampos();
-                            } else if (usuarioLogado.getPerfil().equals("vendedor")) {
+                            } else if (usuarioLogado.getPerfil().equals(dao.PERFIL_VENDEDOR)) {
                                 carregaLayout(context, ListaVisita.class);
                                 limpaCampos();
                             }
@@ -89,8 +84,6 @@ public class Login extends Activity {
                     }
                 } catch (SQLiteException e) {
                     e.printStackTrace();
-                } finally {
-                    dao.close();
                 }
             }
 

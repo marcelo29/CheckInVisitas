@@ -11,10 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import br.com.android.check.Datas;
 import br.com.android.check.R;
 import br.com.android.check.modelo.bean.Visita;
-import br.com.android.check.modelo.dao.DbOpenHelper;
 
 public class ListaVisitaAdapter extends BaseAdapter {
 
@@ -55,19 +53,17 @@ public class ListaVisitaAdapter extends BaseAdapter {
             ((TextView) convertView.findViewById(R.id.txtEndereco)).setText(visita.getEndereco());
             ((TextView) convertView.findViewById(R.id.txtTelefone)).setText(visita.getTelefone());
 
-            Datas util = new Datas();
-
             ((TextView) convertView.findViewById(R.id.txtHora)).setText(visita.getHora());
-            ((TextView) convertView.findViewById(R.id.txtData)).setText(util.convertDataEmString(visita.getData()));
+            ((TextView) convertView.findViewById(R.id.txtData)).setText(visita.getData());
 
             ((TextView) convertView.findViewById(R.id.txtVendedor)).setText(visita.getVendedor().getNome());
 
             final CheckBox chkLstVisita = (CheckBox) convertView.findViewById(R.id.chkLstVisita);
 
-            if (visita.getSituacao() == DbOpenHelper.VISITA_DISPONIVEL) {
+            if (visita.getSituacao() == Visita.EM_ANDAMENTO) {
                 chkLstVisita.setEnabled(true);
                 ((TextView) convertView.findViewById(R.id.txtSituacao)).setText(R.string.em_andamento);
-            } else if (visita.getSituacao() == DbOpenHelper.VISITA_REALIZADA) {
+            } else if (visita.getSituacao() == Visita.FINALIZADA) {
                 chkLstVisita.setEnabled(false);
                 ((TextView) convertView.findViewById(R.id.txtSituacao)).setText(R.string.finalizada);
             }
@@ -76,10 +72,8 @@ public class ListaVisitaAdapter extends BaseAdapter {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-                        //visita.setSituacao(VISITA_REALIZADA);
                         visita.setChkMarcado(true);
                     } else {
-                        //visita.setSituacao(VISITA_DISPONIVEL);
                         visita.setChkMarcado(false);
                     }
                 }

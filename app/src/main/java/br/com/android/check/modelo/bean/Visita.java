@@ -1,18 +1,22 @@
 package br.com.android.check.modelo.bean;
 
-import java.util.Date;
-
 public class Visita {
+
+    public static final int EM_ANDAMENTO = 0, FINALIZADA = 1;
 
     private int id, situacao;
     private String cliente, endereco, telefone;
-    private Date data;
+    private String data;
     private String hora;
     private Vendedor vendedor;
     private Boolean chkMarcado = false;
 
-    public Visita() {
-
+    public Visita(int situacao, String cliente, String endereco, String telefone, String hora) {
+        this.situacao = situacao;
+        this.cliente = cliente;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.hora = hora;
     }
 
     public int getId() {
@@ -27,40 +31,24 @@ public class Visita {
         return cliente;
     }
 
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
     public String getEndereco() {
         return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
     public String getHora() {
         return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
     }
 
     public Vendedor getVendedor() {

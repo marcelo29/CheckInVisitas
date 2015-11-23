@@ -15,7 +15,6 @@ import br.com.android.check.helper.adapter.ListaVisitaAdapter;
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
 import br.com.android.check.modelo.bean.Visita;
-import br.com.android.check.modelo.dao.DbOpenHelper;
 import br.com.android.check.modelo.dao.SessaoDAO;
 import br.com.android.check.modelo.dao.VisitaDAO;
 
@@ -44,11 +43,11 @@ public class ListaVisita extends AppCompatActivity {
             btnMarcaVisita.setVisibility(View.INVISIBLE);
         }
 
-        vdao = new VisitaDAO(this);
+        vdao = new VisitaDAO();
 
         atualizaLista();
 
-        realizaVisita();
+        finalizaVisita();
 
         verNoMapa();
     }
@@ -61,7 +60,7 @@ public class ListaVisita extends AppCompatActivity {
 
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getChkMarcado()) {
-                        if (lista.get(i).getSituacao() == DbOpenHelper.VISITA_DISPONIVEL) {
+                        if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
                             marcadas++;
                             posicaoMarcada = i;
                         }
@@ -85,7 +84,7 @@ public class ListaVisita extends AppCompatActivity {
         });
     }
 
-    private void realizaVisita() {
+    private void finalizaVisita() {
         btnMarcaVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,16 +93,19 @@ public class ListaVisita extends AppCompatActivity {
 
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getChkMarcado())
-                        if (lista.get(i).getSituacao() == DbOpenHelper.VISITA_DISPONIVEL) {
+                        if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
                             qtdMarcada++;
                             posicaoMarcada = i;
                         }
                 }
 
                 if (qtdMarcada == 1) {
-                    lista.get(posicaoMarcada).setSituacao(DbOpenHelper.VISITA_REALIZADA);
-                    vdao.visitaRealizada(lista.get(posicaoMarcada));
-                    Util.showMessage(ctx, "Visita concluída");
+                    lista.get(posicaoMarcada).setSituacao(Visita.FINALIZADA);
+                    if (vdao.finalizaVisita(lista.get(posicaoMarcada))) {
+                        Util.showMessage(ctx, "Visita concluída");
+                    } else {
+                        Util.showAviso(ctx, R.string.aviso_erro_cadastro);
+                    }
                 } else if (qtdMarcada > 1) {
                     Util.showMessage(ctx, "Marque apenas uma visita para realizar.");
                 } else {

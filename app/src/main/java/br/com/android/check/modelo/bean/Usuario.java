@@ -4,7 +4,7 @@ public class Usuario {
 
     // atributos do usuario
     private int id;
-    private String login, senha, perfil, telefone;
+    private String login, senha, perfil;
 
     public Usuario() {
 
@@ -47,11 +47,4 @@ public class Usuario {
         this.perfil = perfil;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
 }

@@ -8,9 +8,9 @@
     <!-- Tela Login -->
     <string name="title_activity_login">Login</string>
     <string name="titulo"></string>
-    <string name="usuario">Usuário:</string>
-    <string name="senha">Senha:</string>
-    <string name="perfil">Perfil:</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="perfil">Perfil</string>
     <string name="btnLogar">Entrar</string>
     <string name="btnCadastrar">Cadastrar</string>
     <string name="aviso_login_invalido">Usuário ou senha inválidos</string>
@@ -26,8 +26,7 @@
     <string name="btnConfirmar">Confirmar</string>
 
     <!-- Tela Cadastro de Vendedor -->
-    <string name="title_activity_cad_vendedor"></string>
-    <string name="subTitulo">Cadastro de vendedor</string>
+    <string name="title_activity_cad_vendedor">Cadastro de vendedor</string>
     <string name="btnCancelar">Cancelar</string>
     <string name="nome">Nome</string>
     <string name="telefone">Telefone</string>
@@ -54,7 +53,8 @@
     <string name="finalizada">Finalizada</string>
 
     <!-- Tela Cadastro de Usuarios -->
-    <string name="title_activity_cad_usuario">Cadastro de Usuário</string>
+    <string name="title_activity_cad_usuario">Cadastro de Administrador</string>
     <string name="usuario_cadastrado">Usuário cadastro com sucesso</string>
+    <string name="aviso_erro_cadastro">Ocorreu um erro durante o cadastro verifique a conexa</string>
 
 </resources>

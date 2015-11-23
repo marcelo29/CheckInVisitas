@@ -1,8 +1,8 @@
 package br.com.android.check;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,7 +11,7 @@ import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Vendedor;
 import br.com.android.check.modelo.dao.VendedorDAO;
 
-public class CadVendedor extends Activity {
+public class CadVendedor extends AppCompatActivity {
 
     private Context ctx;
     private Button btnCadastrar, btnCancelar;
@@ -31,11 +31,14 @@ public class CadVendedor extends Activity {
             @Override
             public void onClick(View v) {
                 if (componentes.validacao()) {
-                    VendedorDAO dao = new VendedorDAO(ctx);
+                    VendedorDAO dao = new VendedorDAO();
                     Vendedor vendedor = componentes.getVendedor();
-                    dao.inserirVendedor(vendedor.getNome(), vendedor.getTelefone(), vendedor.getSenha());
-                    Util.showAviso(ctx, R.string.vendedor_cadastrado);
-                    componentes.limpaCampos();
+                    if (dao.inserirVendedor(vendedor)) {
+                        Util.showAviso(ctx, R.string.vendedor_cadastrado);
+                        componentes.limpaCampos();
+                    } else {
+                        Util.showAviso(ctx, R.string.aviso_erro_cadastro);
+                    }
                 } else {
                     Util.showAviso(ctx, R.string.aviso_validacao_login);
                 }

@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="23" />
+        android:targetSdkVersion="22" />
 
     <permission
         android:name=".permission.MAPS_RECEIVE"
@@ -48,10 +48,10 @@
 
         <activity
             android:name="br.com.android.check.MenuGeral"
-            android:label="" />
+            android:label="@string/title_activity_menu_geral" />
         <activity
             android:name="br.com.android.check.Login"
-            android:label="@string/app_name" >
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,16 +60,16 @@
         </activity>
         <activity
             android:name="br.com.android.check.ListaVisita"
-            android:label="" />
+            android:label="@string/title_activity_lst" />
         <activity
             android:name="br.com.android.check.CadVisita"
-            android:label="" />
+            android:label="@string/title_activity_cad_visita" />
         <activity
             android:name="br.com.android.check.CadVendedor"
             android:label="@string/title_activity_cad_vendedor" />
         <activity
             android:name="br.com.android.check.CadUsuario"
-            android:label="" />
+            android:label="@string/title_activity_cad_usuario" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

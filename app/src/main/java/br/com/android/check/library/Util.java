@@ -1,10 +1,9 @@
 package br.com.android.check.library;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 
-public class Util extends Activity {
+public class Util {
 
     public static void showMessage(Context ctx, String msg) {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
