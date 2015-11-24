@@ -249,7 +249,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String time = "" + dayOfMonth + "/" + monthOfYear + "/" + year + "";
+        String time = "" + dayOfMonth + "/" + monthOfYear+1 + "/" + year + "";
         edtData.setText(time);
     }
 

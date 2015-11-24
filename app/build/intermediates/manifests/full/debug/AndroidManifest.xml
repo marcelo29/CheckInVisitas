@@ -31,8 +31,10 @@
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- Permissions required for GCM -->
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /> <!-- Optional permission for App measurement to run. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+ <!-- Permissions required for GCM -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+ <!-- Optional permission for App measurement to run. -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -51,19 +53,19 @@
             android:label="@string/title_activity_menu_geral" />
         <activity
             android:name="br.com.android.check.Login"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name="br.com.android.check.ListaVisita"
+            android:label="@string/title_activity_lst" />
+        <activity
+            android:name="br.com.android.check.CadVisita"
+            android:label="@string/title_activity_cad_visita" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="br.com.android.check.ListaVisita"
-            android:label="@string/title_activity_lst" />
-        <activity
-            android:name="br.com.android.check.CadVisita"
-            android:label="@string/title_activity_cad_visita" />
         <activity
             android:name="br.com.android.check.CadVendedor"
             android:label="@string/title_activity_cad_vendedor" />
