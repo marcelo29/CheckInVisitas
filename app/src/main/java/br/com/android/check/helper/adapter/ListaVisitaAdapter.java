@@ -44,7 +44,7 @@ public class ListaVisitaAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            // infla o layout recebido para o layout q chamou
+            // infla o content_lista_visita recebido para o content_lista_visita q chamou
             convertView = inflater.inflate(R.layout.componentes_lista_visita, null);
 
             final Visita visita = lista.get(position);

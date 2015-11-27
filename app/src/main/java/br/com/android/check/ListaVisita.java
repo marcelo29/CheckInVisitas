@@ -4,9 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,10 +24,10 @@ import br.com.android.check.modelo.bean.Visita;
 import br.com.android.check.modelo.dao.SessaoDAO;
 import br.com.android.check.modelo.dao.VisitaDAO;
 
-public class ListaVisita extends AppCompatActivity {
+public class ListaVisita extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView lstVisita;
-    private Button btnMarcaVisita, btnVerNoMapa;
+    private FloatingActionButton fabMarcaVisita;
     private Context ctx;
     private ArrayList<Visita> lista;
     private Usuario user;
@@ -33,14 +39,25 @@ public class ListaVisita extends AppCompatActivity {
         ctx = this;
         setContentView(R.layout.activity_lista_visita);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarLstVisita);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         lstVisita = (ListView) findViewById(R.id.lstVisita);
-        btnMarcaVisita = (Button) findViewById(R.id.btnMarcaVisita);
-        btnVerNoMapa = (Button) findViewById(R.id.btnVerNoMapa);
+        fabMarcaVisita = (FloatingActionButton) findViewById(R.id.fabMarcaVisita);
 
         user = new SessaoDAO(this).getUsuario();
 
-        if (user.getPerfil().equals("vendedor")) {
-            btnMarcaVisita.setVisibility(View.INVISIBLE);
+        if (user.getPerfil().equals(user.PERFIL_VENDEDOR)) {
+            fabMarcaVisita.setVisibility(View.INVISIBLE);
         }
 
         vdao = new VisitaDAO();
@@ -48,44 +65,36 @@ public class ListaVisita extends AppCompatActivity {
         atualizaLista();
 
         finalizaVisita();
-
-        verNoMapa();
     }
 
     private void verNoMapa() {
-        btnVerNoMapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int marcadas = 0, posicaoMarcada = 0;
+        int marcadas = 0, posicaoMarcada = 0;
 
-                for (int i = 0; i < lista.size(); i++) {
-                    if (lista.get(i).getChkMarcado()) {
-                        if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
-                            marcadas++;
-                            posicaoMarcada = i;
-                        }
-                    }
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getChkMarcado()) {
+                if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
+                    marcadas++;
+                    posicaoMarcada = i;
                 }
-
-                if (marcadas == 1) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(
-                            Uri.parse("geo:0,0?z=14&q=" + lista.get(posicaoMarcada).getEndereco()));
-                    startActivity(intent);
-                } else if (marcadas > 1) {
-                    Util.showMessage(ctx, "Marque apenas um endereço para visualizar no mapa.");
-                } else {
-                    Util.showMessage(ctx, "Marque um endereço para visualizar no mapa.");
-                }
-
-                atualizaLista();
-
             }
-        });
+        }
+
+        if (marcadas == 1) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(
+                    Uri.parse("geo:0,0?z=14&q=" + lista.get(posicaoMarcada).getEndereco()));
+            startActivity(intent);
+        } else if (marcadas > 1) {
+            Util.showAviso(ctx, R.string.aviso_apenas_um_endereco);
+        } else {
+            Util.showAviso(ctx, R.string.aviso_marque_um_endereco);
+        }
+
+        atualizaLista();
     }
 
     private void finalizaVisita() {
-        btnMarcaVisita.setOnClickListener(new View.OnClickListener() {
+        fabMarcaVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int qtdMarcada = 0;
@@ -102,14 +111,14 @@ public class ListaVisita extends AppCompatActivity {
                 if (qtdMarcada == 1) {
                     lista.get(posicaoMarcada).setSituacao(Visita.FINALIZADA);
                     if (vdao.finalizaVisita(lista.get(posicaoMarcada))) {
-                        Util.showMessage(ctx, "Visita concluída");
+                        Util.showAviso(ctx, R.string.aviso_visita_concluida);
                     } else {
                         Util.showAviso(ctx, R.string.aviso_erro_cadastro);
                     }
                 } else if (qtdMarcada > 1) {
-                    Util.showMessage(ctx, "Marque apenas uma visita para realizar.");
+                    Util.showAviso(ctx, R.string.aviso_apenas_uma_visita);
                 } else {
-                    Util.showMessage(ctx, "Marque uma visita para realizar.");
+                    Util.showAviso(ctx, R.string.aviso_marque_uma_visita);
                 }
 
                 atualizaLista();
@@ -121,4 +130,44 @@ public class ListaVisita extends AppCompatActivity {
         lista = vdao.listar(user);
         lstVisita.setAdapter(new ListaVisitaAdapter(this, lista));
     }
+
+    private void carregaLayout(Context ctx, Class classeDestino) {
+        Intent intent = new Intent(ctx, classeDestino);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        Usuario usuarioLogado = new SessaoDAO(ctx).getUsuario();
+        if (usuarioLogado.getPerfil().equals(usuarioLogado.PERFIL_ADM)) {
+            switch (menuItem.getItemId()) {
+                case R.id.itCadVendedor:
+                    carregaLayout(ctx, CadVendedor.class);
+                    break;
+                case R.id.itCadVisita:
+                    carregaLayout(ctx, CadVisita.class);
+                    break;
+                case R.id.itCadAdmin:
+                    carregaLayout(ctx, CadUsuario.class);
+                    break;
+            }
+        }
+        if (menuItem.getItemId() == R.id.itVerNoMapa) {
+            verNoMapa();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 }

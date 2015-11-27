@@ -2,6 +2,8 @@ package br.com.android.check.modelo.bean;
 
 public class Usuario {
 
+    public static final String PERFIL_ADM = "adm", PERFIL_VENDEDOR = "vendedor";
+
     // atributos do usuario
     private int id;
     private String login, senha, perfil;

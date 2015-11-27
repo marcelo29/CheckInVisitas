@@ -41,29 +41,31 @@
             android:value="AIzaSyD-SFCOS7k046N011yVWDgBuF9ZrkOXfYA " />
 
         <activity
-            android:name=".MenuGeral"
-            android:label="@string/title_activity_menu_geral" />
-        <activity
             android:name=".Login"
-            android:label="@string/title_activity_login"></activity>
-        <activity
-            android:name=".ListaVisita"
-            android:label="@string/title_activity_lst"></activity>
-        <activity
-            android:name=".CadVisita"
-            android:label="@string/title_activity_cad_visita">
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ListaVisita"
+            android:label="@string/title_activity_lst"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".CadVisita"
+            android:label="@string/title_activity_cad_visita"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadVendedor"
-            android:label="@string/title_activity_cad_vendedor" />
+            android:label="@string/title_activity_cad_vendedor"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadUsuario"
-            android:label="@string/title_activity_cad_usuario"></activity>
+            android:label="@string/title_activity_cad_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

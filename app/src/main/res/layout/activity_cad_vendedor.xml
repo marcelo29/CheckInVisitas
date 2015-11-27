@@ -9,46 +9,53 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.android.check.CadVendedor">
 
-    <EditText
-        android:id="@+id/edtNome"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_padrao" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/edtNomeWrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/nome" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/edtTelefone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/telefone"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/edtSenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/senha"
-        android:inputType="textPassword" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCadastrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnCadastrar" />
-
-        <Button
-            android:id="@+id/btnCancelar"
+        <EditText
+            android:id="@+id/edtNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnCancelar" />
-    </LinearLayout>
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/ic_legenda"
+            android:hint="@string/nome" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/edtTelefoneWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/ic_telefone"
+            android:hint="@string/telefone"
+            android:inputType="phone" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/edtSenhaWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/ic_legenda"
+            android:hint="@string/senha"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+
+    <include layout="@layout/componentes_cadastrar_cancelar" />
 </LinearLayout>

@@ -3,13 +3,15 @@ package br.com.android.check;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -27,16 +29,20 @@ import br.com.android.check.modelo.dao.VisitaDAO;
 public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     private EditText edtCliente, edtEnderedo, edtTelefone, edtData, edtHora;
-    private Button btnCadastrar, btnCancelar;
+    private FloatingActionButton fabCadastrar, fabCancelar;
     private Spinner spnVendedores;
     private Context ctx;
     private String cliente, endereco, telefone, data, hora, vendedor;
+    private TextView txtTitulo;
+    private ImageView btnVoltar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.ctx = this;
+        ctx = this;
         setContentView(R.layout.activity_cad_visita);
+        txtTitulo = (TextView) findViewById(R.id.txtTitulo);
+        txtTitulo.setText(R.string.title_activity_cad_visita);
 
         edtCliente = (EditText) findViewById(R.id.edtCliente);
         edtEnderedo = (EditText) findViewById(R.id.edtEndereco);
@@ -50,17 +56,28 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         spnVendedores = (Spinner) findViewById(R.id.spnVendedor);
         spnVendedores.setAdapter(adpVendedores);
 
-        btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
-        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        fabCadastrar = (FloatingActionButton) findViewById(R.id.fabCadastrar);
+        fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
+        btnVoltar = (ImageView) findViewById(R.id.btnVoltar);
 
         cadastrar();
         cancelar();
         exibeRelogio();
         exibeCalendario();
+        voltar();
+    }
+
+    private void voltar() {
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void cadastrar() {
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+        fabCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validacao()) {
@@ -79,15 +96,13 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
                     } else {
                         Util.showAviso(ctx, R.string.aviso_erro_cadastro);
                     }
-                } else {
-                    Util.showAviso(ctx, R.string.aviso_validacao_login);
                 }
             }
         });
     }
 
     private void cancelar() {
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
+        fabCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 limparCampos();
@@ -158,15 +173,10 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     }
 
     private void limparCampos() {
-        edtCliente.setBackgroundColor(Color.WHITE);
         edtCliente.setText("");
-        edtEnderedo.setBackgroundColor(Color.WHITE);
         edtEnderedo.setText("");
-        edtTelefone.setBackgroundColor(Color.WHITE);
         edtTelefone.setText("");
-        edtData.setBackgroundColor(Color.WHITE);
         edtData.setText("");
-        edtHora.setBackgroundColor(Color.WHITE);
         edtHora.setText("");
     }
 
@@ -179,48 +189,36 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         telefone = edtTelefone.getText().toString();
         data = edtData.getText().toString();
         hora = edtHora.getText().toString();
-        String vendedor = spnVendedores.getSelectedItem().toString();
+        vendedor = spnVendedores.getSelectedItem().toString();
 
         if (cliente == null || cliente.equals("")) {
-            edtCliente.setBackgroundColor(Color.RED);
+            edtCliente.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtCliente.setBackgroundColor(Color.WHITE);
         }
 
         if (endereco == null || endereco.equals("")) {
-            edtEnderedo.setBackgroundColor(Color.RED);
+            edtEnderedo.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtEnderedo.setBackgroundColor(Color.WHITE);
         }
 
         if (telefone == null || telefone.equals("")) {
-            edtTelefone.setBackgroundColor(Color.RED);
+            edtTelefone.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtTelefone.setBackgroundColor(Color.WHITE);
         }
 
         if (data == null || data.equals("")) {
-            edtData.setBackgroundColor(Color.RED);
+            edtData.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtData.setBackgroundColor(Color.WHITE);
         }
 
         if (hora == null || hora.equals("")) {
-            edtHora.setBackgroundColor(Color.RED);
+            edtHora.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtHora.setBackgroundColor(Color.WHITE);
         }
 
         if (vendedor == null || vendedor.equals("")) {
             spnVendedores.setBackgroundColor(Color.RED);
             valido = false;
-        } else {
-            spnVendedores.setBackgroundColor(Color.WHITE);
         }
 
         return valido;
@@ -249,7 +247,10 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String time = "" + dayOfMonth + "/" + monthOfYear+1 + "/" + year + "";
+        monthOfYear++;
+        String monthOfYearString = monthOfYear < 10 ? "0" + monthOfYear : "" + monthOfYear;
+        String dayOfMonthString = dayOfMonth < 10 ? "0" + dayOfMonth : "" + dayOfMonth;
+        String time = "" + dayOfMonthString + "/" + monthOfYearString + "/" + year + "";
         edtData.setText(time);
     }
 

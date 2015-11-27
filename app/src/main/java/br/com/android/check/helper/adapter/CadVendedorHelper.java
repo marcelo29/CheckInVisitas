@@ -1,10 +1,10 @@
 package br.com.android.check.helper.adapter;
 
-import android.graphics.Color;
 import android.widget.EditText;
 
 import br.com.android.check.CadVendedor;
 import br.com.android.check.R;
+import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Vendedor;
 
 public class CadVendedorHelper {
@@ -29,10 +29,6 @@ public class CadVendedorHelper {
         edtNome.setText("");
         edtTelefone.setText("");
         edtSenha.setText("");
-
-        edtNome.setBackgroundColor(Color.WHITE);
-        edtTelefone.setBackgroundColor(Color.WHITE);
-        edtSenha.setBackgroundColor(Color.WHITE);
     }
 
     // validas os campos
@@ -44,24 +40,18 @@ public class CadVendedorHelper {
         String senha = edtSenha.getText().toString();
 
         if (nome == null || nome.equals("")) {
-            edtNome.setBackgroundColor(Color.RED);
+            edtNome.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtNome.setBackgroundColor(Color.WHITE);
         }
 
         if (telefone == null || telefone.equals("")) {
-            edtTelefone.setBackgroundColor(Color.RED);
+            edtTelefone.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtTelefone.setBackgroundColor(Color.WHITE);
         }
 
         if (senha == null || senha.equals("")) {
-            edtSenha.setBackgroundColor(Color.RED);
+            edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             valido = false;
-        } else {
-            edtSenha.setBackgroundColor(Color.WHITE);
         }
 
         return valido;

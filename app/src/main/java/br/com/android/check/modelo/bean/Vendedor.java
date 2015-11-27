@@ -5,10 +5,6 @@ public class Vendedor {
     private int id;
     private String nome, telefone, senha;
 
-    public Vendedor() {
-
-    }
-
     public int getId() {
         return id;
     }

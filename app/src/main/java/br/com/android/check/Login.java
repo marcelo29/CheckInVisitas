@@ -3,12 +3,11 @@ package br.com.android.check;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteException;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 
 import br.com.android.check.library.Util;
@@ -20,29 +19,29 @@ import br.com.android.check.modelo.dao.UsuarioDAO;
 public class Login extends AppCompatActivity {
 
     // componentes da tela /
-    private Context context;
+    private Context ctx;
     private EditText edtUsuario, edtSenha;
-    private Button btnLogar, btnCancelar;
+    private FloatingActionButton fabLogar, fabCancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.context = this;
+        this.ctx = this;
         setContentView(R.layout.activity_login);
 
         // relaciona xml com codigo java
         edtUsuario = (EditText) findViewById(R.id.edtUsuario);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
 
-        btnLogar = (Button) findViewById(R.id.btnLogar);
+        fabLogar = (FloatingActionButton) findViewById(R.id.fabLogar);
         ChecarLogin();
 
-        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
         cancelar();
     }
 
     private void cancelar() {
-        btnCancelar.setOnClickListener(new OnClickListener() {
+        fabCancelar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 limpaCampos();
@@ -51,7 +50,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void ChecarLogin() {
-        btnLogar.setOnClickListener(new OnClickListener() {
+        fabLogar.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -64,23 +63,14 @@ public class Login extends AppCompatActivity {
                 boolean validacao = validacao(usuario.getLogin(), usuario.getSenha());
                 try {
                     if (validacao) {
-                        if (dao.Logar(usuario.getLogin(), usuario.getSenha())) {
-                            new SessaoDAO(context).setUsuario(usuario.getLogin(), dao);
+                        if (dao.logar(usuario.getLogin(), usuario.getSenha(), ctx)) {
+                            new SessaoDAO(ctx).setUsuario(usuario.getLogin(), dao);
 
-                            Usuario usuarioLogado = new SessaoDAO(context).getUsuario();
-
-                            if (usuarioLogado.getPerfil().equals(dao.PERFIL_ADM)) {
-                                carregaLayout(context, MenuGeral.class);
-                                limpaCampos();
-                            } else if (usuarioLogado.getPerfil().equals(dao.PERFIL_VENDEDOR)) {
-                                carregaLayout(context, ListaVisita.class);
-                                limpaCampos();
-                            }
+                            carregaLayout(ctx, ListaVisita.class);
+                            limpaCampos();
                         } else {
-                            Util.showAviso(context, R.string.aviso_login_invalido);
+                            Util.showAviso(ctx, R.string.aviso_login_invalido);
                         }
-                    } else {
-                        Util.showAviso(context, R.string.aviso_validacao_login);
                     }
                 } catch (SQLiteException e) {
                     e.printStackTrace();
@@ -108,16 +98,12 @@ public class Login extends AppCompatActivity {
 
         if (usuario == null || usuario.equals("")) {
             validacao = false;
-            edtUsuario.setBackgroundColor(Color.RED);
-        } else {
-            edtUsuario.setBackgroundColor(Color.WHITE);
+            edtUsuario.setError(Util.AVISO_CAMPO_OBRIGATORIO);
         }
 
         if (senha == null || senha.equals("")) {
             validacao = false;
-            edtSenha.setBackgroundColor(Color.RED);
-        } else {
-            edtSenha.setBackgroundColor(Color.WHITE);
+            edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
         }
 
         return validacao;

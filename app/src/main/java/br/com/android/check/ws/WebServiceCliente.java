@@ -16,82 +16,80 @@ import java.net.URI;
 /**
  * Created by Marcio on 24/11/2015.
  */
+public class WebServiceCliente {
 
-    public class WebServiceCliente {
+    public final String[] get(String url, boolean setHeader) {
 
-        public final String[] get(String url, boolean setHeader) {
-
-            String[] result = new String[2];
-            HttpGet httpget = new HttpGet(url);
-            if (setHeader) {
-                httpget.setHeader("Content-type", "application/json");
-            }
-            HttpResponse response;
-
-            try {
-                response = HttpClientSingleton.getHttpClientInstace().execute(
-                        httpget);
-                HttpEntity entity = response.getEntity();
-
-                if (entity != null) {
-                    result[0] = String.valueOf(response.getStatusLine()
-                            .getStatusCode());
-                    InputStream instream = entity.getContent();
-                    result[1] = toString(instream);
-                    instream.close();
-                    Log.i("marcarconsultas", "Result from post JsonPost : " + result[0]
-                            + " : " + result[1]);
-                }
-            } catch (Exception e) {
-                Log.i("marcarconsultas", "Falha ao acessar Web service", e);
-                result[0] = "0";
-                result[1] = "Falha de rede!";
-            }
-            return result;
+        String[] result = new String[2];
+        HttpGet httpget = new HttpGet(url);
+        if (setHeader) {
+            httpget.setHeader("Content-type", "application/json");
         }
+        HttpResponse response;
 
-        public final String[] post(String url, String json) {
-            String[] result = new String[2];
+        try {
+            response = HttpClientSingleton.getHttpClientInstace().execute(
+                    httpget);
+            HttpEntity entity = response.getEntity();
 
-            try {
-
-                HttpPost httpPost = new HttpPost(new URI(url));
-                httpPost.setHeader("Content-type", "application/json");
-                StringEntity sEntity = new StringEntity(json, "UTF-8");
-                httpPost.setEntity(sEntity);
-
-                HttpResponse response;
-                response = HttpClientSingleton.getHttpClientInstace().execute(
-                        httpPost);
-                HttpEntity entity = response.getEntity();
-
-                if (entity != null) {
-                    result[0] = String.valueOf(response.getStatusLine()
-                            .getStatusCode());
-                    InputStream instream = entity.getContent();
-                    result[1] = toString(instream);
-                    instream.close();
-                    Log.i("marcarconsultas", "Result from post JsonPost : " + result[0]
-                            + " : " + result[1]);
-                }
-
-            } catch (Exception e) {
-                Log.i("marcarconsultas", "Falha ao acessar Web service", e);
-                result[0] = "0";
-                result[1] = "Falha de rede!";
+            if (entity != null) {
+                result[0] = String.valueOf(response.getStatusLine()
+                        .getStatusCode());
+                InputStream instream = entity.getContent();
+                result[1] = toString(instream);
+                instream.close();
+                Log.i("marcarconsultas", "Result from post JsonPost : " + result[0]
+                        + " : " + result[1]);
             }
-            return result;
+        } catch (Exception e) {
+            Log.i("marcarconsultas", "Falha ao conectar ws");
+            result[0] = "0";
+            result[1] = "Falha de rede!";
         }
-
-        private String toString(InputStream is) throws IOException {
-
-            byte[] bytes = new byte[1024];
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int lidos;
-            while ((lidos = is.read(bytes)) > 0) {
-                baos.write(bytes, 0, lidos);
-            }
-            return new String(baos.toByteArray());
-        }
-
+        return result;
     }
+
+    public final String[] post(String url, String json) {
+        String[] result = new String[2];
+
+        try {
+
+            HttpPost httpPost = new HttpPost(new URI(url));
+            httpPost.setHeader("Content-type", "application/json");
+            StringEntity sEntity = new StringEntity(json, "UTF-8");
+            httpPost.setEntity(sEntity);
+
+            HttpResponse response;
+            response = HttpClientSingleton.getHttpClientInstace().execute(
+                    httpPost);
+            HttpEntity entity = response.getEntity();
+
+            if (entity != null) {
+                result[0] = String.valueOf(response.getStatusLine()
+                        .getStatusCode());
+                InputStream instream = entity.getContent();
+                result[1] = toString(instream);
+                instream.close();
+                Log.i("marcarconsultas", "Result from post JsonPost : " + result[0]
+                        + " : " + result[1]);
+            }
+        } catch (Exception e) {
+            Log.i("marcarconsultas", "Falha ao conectar ws");
+            result[0] = "0";
+            result[1] = "Falha de rede!";
+        }
+        return result;
+    }
+
+    private String toString(InputStream is) throws IOException {
+
+        byte[] bytes = new byte[1024];
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int lidos;
+        while ((lidos = is.read(bytes)) > 0) {
+            baos.write(bytes, 0, lidos);
+        }
+        return new String(baos.toByteArray());
+    }
+
+}

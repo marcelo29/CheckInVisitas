@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,39 +9,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.android.check.CadUsuario">
 
-    <EditText
-        android:id="@+id/edtUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/usuario" />
-
-    <EditText
-        android:id="@+id/edtSenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/senha"
-        android:inputType="textPassword" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_padrao" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/layoutCadUsu1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnCadastrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnCadastrar" />
-
-        <Button
-            android:id="@+id/btnCancelar"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/edtUsuarioWrapper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btnCancelar" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableRight="@drawable/ic_contato"
+                android:hint="@string/usuario" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/edtSenhaWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableRight="@drawable/ic_senha"
+                android:hint="@string/senha"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
+    <include layout="@layout/componentes_cadastrar_cancelar" />
 </LinearLayout>
