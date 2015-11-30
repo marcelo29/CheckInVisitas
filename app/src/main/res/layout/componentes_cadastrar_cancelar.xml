@@ -4,18 +4,19 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginTop="5dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:theme="@style/AppTheme.LoginFloatingActionBottom">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_cadastrar" />
+        android:src="@drawable/ic_cad_padrao_branco" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabCancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_cancelar" />
+        android:src="@drawable/abc_ic_clear_mtrl_alpha" />
 </LinearLayout>

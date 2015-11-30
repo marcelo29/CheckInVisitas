@@ -3,6 +3,7 @@ package br.com.android.check;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -32,6 +34,7 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
     private ArrayList<Visita> lista;
     private Usuario user;
     private VisitaDAO vdao;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,11 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
         ctx = this;
         setContentView(R.layout.activity_lista_visita);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarLstVisita);
+        toolbar = (Toolbar) findViewById(R.id.tbLstVisita);
+        toolbar.setTitleTextColor(R.color.colorPrimaryWhite);
+        toolbar.setTitle("prova");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,6 +71,14 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
         atualizaLista();
 
         finalizaVisita();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setBackgroundResource(R.drawable.toolbar_rounded_corners);
+        }
     }
 
     private void verNoMapa() {
@@ -167,6 +181,22 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lst, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+        }
         return true;
     }
 

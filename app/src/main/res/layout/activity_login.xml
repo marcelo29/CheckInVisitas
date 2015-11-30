@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
         android:layout_margin="20dp"
         android:orientation="vertical">
 
@@ -47,21 +46,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:theme="@style/AppTheme.LoginFloatingActionBottom">
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabLogar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:src="@drawable/ic_entrar" />
+                android:src="@drawable/ic_lock_open_black_36dp" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabCancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:src="@drawable/ic_cancelar" />
+                android:src="@drawable/abc_ic_clear_mtrl_alpha" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

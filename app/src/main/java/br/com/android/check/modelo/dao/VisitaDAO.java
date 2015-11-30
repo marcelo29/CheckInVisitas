@@ -4,8 +4,7 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -79,26 +78,10 @@ public class VisitaDAO {
                     return null;
                 }
 
-                if (!json.contains("[")) {
-                    StringBuilder stringBuilder = new StringBuilder(json);
-                    stringBuilder.insert(10, "[");
-                    stringBuilder.insert(json.length(), "]");
-
-                    json = stringBuilder.toString();
-                }
-
                 Gson gson = new Gson();
 
-                JsonParser parser = new JsonParser();
-
-                JsonArray array = null;
-
-                array = parser.parse(json).getAsJsonObject().getAsJsonArray("visitas");
-
-                for (int i = 0; i < array.size(); i++) {
-                    Visita visita = gson.fromJson(array.get(i), Visita.class);
-                    lista.add(visita);
-                }
+                lista = gson.fromJson(json, new TypeToken<ArrayList<Visita>>() {
+                }.getType());
             }
         } catch (Exception e) {
             Log.e("ErroListaVisita", e.getMessage());

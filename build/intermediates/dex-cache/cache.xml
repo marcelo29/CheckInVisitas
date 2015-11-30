@@ -2,67 +2,53 @@
 <items version="2" >
 
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="71eda10e33212e44245524b5087366ff8d805825">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a83b43f9310341807c03bf10cf65931b8f973e05.jar" />
+        sha1="9aedc597d74c6d77258ce5236e9abff0c3cc65e3">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a1260eac32ec5eb0b43f061f3c3d0024e3812215.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-053eefd24bd16af85fb7e001e257c55b48c829cf.jar" />
+        sha1="77f9593d979f4347344be233bd0d888315f79517">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-1daa9854df229cdb1c60419a41a4a844b3a23357.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="0c3e81d3eb86b86d194b5cdb6a4de78203f6f7fd">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-65f70aacedbb447e5db00e7205c104b5933e01c7.jar" />
+        sha1="724ce977487ab3a215d4d2eb47d8dccd9f30013f">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-d10dbeae3af4239003cdcf94c44a87fd20a8918e.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.0.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="697679619b00837e3d09e9988a2e1e2a9009d502">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-e15400c3c8cbaf15bd3c4c3ef99f9b10e4f0dbd5.jar" />
+        sha1="02329eff16d85c04492c7a5dab456f0993d16349">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-4e95b084e411296dd72c28fde07fc696247e361d.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="4b8df1b1e51fe14b0e89b3845dc2e215a024a09f">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-0adef029e99f160ab8d250d2ebcf909a9566075f.jar" />
+        sha1="27775d59b16610ac76f1b83693fedd9520396332">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a95508c263ec18f501041d2519d2923eea0e794a.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="2c6fcd6267cbac6509a2e72a61127534a1d616cf">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-2f3f7107e2322ccc82a2aebd9651788a68708b0e.jar" />
+        sha1="eb576427887e497cd958a475475f9206e38dc314">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-007832397531db9f7eff5ac11f520d81ce4b132e.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-6566d7e9d74397a92dd6f03fe2b7e2064a02546d.jar" />
-    </item>
-    <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="6d9ed9a288364688e7fcf6704776284dac1eb42e">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-ac5228545cfec4c91810f791dafc84a4f1961278.jar" />
-    </item>
-    <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="0af4f577b4a21eb9be2a7f52e33b077b67e6d9f8">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-72dd4e66ba7aa943d0889b8721111adbbed0debf.jar" />
+        sha1="fd76d95678a6b2b8a49bb8a9fb5bcef7aedb70e7">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a17614e6f386a8c828d9d4b22a44c91c72749d78.jar" />
     </item>
     <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
@@ -72,6 +58,13 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-b83d9678f020cb30de4547107499e1587c812c1e.jar" />
     </item>
     <item
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="6d9ed9a288364688e7fcf6704776284dac1eb42e">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-ac5228545cfec4c91810f791dafc84a4f1961278.jar" />
+    </item>
+    <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
@@ -79,11 +72,32 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-4d0529e3d4acbd429520c97ed9431a810b44de31.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="9aedc597d74c6d77258ce5236e9abff0c3cc65e3">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a1260eac32ec5eb0b43f061f3c3d0024e3812215.jar" />
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-3b723c429bfb2c518337af9939e3c3490f091dae.jar" />
+    </item>
+    <item
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="0af4f577b4a21eb9be2a7f52e33b077b67e6d9f8">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-72dd4e66ba7aa943d0889b8721111adbbed0debf.jar" />
+    </item>
+    <item
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="697679619b00837e3d09e9988a2e1e2a9009d502">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-e15400c3c8cbaf15bd3c4c3ef99f9b10e4f0dbd5.jar" />
+    </item>
+    <item
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-edc986ce4e7f1e1a2b996f7093587ecad7a99348.jar" />
     </item>
     <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.3.0/jars/classes.jar"
@@ -100,20 +114,6 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-e61393bc60520577d19920a9db965f2e5c65f19e.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-edc986ce4e7f1e1a2b996f7093587ecad7a99348.jar" />
-    </item>
-    <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.3.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="724ce977487ab3a215d4d2eb47d8dccd9f30013f">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-d10dbeae3af4239003cdcf94c44a87fd20a8918e.jar" />
-    </item>
-    <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
@@ -121,67 +121,46 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-5489ca15d48d952f636c7d2125d3a68575e2bade.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="77f9593d979f4347344be233bd0d888315f79517">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-1daa9854df229cdb1c60419a41a4a844b3a23357.jar" />
+        sha1="2c6fcd6267cbac6509a2e72a61127534a1d616cf">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-2f3f7107e2322ccc82a2aebd9651788a68708b0e.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-5847c1d64142877ae46eda82436a33e1467e1499.jar" />
+        sha1="4b8df1b1e51fe14b0e89b3845dc2e215a024a09f">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-0adef029e99f160ab8d250d2ebcf909a9566075f.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/design/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="27775d59b16610ac76f1b83693fedd9520396332">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a95508c263ec18f501041d2519d2923eea0e794a.jar" />
+        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-053eefd24bd16af85fb7e001e257c55b48c829cf.jar" />
     </item>
     <item
-        jar="/Users/masasp29/Documents/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-22e616b0ae2a0490863be701a5fe552be2395eb3.jar" />
+        sha1="0c3e81d3eb86b86d194b5cdb6a4de78203f6f7fd">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-65f70aacedbb447e5db00e7205c104b5933e01c7.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-3b723c429bfb2c518337af9939e3c3490f091dae.jar" />
+        sha1="71eda10e33212e44245524b5087366ff8d805825">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a83b43f9310341807c03bf10cf65931b8f973e05.jar" />
     </item>
     <item
-        jar="/Users/masasp29/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.4/695b63d702f505b9b916e02272e3b6381bade7f/gson-2.4.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="0695b63d702f505b9b916e02272e3b6381bade7f">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/gson-2.4-9cf04c8ae09d72f683a565659fef0646046b3961.jar" />
-    </item>
-    <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/8.3.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="fd76d95678a6b2b8a49bb8a9fb5bcef7aedb70e7">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-a17614e6f386a8c828d9d4b22a44c91c72749d78.jar" />
-    </item>
-    <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.3.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="eb576427887e497cd958a475475f9206e38dc314">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-007832397531db9f7eff5ac11f520d81ce4b132e.jar" />
-    </item>
-    <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.3.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="ea34579b1be157cd792376362157e9c54ebb4cd7">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-16e7eb90fc47351f4ec1c053e07469f563b66038.jar" />
+        sha1="cb4af597d079ffdc0984a3ec2c03cbf6a1b9f869">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-018b960f0155b3027327b7c99b8e666bb4701f02.jar" />
     </item>
     <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/jars/classes.jar"
@@ -191,6 +170,13 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-ab8943ea903d844c9c44c65d070df451125e803a.jar" />
     </item>
     <item
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-6566d7e9d74397a92dd6f03fe2b7e2064a02546d.jar" />
+    </item>
+    <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
@@ -198,11 +184,11 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-44ef5ba5897b67dab884bddd7a264b5ebeff34c4.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.0.1/jars/classes.jar"
+        jar="/Users/masasp29/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.4/695b63d702f505b9b916e02272e3b6381bade7f/gson-2.4.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="02329eff16d85c04492c7a5dab456f0993d16349">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-4e95b084e411296dd72c28fde07fc696247e361d.jar" />
+        sha1="0695b63d702f505b9b916e02272e3b6381bade7f">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/gson-2.4-9cf04c8ae09d72f683a565659fef0646046b3961.jar" />
     </item>
     <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/libs/internal_impl-22.2.0.jar"
@@ -212,6 +198,20 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-414114fd3c28f2d21a1690eff68c64f49407bdab.jar" />
     </item>
     <item
+        jar="/Users/masasp29/Documents/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-22e616b0ae2a0490863be701a5fe552be2395eb3.jar" />
+    </item>
+    <item
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="ea34579b1be157cd792376362157e9c54ebb4cd7">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-16e7eb90fc47351f4ec1c053e07469f563b66038.jar" />
+    </item>
+    <item
         jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
@@ -219,11 +219,11 @@
         <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-385a5d16879ef23a1306871470c64798302b4b6c.jar" />
     </item>
     <item
-        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/jars/classes.jar"
+        jar="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="cb4af597d079ffdc0984a3ec2c03cbf6a1b9f869">
-        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-018b960f0155b3027327b7c99b8e666bb4701f02.jar" />
+        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
+        <dex dex="/Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/pre-dexed/debug/classes-5847c1d64142877ae46eda82436a33e1467e1499.jar" />
     </item>
 
 </items>

@@ -11,10 +11,9 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarLstVisita"
+            android:id="@+id/tbLstVisita"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" />
+            android:layout_height="?attr/actionBarSize" />
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_lista_visita" />
@@ -24,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src="@android:drawable/ic_input_add" />
+        android:src="@drawable/ic_finaliza_visita"
+        android:theme="@style/AppTheme.LoginFloatingActionBottom" />
 
 </android.support.design.widget.CoordinatorLayout>

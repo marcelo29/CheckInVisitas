@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -33,8 +35,8 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     private Spinner spnVendedores;
     private Context ctx;
     private String cliente, endereco, telefone, data, hora, vendedor;
-    private TextView txtTitulo;
     private ImageView btnVoltar;
+    private TextView txtTitulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         edtTelefone = (EditText) findViewById(R.id.edtTelefone);
         edtData = (EditText) findViewById(R.id.edtData);
         edtHora = (EditText) findViewById(R.id.edtHora);
+        btnVoltar = (ImageView) findViewById(R.id.btnVoltar);
 
         ArrayList<String> strVendedores = populaVendedor();
         ArrayAdapter<String> adpVendedores = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
@@ -58,22 +61,12 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
 
         fabCadastrar = (FloatingActionButton) findViewById(R.id.fabCadastrar);
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
-        btnVoltar = (ImageView) findViewById(R.id.btnVoltar);
 
         cadastrar();
         cancelar();
         exibeRelogio();
         exibeCalendario();
         voltar();
-    }
-
-    private void voltar() {
-        btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     private void cadastrar() {
@@ -262,4 +255,29 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         String time = "" + hourString + ":" + minuteString + ":" + secondString + "";
         edtHora.setText(time);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cad_visita, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void voltar() {
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
 }

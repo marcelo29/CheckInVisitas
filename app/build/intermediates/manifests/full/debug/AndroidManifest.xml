@@ -48,17 +48,17 @@
 
         <activity
             android:name="br.com.android.check.Login"
-            android:label="@string/title_activity_login" >
+            android:label="@string/app_name" />
+        <activity
+            android:name="br.com.android.check.ListaVisita"
+            android:label="@string/title_activity_lst"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="br.com.android.check.ListaVisita"
-            android:label="@string/title_activity_lst"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="br.com.android.check.CadVisita"
             android:label="@string/title_activity_cad_visita"

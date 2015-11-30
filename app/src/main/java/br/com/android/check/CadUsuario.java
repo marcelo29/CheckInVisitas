@@ -19,8 +19,8 @@ public class CadUsuario extends AppCompatActivity {
     private Context ctx;
     private FloatingActionButton fabCadastrar, fabCancelar;
     private EditText edtUsuario, edtSenha;
-    private TextView txtTitulo;
     private ImageView btnVoltar;
+    private TextView txtTitulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class CadUsuario extends AppCompatActivity {
         ctx = this;
         setContentView(R.layout.activity_cad_usuario);
         txtTitulo = (TextView) findViewById(R.id.txtTitulo);
-        txtTitulo.setText(R.string.title_activity_cad_usuario);
+        txtTitulo.setText(R.string.title_activity_cad_vendedor);
 
         edtUsuario = (EditText) findViewById(R.id.edtUsuario);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
