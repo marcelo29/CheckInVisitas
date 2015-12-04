@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="20dp">
+
+    <LinearLayout
+        android:id="@+id/llCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chkLstVisita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/cliente" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llCliente"
+        android:layout_marginLeft="33dp"
+        android:hint="@string/endereco" />
+
+    <TextView
+        android:id="@+id/txtTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtEndereco"
+        android:layout_marginLeft="33dp"
+        android:hint="@string/telefone" />
+
+    <TextView
+        android:id="@+id/txtData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTelefone"
+        android:layout_marginLeft="33dp"
+        android:hint="@string/data" />
+
+    <TextView
+        android:id="@+id/txtHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtData"
+        android:layout_marginLeft="33dp"
+        android:hint="@string/hora" />
+
+    <TextView
+        android:id="@+id/txtVendedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtHora"
+        android:layout_marginLeft="33dp"
+        android:hint="@string/vendedor" />
+
+    <TextView
+        android:id="@+id/txtSituacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtVendedor"
+        android:layout_marginLeft="33dp"
+        android:hint="@string/situacao" />
+
+    <View
+        android:id="@+id/vw_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_below="@+id/txtSituacao"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary" />
+
+</RelativeLayout>

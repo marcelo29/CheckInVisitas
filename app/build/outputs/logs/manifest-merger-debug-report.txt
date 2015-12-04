@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:2:1-70:12
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:2:1-75:12
 	package
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:3:5-35
 		INJECTED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml
@@ -18,6 +18,8 @@ ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManife
 MERGED from [com.wdullaer:materialdatetimepicker:2.0.1] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.0.1/AndroidManifest.xml:22:5-24:41
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:appcompat-v7:22.2.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
 MERGED from [com.google.android.gms:play-services:8.3.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/8.3.0/AndroidManifest.xml:18:5-42
 MERGED from [com.google.android.gms:play-services-ads:8.3.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:23:5-42
@@ -240,10 +242,12 @@ ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManife
 	android:name
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:32:30-85
 application
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:34:5-68:19
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:34:5-73:19
 MERGED from [com.wdullaer:materialdatetimepicker:2.0.1] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.0.1/AndroidManifest.xml:28:5-20
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:22.2.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services:8.3.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/8.3.0/AndroidManifest.xml:19:5-20
 MERGED from [com.google.android.gms:play-services-ads:8.3.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:24:5-32:19
@@ -358,29 +362,29 @@ ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManife
 	android:name
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:40:13-62
 activity#br.com.android.check.Login
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:43:9-45:57
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:43:9-51:20
 	android:label
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:45:13-45
 	android:name
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:44:13-34
-activity#br.com.android.check.ListaVisita
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:46:9-55:20
-	android:label
-		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:48:13-55
-	android:theme
-		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:49:13-56
-	android:name
-		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:47:13-40
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:50:13-54:29
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:46:13-50:29
 action#android.intent.action.MAIN
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:51:17-69
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:47:17-69
 	android:name
-		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:51:25-66
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:47:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:53:17-77
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:49:17-77
 	android:name
-		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:53:27-74
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:49:27-74
+activity#br.com.android.check.ListaVisita
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:52:9-55:59
+	android:label
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:54:13-55
+	android:theme
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:55:13-56
+	android:name
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:53:13-40
 activity#br.com.android.check.CadVisita
 ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:56:9-59:59
 	android:label
@@ -405,10 +409,24 @@ ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManife
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:67:13-56
 	android:name
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:65:13-39
+activity#br.com.android.check.ListaVisitaRecyclerView
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:68:9-71:59
+	android:label
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:70:13-55
+	android:theme
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:71:13-56
+	android:name
+		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:69:13-52
 uses-permission#android.permission.VIBRATE
 ADDED from [com.wdullaer:materialdatetimepicker:2.0.1] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.0.1/AndroidManifest.xml:26:5-66
 	android:name
 		ADDED from [com.wdullaer:materialdatetimepicker:2.0.1] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.0.1/AndroidManifest.xml:26:22-63
+activity#android.support.v7.widget.TestActivity
+ADDED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:23:9-25:56
+	android:label
+		ADDED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:25:13-53
+	android:name
+		ADDED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:24:13-66
 activity#com.google.android.gms.ads.AdActivity
 ADDED from [com.google.android.gms:play-services-ads:8.3.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.3.0/AndroidManifest.xml:26:9-29:64
 	android:configChanges

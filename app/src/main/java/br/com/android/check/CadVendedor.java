@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import br.com.android.check.helper.adapter.CadVendedorHelper;
+import br.com.android.check.helper.CadVendedorHelper;
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Vendedor;
 import br.com.android.check.modelo.dao.VendedorDAO;

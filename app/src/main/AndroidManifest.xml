@@ -42,17 +42,17 @@
 
         <activity
             android:name=".Login"
-            android:label="@string/app_name"></activity>
-        <activity
-            android:name=".ListaVisita"
-            android:label="@string/title_activity_lst"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ListaVisita"
+            android:label="@string/title_activity_lst"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadVisita"
             android:label="@string/title_activity_cad_visita"
@@ -65,6 +65,11 @@
             android:name=".CadUsuario"
             android:label="@string/title_activity_cad_usuario"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListaVisitaRecyclerView"
+            android:label="@string/title_activity_lst"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

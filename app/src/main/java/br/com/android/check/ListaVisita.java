@@ -194,8 +194,8 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == android.R.id.home) {
-            finish();
+        if (id == R.id.action_settings) {
+            carregaLayout(ctx, ListaVisitaRecyclerView.class);
         }
         return true;
     }

@@ -14,7 +14,7 @@
         <item
             android:id="@+id/itCadAdmin"
             android:icon="@drawable/ic_cad_usuvendedor"
-            android:title="@string/menu_mapa" />
+            android:title="@string/title_activity_cad_usuario" />
         <item
             android:id="@+id/itVerNoMapa"
             android:icon="@drawable/ic_explore_black_36dp"
