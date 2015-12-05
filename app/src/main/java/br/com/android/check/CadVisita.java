@@ -4,16 +4,16 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -35,23 +35,24 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     private Spinner spnVendedores;
     private Context ctx;
     private String cliente, endereco, telefone, data, hora, vendedor;
-    private ImageView btnVoltar;
-    private TextView txtTitulo;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ctx = this;
         setContentView(R.layout.activity_cad_visita);
-        txtTitulo = (TextView) findViewById(R.id.txtTitulo);
-        txtTitulo.setText(R.string.title_activity_cad_visita);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         edtCliente = (EditText) findViewById(R.id.edtCliente);
         edtEnderedo = (EditText) findViewById(R.id.edtEndereco);
         edtTelefone = (EditText) findViewById(R.id.edtTelefone);
         edtData = (EditText) findViewById(R.id.edtData);
         edtHora = (EditText) findViewById(R.id.edtHora);
-        btnVoltar = (ImageView) findViewById(R.id.btnVoltar);
 
         ArrayList<String> strVendedores = populaVendedor();
         ArrayAdapter<String> adpVendedores = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
@@ -66,7 +67,6 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         cancelar();
         exibeRelogio();
         exibeCalendario();
-        voltar();
     }
 
     private void cadastrar() {
@@ -264,20 +264,11 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void voltar() {
-        btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
 }

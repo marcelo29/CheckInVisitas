@@ -2,26 +2,21 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- colorPrimary e usado por padrao no plano de fundo da action bar-->
         <item name="colorPrimary">@color/colorPrimary</item>
-
-        <!-- colorPrimaryDark e usado na status bar-->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
-        <!-- colorAccent e um valor padrao usado por colorControlActivated e tbm em widgets-->
         <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/colorPrimaryGreen</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.LoginFloatingActionBottom">
-        <item name="colorAccent">@color/colorPrimaryGreen</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
 

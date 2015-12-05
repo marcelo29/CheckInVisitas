@@ -3,12 +3,13 @@ package br.com.android.check;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
@@ -19,27 +20,27 @@ public class CadUsuario extends AppCompatActivity {
     private Context ctx;
     private FloatingActionButton fabCadastrar, fabCancelar;
     private EditText edtUsuario, edtSenha;
-    private ImageView btnVoltar;
-    private TextView txtTitulo;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ctx = this;
         setContentView(R.layout.activity_cad_usuario);
-        txtTitulo = (TextView) findViewById(R.id.txtTitulo);
-        txtTitulo.setText(R.string.title_activity_cad_vendedor);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         edtUsuario = (EditText) findViewById(R.id.edtUsuario);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
 
         fabCadastrar = (FloatingActionButton) findViewById(R.id.fabCadastrar);
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
-        btnVoltar = (ImageView) findViewById(R.id.btnVoltar);
 
         cadastrar();
         cancelar();
-        voltar();
     }
 
     private void cadastrar() {
@@ -93,13 +94,12 @@ public class CadUsuario extends AppCompatActivity {
         return validacao;
     }
 
-    private void voltar() {
-        btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
-
 }

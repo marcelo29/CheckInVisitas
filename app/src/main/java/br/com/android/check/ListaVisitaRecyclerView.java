@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -27,36 +28,52 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
 
     private Context ctx;
     private Toolbar toolbar;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_visita_recycler_view);
         ctx = this;
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        VisitaFragment frag = (VisitaFragment) getSupportFragmentManager().findFragmentByTag("visitaFrag");
-        if (frag == null) {
-            frag = new VisitaFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.rl_fragment_container, frag, "visitaFrag");
-            ft.commit();
-        }
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout_recycler);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        carregaVisitaFragment();
+    }
+
+    private void carregaVisitaFragment() {
+        try {
+            VisitaFragment frag = (VisitaFragment) getSupportFragmentManager().findFragmentByTag("visitaFrag");
+
+            if (frag == null) {
+                frag = new VisitaFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.rl_fragment_container, frag, "visitaFrag");
+                ft.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
+        // Create a new fragment and specify the planet to show based on
+        // position
         Usuario usuarioLogado = new SessaoDAO(ctx).getUsuario();
+
         if (usuarioLogado.getPerfil().equals(usuarioLogado.PERFIL_ADM)) {
             switch (menuItem.getItemId()) {
                 case R.id.itCadVendedor:
@@ -70,13 +87,17 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
                     break;
             }
         }
+
         if (menuItem.getItemId() == R.id.itVerNoMapa) {
             verNoMapa();
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
 
+        // Highlight the selected item, update the title, and close the drawer
+        menuItem.setChecked(true);
+        // setTitle(menuItem.getTitle());
+        drawer.closeDrawers();
+
+        return true;
     }
 
     private void carregaLayout(Context ctx, Class classeDestino) {
@@ -86,7 +107,7 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_recycler);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -127,6 +148,17 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
             Util.showAviso(ctx, R.string.aviso_marque_um_endereco);
         }
 
-        //atualizaLista();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lst, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return true;
+    }
+
 }

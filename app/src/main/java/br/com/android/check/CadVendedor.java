@@ -3,10 +3,11 @@ package br.com.android.check;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import br.com.android.check.helper.CadVendedorHelper;
 import br.com.android.check.library.Util;
@@ -17,22 +18,23 @@ public class CadVendedor extends AppCompatActivity {
 
     private Context ctx;
     private FloatingActionButton fabCadastrar, fabCancelar;
-    private TextView txtTitulo;
-    private ImageView btnVoltar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ctx = this;
         setContentView(R.layout.activity_cad_vendedor);
-        txtTitulo = (TextView) findViewById(R.id.txtTitulo);
-        txtTitulo.setText(R.string.title_activity_cad_vendedor);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         final CadVendedorHelper componentes = new CadVendedorHelper(this);
 
         fabCadastrar = (FloatingActionButton) findViewById(R.id.fabCadastrar);
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
-        btnVoltar = (ImageView) findViewById(R.id.btnVoltar);
 
         fabCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,16 +58,14 @@ public class CadVendedor extends AppCompatActivity {
                 componentes.limpaCampos();
             }
         });
-        voltar();
     }
 
-    private void voltar() {
-        btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
-
 }

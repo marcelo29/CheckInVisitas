@@ -25,7 +25,7 @@
     <string name="btnConfirmar">Confirmar</string>
 
     <!-- Tela Cadastro de Vendedor -->
-    <string name="title_activity_cad_vendedor">Cadastro de vendedor</string>
+    <string name="title_activity_cad_vendedor">Cadastro de Vendedor</string>
     <string name="btnCancelar">Cancelar</string>
     <string name="nome">Nome</string>
     <string name="telefone">Telefone</string>

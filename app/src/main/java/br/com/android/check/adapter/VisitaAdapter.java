@@ -32,7 +32,6 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
         View view = layoutInflater.inflate(R.layout.item_visita, parent, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
-
     }
 
     @Override

@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
                         if (dao.logar(usuario.getLogin(), usuario.getSenha(), ctx)) {
                             new SessaoDAO(ctx).setUsuario(usuario.getLogin(), dao);
 
-                            carregaLayout(ctx, ListaVisita.class);
+                            carregaLayout(ctx, ListaVisitaRecyclerView.class);
                             limpaCampos();
                         } else {
                             Util.showAviso(ctx, R.string.aviso_login_invalido);

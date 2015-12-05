@@ -19,7 +19,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import br.com.android.check.helper.adapter.ListaVisitaAdapter;
+import br.com.android.check.adapter.ListaVisitaAdapter;
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
 import br.com.android.check.modelo.bean.Visita;
@@ -35,6 +35,7 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
     private Usuario user;
     private VisitaDAO vdao;
     private Toolbar toolbar;
+    //private ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +43,12 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
         ctx = this;
         setContentView(R.layout.activity_lista_visita);
 
-        toolbar = (Toolbar) findViewById(R.id.tbLstVisita);
-        toolbar.setTitleTextColor(R.color.colorPrimaryWhite);
-        toolbar.setTitle("prova");
+        //img = (ImageView) findViewById(R.id.btnVoltar);
+        //img.setVisibility(View.INVISIBLE);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //toolbar.setTitle(R.string.title_activity_lst);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -160,7 +162,6 @@ public class ListaVisita extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
-    @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         Usuario usuarioLogado = new SessaoDAO(ctx).getUsuario();
         if (usuarioLogado.getPerfil().equals(usuarioLogado.PERFIL_ADM)) {

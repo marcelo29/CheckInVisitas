@@ -7,23 +7,17 @@
     tools:context="br.com.android.check.ListaVisita">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/barLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tbLstVisita"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+        <include layout="@layout/toolbar" />
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_lista_visita" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabMarcaVisita"
-        android:layout_width="wrap_content"
+    <include
+        layout="@layout/container_visita_fragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_finaliza_visita"
-        android:theme="@style/AppTheme.LoginFloatingActionBottom" />
+        android:layout_marginTop="60dp" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -145,6 +145,9 @@ MERGED from [com.android.support:design:22.2.0] /Users/masasp29/StudioProjects/C
 MERGED from [com.android.support:appcompat-v7:22.2.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
+MERGED from [com.melnykov:floatingactionbutton:1.3.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:9:9-38
 		INJECTED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml
@@ -347,6 +350,9 @@ MERGED from [com.android.support:design:22.2.0] /Users/masasp29/StudioProjects/C
 MERGED from [com.android.support:appcompat-v7:22.2.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
+MERGED from [com.melnykov:floatingactionbutton:1.3.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/AndroidManifest.xml:12:5-20
+MERGED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:23.1.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:37:9-41
 	android:allowBackup
@@ -410,7 +416,7 @@ ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManife
 	android:name
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:65:13-39
 activity#br.com.android.check.ListaVisitaRecyclerView
-ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:68:9-71:59
+ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:68:9-71:68
 	android:label
 		ADDED from /Users/masasp29/StudioProjects/CheckVisita/app/src/main/AndroidManifest.xml:70:13-55
 	android:theme
@@ -423,6 +429,7 @@ ADDED from [com.wdullaer:materialdatetimepicker:2.0.1] /Users/masasp29/StudioPro
 		ADDED from [com.wdullaer:materialdatetimepicker:2.0.1] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.0.1/AndroidManifest.xml:26:22-63
 activity#android.support.v7.widget.TestActivity
 ADDED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:23:9-25:56
+MERGED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:23:9-25:56
 	android:label
 		ADDED from [com.android.support:recyclerview-v7:22.0.0] /Users/masasp29/StudioProjects/CheckVisita/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:25:13-53
 	android:name

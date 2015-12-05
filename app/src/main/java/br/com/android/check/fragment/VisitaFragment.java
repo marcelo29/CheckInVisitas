@@ -1,5 +1,6 @@
 package br.com.android.check.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import br.com.android.check.modelo.bean.Visita;
 import br.com.android.check.modelo.dao.SessaoDAO;
 import br.com.android.check.modelo.dao.VisitaDAO;
 
+
 /**
  * Created by masasp29 on 04/12/15.
  */
@@ -29,23 +31,25 @@ public class VisitaFragment extends Fragment {
     private FloatingActionButton fabMarcaVisita;
     private VisitaDAO vdao;
     private Usuario user;
+    private Context ctx;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_visita, container, false);
-
-        vdao = new VisitaDAO();
-        user = new SessaoDAO(getActivity()).getUsuario();
-
-        if (user.getPerfil().equals(user.PERFIL_VENDEDOR)) {
-            fabMarcaVisita.setVisibility(View.INVISIBLE);
-            getExitTransition();
-        }
+        this.ctx = view.getContext();
 
         fabMarcaVisita = (FloatingActionButton) view.findViewById(R.id.fabMarcaVisita);
+        recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
+
+        vdao = new VisitaDAO();
+        user = new SessaoDAO(ctx).getUsuario();
+
+        if (user.getPerfil().equals(Usuario.PERFIL_VENDEDOR)) {
+            fabMarcaVisita.setVisibility(View.INVISIBLE);
+        }
+
         finalizaVisita();
 
-        recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
         recyclerViewVisita.setHasFixedSize(true);
 
         recyclerViewVisita.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -60,13 +64,19 @@ public class VisitaFragment extends Fragment {
             }
         });
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        LinearLayoutManager llm = new LinearLayoutManager(ctx);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewVisita.setLayoutManager(llm);
 
         atualizaLista();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        atualizaLista();
     }
 
     private void finalizaVisita() {
@@ -88,15 +98,15 @@ public class VisitaFragment extends Fragment {
                 if (qtdMarcada == 1) {
                     lista.get(posicaoMarcada).setSituacao(Visita.FINALIZADA);
                     if (vdao.finalizaVisita(lista.get(posicaoMarcada))) {
-                        Util.showAviso(getActivity(), R.string.aviso_visita_concluida);
+                        Util.showAviso(ctx, R.string.aviso_visita_concluida);
                         atualizaLista();
                     } else {
-                        Util.showAviso(getActivity(), R.string.aviso_erro_conexaows);
+                        Util.showAviso(ctx, R.string.aviso_erro_conexaows);
                     }
                 } else if (qtdMarcada > 1) {
-                    Util.showAviso(getActivity(), R.string.aviso_apenas_uma_visita);
+                    Util.showAviso(ctx, R.string.aviso_apenas_uma_visita);
                 } else {
-                    Util.showAviso(getActivity(), R.string.aviso_marque_uma_visita);
+                    Util.showAviso(ctx, R.string.aviso_marque_uma_visita);
                 }
             }
         });
@@ -104,7 +114,7 @@ public class VisitaFragment extends Fragment {
 
     private void atualizaLista() {
         lista = vdao.listar(user);
-        VisitaAdapter adapter = new VisitaAdapter(getActivity(), lista);
+        VisitaAdapter adapter = new VisitaAdapter(ctx, lista);
         recyclerViewVisita.setAdapter(adapter);
     }
 
