@@ -17,12 +17,12 @@ import android.view.MenuItem;
 
 import java.util.List;
 
+import br.com.android.check.adapter.VisitaAdapter;
 import br.com.android.check.fragment.VisitaFragment;
 import br.com.android.check.library.Util;
 import br.com.android.check.modelo.bean.Usuario;
 import br.com.android.check.modelo.bean.Visita;
 import br.com.android.check.modelo.dao.SessaoDAO;
-import br.com.android.check.modelo.dao.VisitaDAO;
 
 public class ListaVisitaRecyclerView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -126,7 +126,7 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
     private void verNoMapa() {
         int marcadas = 0, posicaoMarcada = 0;
 
-        List<Visita> lista = new VisitaDAO().listar(new SessaoDAO(ctx).getUsuario());
+        List<Visita> lista = VisitaAdapter.lista;
 
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getChkMarcado()) {

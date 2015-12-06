@@ -56,6 +56,7 @@
     <string name="aviso_apenas_uma_visita">Marque apenas uma visita para finalizar</string>
     <string name="aviso_marque_uma_visita">"Marque uma visita para finalizar."</string>
     <string name="aviso_usuario_sem_permissao">Usuário sem permissão</string>"
+    <string name="erro_lista_visita">erro_lista_visita</string>
 
     <!-- Tela Cadastro de Usuarios -->
     <string name="title_activity_cad_usuario">Cadastro de Administrador</string>

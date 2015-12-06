@@ -9,9 +9,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.List;
 
 import br.com.android.check.R;
+import br.com.android.check.fragment.VisitaFragment;
 import br.com.android.check.modelo.bean.Visita;
 
 /**
@@ -20,10 +24,12 @@ import br.com.android.check.modelo.bean.Visita;
 public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
-    private List<Visita> lista;
+    public static List<Visita> lista;
+    private Context ctx;
 
     public VisitaAdapter(Context ctx, List<Visita> lista) {
         this.lista = lista;
+        this.ctx = ctx;
         this.layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -36,6 +42,10 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(VisitaAdapter.ViewHolder vh, int position) {
+        onBindViewItemHolder(vh, position);
+    }
+
+    public void onBindViewItemHolder(VisitaAdapter.ViewHolder vh, int position) {
         final Visita visita = lista.get(position);
 
         vh.txtCliente.setText(visita.getCliente());
@@ -63,6 +73,18 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
                 }
             }
         });
+
+        if (visita.getSituacao() == Visita.FINALIZADA && !visita.getChkMarcado()) {
+            if (VisitaFragment.posicao == position) {
+                try {
+                    YoYo.with(Techniques.Tada)
+                            .duration(700)
+                            .playOn(vh.itemView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override

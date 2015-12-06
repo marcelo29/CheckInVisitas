@@ -32,6 +32,8 @@ public class VisitaFragment extends Fragment {
     private VisitaDAO vdao;
     private Usuario user;
     private Context ctx;
+    private VisitaAdapter adapter;
+    public static int posicao = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class VisitaFragment extends Fragment {
     public void onResume() {
         super.onResume();
         atualizaLista();
+        posicao = -1;
     }
 
     private void finalizaVisita() {
@@ -84,21 +87,22 @@ public class VisitaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int qtdMarcada = 0;
-                int posicaoMarcada = 0;
+                //int posicaoMarcada = 0;
 
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getChkMarcado()) {
                         if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
                             qtdMarcada++;
-                            posicaoMarcada = i;
+                            //posicaoMarcada = i;
+                            posicao = i;
                         }
                     }
                 }
 
                 if (qtdMarcada == 1) {
-                    lista.get(posicaoMarcada).setSituacao(Visita.FINALIZADA);
-                    if (vdao.finalizaVisita(lista.get(posicaoMarcada))) {
-                        Util.showAviso(ctx, R.string.aviso_visita_concluida);
+                    //lista.get(posicaoMarcada).setSituacao(Visita.FINALIZADA);
+                    lista.get(posicao).setSituacao(Visita.FINALIZADA);
+                    if (vdao.finalizaVisita(lista.get(posicao))) {
                         atualizaLista();
                     } else {
                         Util.showAviso(ctx, R.string.aviso_erro_conexaows);
@@ -114,7 +118,8 @@ public class VisitaFragment extends Fragment {
 
     private void atualizaLista() {
         lista = vdao.listar(user);
-        VisitaAdapter adapter = new VisitaAdapter(ctx, lista);
+        adapter = null;
+        adapter = new VisitaAdapter(ctx, lista);
         recyclerViewVisita.setAdapter(adapter);
     }
 
