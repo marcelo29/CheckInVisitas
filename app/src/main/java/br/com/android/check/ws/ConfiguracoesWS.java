@@ -5,6 +5,7 @@ package br.com.android.check.ws;
  */
 public class ConfiguracoesWS {
     private static final String NOME_WS = "CheckVisitaWS/";
-    public static final String URL_APLICACAO = "http://192.168.25.9:8080/" + NOME_WS;
-    //public static final String URL_APLICACAO = "http://192.168.15.215:8080/" + NOME_WS;
+    private static final String PORTA = ":8080/";
+    public static final String IP = "192.168.25.3";
+    public static final String URL_APLICACAO = "http://" + IP + PORTA + NOME_WS;
 }

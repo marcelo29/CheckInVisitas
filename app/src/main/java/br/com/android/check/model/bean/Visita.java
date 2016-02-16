@@ -1,8 +1,8 @@
-package br.com.android.check.modelo.bean;
+package br.com.android.check.model.bean;
 
 public class Visita {
 
-    public static final int EM_ANDAMENTO = 0, FINALIZADA = 1;
+    public static final int EM_ANDAMENTO = 0, REALIZADA = 1, FINALIZADA = 2;
 
     private int id, situacao;
     private String cliente, endereco, telefone;

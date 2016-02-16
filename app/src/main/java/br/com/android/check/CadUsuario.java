@@ -12,8 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import br.com.android.check.library.Util;
-import br.com.android.check.modelo.bean.Usuario;
-import br.com.android.check.modelo.dao.UsuarioDAO;
+import br.com.android.check.model.bean.Usuario;
+import br.com.android.check.model.dao.UsuarioDAO;
 
 public class CadUsuario extends AppCompatActivity {
 

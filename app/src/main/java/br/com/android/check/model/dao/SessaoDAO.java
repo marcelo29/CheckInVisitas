@@ -1,9 +1,9 @@
-package br.com.android.check.modelo.dao;
+package br.com.android.check.model.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import br.com.android.check.modelo.bean.Usuario;
+import br.com.android.check.model.bean.Usuario;
 
 public class SessaoDAO {
 
@@ -26,10 +26,10 @@ public class SessaoDAO {
         return usuario;
     }
 
-    public void setUsuario(String usuarioNome, UsuarioDAO dao) {
+    public void setUsuario(Usuario usuario, UsuarioDAO dao) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        Usuario user = dao.usuarioLogado(usuarioNome);
+        Usuario user = dao.usuarioLogado(usuario);
 
         editor.putInt(ID_USUARIO, user.getId());
         editor.putString(PERFIL_USUARIO, user.getPerfil());

@@ -28,9 +28,6 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_gps_fixed_white_24dp"
@@ -49,10 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ListaVisita"
-            android:label="@string/title_activity_lst"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CadVisita"
             android:label="@string/title_activity_cad_visita"

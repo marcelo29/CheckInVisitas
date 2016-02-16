@@ -19,7 +19,6 @@ import java.net.URI;
 public class WebServiceCliente {
 
     public final String[] get(String url, boolean setHeader) {
-
         String[] result = new String[2];
         HttpGet httpget = new HttpGet(url);
         if (setHeader) {
@@ -53,7 +52,6 @@ public class WebServiceCliente {
         String[] result = new String[2];
 
         try {
-
             HttpPost httpPost = new HttpPost(new URI(url));
             httpPost.setHeader("Content-type", "application/json");
             StringEntity sEntity = new StringEntity(json, "UTF-8");

@@ -20,9 +20,9 @@ import java.util.List;
 import br.com.android.check.adapter.VisitaAdapter;
 import br.com.android.check.fragment.VisitaFragment;
 import br.com.android.check.library.Util;
-import br.com.android.check.modelo.bean.Usuario;
-import br.com.android.check.modelo.bean.Visita;
-import br.com.android.check.modelo.dao.SessaoDAO;
+import br.com.android.check.model.bean.Usuario;
+import br.com.android.check.model.bean.Visita;
+import br.com.android.check.model.dao.SessaoDAO;
 
 public class ListaVisitaRecyclerView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

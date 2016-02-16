@@ -1,5 +1,2 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
-    tools:context="br.com.android.check.CadVendedor">
-
-
-</menu>
+    tools:context="br.com.android.check.CadVendedor" />

@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import br.com.android.check.library.Util;
-import br.com.android.check.modelo.bean.Vendedor;
-import br.com.android.check.modelo.bean.Visita;
-import br.com.android.check.modelo.dao.VendedorDAO;
-import br.com.android.check.modelo.dao.VisitaDAO;
+import br.com.android.check.model.bean.Vendedor;
+import br.com.android.check.model.bean.Visita;
+import br.com.android.check.model.dao.VendedorDAO;
+import br.com.android.check.model.dao.VisitaDAO;
 
 public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -171,6 +171,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         edtTelefone.setText("");
         edtData.setText("");
         edtHora.setText("");
+        spnVendedores.setSelection(0);
     }
 
     // validas os campos

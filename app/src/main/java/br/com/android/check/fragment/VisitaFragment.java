@@ -15,10 +15,10 @@ import java.util.List;
 import br.com.android.check.R;
 import br.com.android.check.adapter.VisitaAdapter;
 import br.com.android.check.library.Util;
-import br.com.android.check.modelo.bean.Usuario;
-import br.com.android.check.modelo.bean.Visita;
-import br.com.android.check.modelo.dao.SessaoDAO;
-import br.com.android.check.modelo.dao.VisitaDAO;
+import br.com.android.check.model.bean.Usuario;
+import br.com.android.check.model.bean.Visita;
+import br.com.android.check.model.dao.SessaoDAO;
+import br.com.android.check.model.dao.VisitaDAO;
 
 
 /**
@@ -87,20 +87,17 @@ public class VisitaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int qtdMarcada = 0;
-                //int posicaoMarcada = 0;
 
                 for (int i = 0; i < lista.size(); i++) {
                     if (lista.get(i).getChkMarcado()) {
                         if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
                             qtdMarcada++;
-                            //posicaoMarcada = i;
                             posicao = i;
                         }
                     }
                 }
 
                 if (qtdMarcada == 1) {
-                    //lista.get(posicaoMarcada).setSituacao(Visita.FINALIZADA);
                     lista.get(posicao).setSituacao(Visita.FINALIZADA);
                     if (vdao.finalizaVisita(lista.get(posicao))) {
                         atualizaLista();

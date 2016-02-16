@@ -1,4 +1,4 @@
-package br.com.android.check.modelo.dao;
+package br.com.android.check.model.dao;
 
 import android.os.StrictMode;
 import android.util.Log;
@@ -8,31 +8,25 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-import br.com.android.check.modelo.bean.Usuario;
-import br.com.android.check.modelo.bean.Visita;
+import br.com.android.check.model.bean.Vendedor;
 import br.com.android.check.ws.ConfiguracoesWS;
 import br.com.android.check.ws.WebServiceCliente;
 
-/**
- * Created by masasp29 on 20/10/15.
- */
-public class VisitaDAO {
+public class VendedorDAO {
 
-    //ws
-    private String url = ConfiguracoesWS.URL_APLICACAO + "visita/";
+    // ws ok
+    private String url = ConfiguracoesWS.URL_APLICACAO + "vendedor/";
 
-    public VisitaDAO() {
+    public VendedorDAO() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll()
                 .build();
         StrictMode.setThreadPolicy(policy);
     }
 
-    public Boolean inserirVisita(Visita visita) {
+    public Boolean inserirVendedor(Vendedor vendedor) {
         Boolean flag = false;
         try {
-            Gson gson = new Gson();
-
-            String vendedorJson = gson.toJson(visita);
+            String vendedorJson = new Gson().toJson(vendedor);
             String[] resposta = new WebServiceCliente().post(url + "inserir", vendedorJson);
 
             if (resposta[0].equals("200")) {
@@ -46,30 +40,22 @@ public class VisitaDAO {
         return flag;
     }
 
-    public Boolean finalizaVisita(Visita visita) {
-        Boolean flag = false;
+    public Vendedor retornaVendedorPorNome(String nome) {
+        Vendedor vendedor = null;
         try {
-            Gson gson = new Gson();
-
-            String vendedorJson = gson.toJson(visita);
-            String[] resposta = new WebServiceCliente().post(url + "finalizaVisita", vendedorJson);
-
-            if (resposta[0].equals("200")) {
-                flag = true;
-            } else {
-                flag = false;
-            }
+            String[] resposta = new WebServiceCliente().get(url + "retornaVendedorPorNome/" + nome, false);
+            vendedor = new Gson().fromJson(resposta[1], Vendedor.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return flag;
+        return vendedor;
     }
 
-    public ArrayList<Visita> listar(Usuario user) {
-        ArrayList<Visita> lista = new ArrayList<>();
+    public ArrayList<Vendedor> listaVendedores() {
+        ArrayList<Vendedor> lista = new ArrayList<>();
 
         try {
-            String[] resposta = new WebServiceCliente().get(url + "lista/" + user.getLogin() + "/" + user.getPerfil(), false);
+            String[] resposta = new WebServiceCliente().get(url + "lista", false);
 
             if (resposta[0].equals("200")) {
                 String json = resposta[1];
@@ -80,11 +66,11 @@ public class VisitaDAO {
 
                 Gson gson = new Gson();
 
-                lista = gson.fromJson(json, new TypeToken<ArrayList<Visita>>() {
+                lista = gson.fromJson(json, new TypeToken<ArrayList<Vendedor>>() {
                 }.getType());
             }
         } catch (Exception e) {
-            Log.e("ErroListaVisita", e.getMessage());
+            Log.e("ErroListaVendedor", e.getMessage());
         }
 
         return lista;

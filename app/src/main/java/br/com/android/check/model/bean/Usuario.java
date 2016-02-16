@@ -1,4 +1,4 @@
-package br.com.android.check.modelo.bean;
+package br.com.android.check.model.bean;
 
 public class Usuario {
 

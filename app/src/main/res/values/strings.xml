@@ -7,7 +7,6 @@
 
     <!-- Tela Login -->
     <string name="title_activity_login">Login</string>
-    <string name="titulo"></string>
     <string name="usuario">Usuário</string>
     <string name="senha">Senha</string>
     <string name="perfil">Perfil</string>
@@ -68,4 +67,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="ip_na_rede">Ip na rede.</string>
+    <string name="ip_fora_da_rede">Ip fora da rede.</string>
 </resources>

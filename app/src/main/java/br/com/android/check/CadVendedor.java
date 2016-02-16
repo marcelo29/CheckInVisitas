@@ -11,8 +11,8 @@ import android.view.View;
 
 import br.com.android.check.helper.CadVendedorHelper;
 import br.com.android.check.library.Util;
-import br.com.android.check.modelo.bean.Vendedor;
-import br.com.android.check.modelo.dao.VendedorDAO;
+import br.com.android.check.model.bean.Vendedor;
+import br.com.android.check.model.dao.VendedorDAO;
 
 public class CadVendedor extends AppCompatActivity {
 

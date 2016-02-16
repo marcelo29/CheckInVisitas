@@ -12,9 +12,10 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import br.com.android.check.library.Util;
-import br.com.android.check.modelo.bean.Usuario;
-import br.com.android.check.modelo.dao.SessaoDAO;
-import br.com.android.check.modelo.dao.UsuarioDAO;
+import br.com.android.check.model.bean.Usuario;
+import br.com.android.check.model.dao.SessaoDAO;
+import br.com.android.check.model.dao.UsuarioDAO;
+import br.com.android.check.ws.ConfiguracoesWS;
 
 // gerencia o login da aplicacoa
 public class Login extends AppCompatActivity {
@@ -60,12 +61,19 @@ public class Login extends AppCompatActivity {
                 // chama o dao
                 UsuarioDAO dao = new UsuarioDAO();
 
+                // testando ping
+                if (Util.ipOff(ConfiguracoesWS.IP)) {
+                    Util.showAviso(ctx, R.string.ip_fora_da_rede);
+                } else {
+                    Util.showAviso(ctx, R.string.ip_na_rede);
+                }
+
                 // valida os campos
                 boolean validacao = validacao(usuario.getLogin(), usuario.getSenha());
                 try {
                     if (validacao) {
-                        if (dao.logar(usuario.getLogin(), usuario.getSenha(), ctx)) {
-                            new SessaoDAO(ctx).setUsuario(usuario.getLogin(), dao);
+                        if (dao.logar(usuario)) {
+                            new SessaoDAO(ctx).setUsuario(usuario, dao);
 
                             carregaLayout(ctx, ListaVisitaRecyclerView.class);
                             limpaCampos();
