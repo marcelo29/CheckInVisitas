@@ -8,8 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
-import br.com.android.check.helper.CadVendedorHelper;
+import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.library.Util;
 import br.com.android.check.model.bean.Vendedor;
 import br.com.android.check.model.dao.VendedorDAO;
@@ -19,6 +20,7 @@ public class CadVendedor extends AppCompatActivity {
     private Context ctx;
     private FloatingActionButton fabCadastrar, fabCancelar;
     private Toolbar toolbar;
+    private EditText edtNome, edtSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,36 +28,39 @@ public class CadVendedor extends AppCompatActivity {
         ctx = this;
         setContentView(R.layout.activity_cad_vendedor);
 
+        // construindo toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        final CadVendedorHelper componentes = new CadVendedorHelper(this);
-
+        // recebendo componentes do xhtml
         fabCadastrar = (FloatingActionButton) findViewById(R.id.fabCadastrar);
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
+        edtNome = (EditText) findViewById(R.id.edtNome);
+        edtSenha = (EditText) findViewById(R.id.edtSenha);
 
+        cadastrar();
+    }
+
+    private void cadastrar() {
         fabCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (componentes.validacao()) {
-                    VendedorDAO dao = new VendedorDAO();
-                    Vendedor vendedor = componentes.getVendedor();
+                VendedorDAO dao = new VendedorDAO();
+
+                Vendedor vendedor = new Vendedor();
+                vendedor.setNome(edtNome.getText().toString());
+                vendedor.setSenha(edtSenha.getText().toString());
+
+                if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(vendedor.getNome()))
                     if (dao.inserirVendedor(vendedor)) {
                         Util.showAviso(ctx, R.string.vendedor_cadastrado);
-                        componentes.limpaCampos();
                     } else {
                         Util.showAviso(ctx, R.string.aviso_erro_cadastro);
                     }
-                }
-            }
-        });
-
-        fabCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                componentes.limpaCampos();
+                else
+                    edtNome.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             }
         });
     }
@@ -68,4 +73,5 @@ public class CadVendedor extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

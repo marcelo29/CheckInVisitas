@@ -67,6 +67,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="ip_na_rede">Ip na rede.</string>
-    <string name="ip_fora_da_rede">Ip fora da rede.</string>
+    <string name="ip_na_rede">WS esta on.</string>
+    <string name="ip_fora_da_rede">WS esta off.</string>
 </resources>

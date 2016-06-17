@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.library.Util;
 import br.com.android.check.model.bean.Usuario;
 import br.com.android.check.model.dao.SessaoDAO;
@@ -36,7 +37,7 @@ public class Login extends AppCompatActivity {
         edtSenha = (EditText) findViewById(R.id.edtSenha);
 
         fabLogar = (FloatingActionButton) findViewById(R.id.fabLogar);
-        ChecarLogin();
+        checarLogin();
 
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
         cancelar();
@@ -51,7 +52,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void ChecarLogin() {
+    private void checarLogin() {
         fabLogar.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -64,12 +65,10 @@ public class Login extends AppCompatActivity {
                 // testando ping
                 if (Util.ipOff(ConfiguracoesWS.IP)) {
                     Util.showAviso(ctx, R.string.ip_fora_da_rede);
-                } else {
-                    Util.showAviso(ctx, R.string.ip_na_rede);
                 }
 
                 // valida os campos
-                boolean validacao = validacao(usuario.getLogin(), usuario.getSenha());
+                boolean validacao = camposValidos(usuario.getLogin(), usuario.getSenha());
                 try {
                     if (validacao) {
                         if (dao.logar(usuario)) {
@@ -110,20 +109,18 @@ public class Login extends AppCompatActivity {
     }
 
     // validas os campos
-    private boolean validacao(String usuario, String senha) {
-        boolean validacao = true;
-
-        if (usuario == null || usuario.equals("")) {
-            validacao = false;
+    private boolean camposValidos(String usuario, String senha) {
+        if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(usuario)) {
             edtUsuario.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            return false;
         }
 
-        if (senha == null || senha.equals("")) {
-            validacao = false;
+        if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(senha)) {
             edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            return false;
         }
 
-        return validacao;
+        return true;
     }
 
 }
