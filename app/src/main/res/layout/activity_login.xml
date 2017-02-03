@@ -25,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_contato"
-            android:ems="10" />
+            android:ems="10"
+            android:text="admin" />
 
         <TextView
             android:id="@+id/txtSenha"
@@ -40,7 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_legenda"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="admin" />
 
         <LinearLayout
             android:layout_width="wrap_content"
