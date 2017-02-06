@@ -72,6 +72,11 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         Usuario usuarioLogado = new SessaoDAO(ctx).getUsuario();
 
+        if (menuItem.getItemId() == R.id.itVerNoMapa) {
+            verNoMapa();
+            return true;
+        }
+
         if (usuarioLogado.getPerfil().equals(usuarioLogado.PERFIL_ADM)) {
             switch (menuItem.getItemId()) {
                 case R.id.itCadVendedor:
@@ -86,10 +91,6 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
             }
         } else {
             Util.showAviso(ctx, R.string.aviso_usuario_sem_permissao);
-        }
-
-        if (menuItem.getItemId() == R.id.itVerNoMapa) {
-            verNoMapa();
         }
 
         // Highlight the selected item, update the title, and close the drawer

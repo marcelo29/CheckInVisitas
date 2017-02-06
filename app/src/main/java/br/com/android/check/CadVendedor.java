@@ -14,13 +14,10 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import br.com.android.check.api.UsuarioAPI;
 import br.com.android.check.api.VendedorAPI;
 import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.library.Util;
-import br.com.android.check.model.bean.Usuario;
 import br.com.android.check.model.bean.Vendedor;
-import br.com.android.check.model.dao.VendedorDAO;
 import br.com.android.check.util.VendedorDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;
@@ -29,15 +26,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static br.com.android.check.R.string.usuario;
-
 public class CadVendedor extends AppCompatActivity {
 
     // componentes da tela /
     private Context ctx;
     private FloatingActionButton fabCadastrar, fabCancelar;
     private Toolbar toolbar;
-    private EditText edtNome, edtSenha;
+    private EditText edtNome, edtSenha, edtTelefone;
 
     // componentes da request
     private Vendedor vendedor = null;
@@ -59,6 +54,7 @@ public class CadVendedor extends AppCompatActivity {
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
         edtNome = (EditText) findViewById(R.id.edtNome);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
+        edtTelefone = (EditText) findViewById(R.id.edtTelefone);
 
         cancelar();
     }
@@ -67,10 +63,15 @@ public class CadVendedor extends AppCompatActivity {
         fabCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtNome.setText("");
-                edtSenha.setText("");
+                limpaCampos();
             }
         });
+    }
+
+    private void limpaCampos() {
+        edtNome.setText("");
+        edtSenha.setText("");
+        edtTelefone.setText("");
     }
 
     @Override
@@ -82,63 +83,39 @@ public class CadVendedor extends AppCompatActivity {
                 vendedor = new Vendedor();
                 vendedor.setNome(edtNome.getText().toString());
                 vendedor.setSenha(edtSenha.getText().toString());
+                vendedor.setTelefone(edtTelefone.getText().toString());
 
-                if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(vendedor.getNome())) {
+                if (camposValidos(vendedor.getNome(), vendedor.getSenha(), vendedor.getTelefone())) {
                     // CADASTRA VENDEDOR - POST
-                    Gson gson = new GsonBuilder().registerTypeAdapter(Vendedor.class, new VendedorDeserializer()).create();
+                    Gson gson = new GsonBuilder().registerTypeAdapter(String.class,
+                            new VendedorDeserializer()).create();
 
-                    Retrofit retroitUser = new Retrofit
+                    Retrofit retroit = new Retrofit
                             .Builder()
                             .baseUrl(ConfiguracoesWS.API)
                             .addConverterFactory(GsonConverterFactory.create(gson))
                             .build();
-                    VendedorAPI vendedorAPI = retroitUser.create(VendedorAPI.class);
+                    VendedorAPI vendedorAPI = retroit.create(VendedorAPI.class);
 
-                    final Call<Vendedor> callVendedor = vendedorAPI.inserir(vendedor);
+                    final Call<String> callVendedor = vendedorAPI.inserir(vendedor);
 
-                    callVendedor.enqueue(new Callback<Vendedor>() {
+                    callVendedor.enqueue(new Callback<String>() {
                         @Override
-                        public void onResponse(Call<Vendedor> call, Response<Vendedor> response) {
-                            if (response.body() != null) {
-                                Util.showAviso(ctx, R.string.vendedor_cadastrado);
-                            } else {
-                                Util.showAviso(ctx, R.string.aviso_erro_cadastro);
-                            }
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Util.showAviso(ctx, R.string.vendedor_cadastrado);
+                            limpaCampos();
                         }
 
                         @Override
-                        public void onFailure(Call<Vendedor> call, Throwable t) {
-                            Log.i(ConfiguracoesWS.TAG, "ErroCadastroVendedor" + t.getMessage());
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Log.i(ConfiguracoesWS.TAG, "ErroCadastroVendedor " + t.getMessage());
+                            Util.showAviso(ctx, R.string.aviso_erro_cadastro);
                         }
                     });
-                } else {
-                    edtNome.setError(Util.AVISO_CAMPO_OBRIGATORIO);
                 }
             }
         });
     }
-
-    /*private void cadastrar() {
-        fabCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VendedorDAO dao = new VendedorDAO();
-
-                Vendedor vendedor = new Vendedor();
-                vendedor.setNome(edtNome.getText().toString());
-                vendedor.setSenha(edtSenha.getText().toString());
-
-                if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(vendedor.getNome()))
-                    if (dao.inserirVendedor(vendedor)) {
-                        Util.showAviso(ctx, R.string.vendedor_cadastrado);
-                    } else {
-                        Util.showAviso(ctx, R.string.aviso_erro_cadastro);
-                    }
-                else
-                    edtNome.setError(Util.AVISO_CAMPO_OBRIGATORIO);
-            }
-        });
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -147,6 +124,28 @@ public class CadVendedor extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // validas os campos
+    private boolean camposValidos(String nome, String senha, String telefone) {
+        boolean validacao = true;
+
+        if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(nome)) {
+            edtNome.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            validacao = false;
+        }
+
+        if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(senha)) {
+            edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            validacao = false;
+        }
+
+        if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(telefone)) {
+            edtTelefone.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            validacao = false;
+        }
+
+        return validacao;
     }
 
 }

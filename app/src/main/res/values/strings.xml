@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Check-in Visitas</string>
+    <string name="app_name">CheckIn Visitas</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -16,10 +16,10 @@
 
     <!-- Tele Menu Geral -->
     <string name="title_activity_menu_geral">Menu</string>
-    <string name="btnCadVendedor">Cadastro de vendedor</string>
-    <string name="btnCadVisita">Cadastro de visita</string>
+    <string name="btnCadVendedor">Cadastro de Vendedor</string>
+    <string name="btnCadVisita">Cadastro de Visita</string>
     <string name="btnCadAdmin">Cadastro de Administradores</string>
-    <string name="btnLstVisita">Listar visitas</string>
+    <string name="btnLstVisita">Listar Visitas</string>
     <string name="btnVoltar">Voltar</string>
     <string name="btnConfirmar">Confirmar</string>
 

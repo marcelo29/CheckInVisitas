@@ -11,5 +11,5 @@ import retrofit2.http.POST;
 
 public interface VendedorAPI {
     @POST("CheckVisitaWS/vendedor/inserir")
-    Call<Vendedor> inserir(@Body Vendedor vendedor);
+    Call<String> inserir(@Body Vendedor vendedor);
 }

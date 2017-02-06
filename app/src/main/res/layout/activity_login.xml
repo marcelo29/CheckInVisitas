@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/ic_lock_open_black_36dp" />
+                android:src="@drawable/ic_lock_open_white_36dp" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabCancelar"

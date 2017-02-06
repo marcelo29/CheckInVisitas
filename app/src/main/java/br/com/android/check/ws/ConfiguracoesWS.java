@@ -11,5 +11,5 @@ public class ConfiguracoesWS {
 
     //retrofit
     public static final String API = "http://192.168.25.8:8080/";
-    public static final String TAG = "TAGE";
+    public static final String TAG = "MARCELO";
 }

@@ -2,7 +2,6 @@ package br.com.android.check;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.library.Util;
 import br.com.android.check.model.bean.Usuario;
 import br.com.android.check.model.dao.SessaoDAO;
-import br.com.android.check.model.dao.UsuarioDAO;
 import br.com.android.check.util.UsuarioDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;
@@ -37,8 +35,6 @@ public class Login extends AppCompatActivity {
     private EditText edtUsuario, edtSenha;
     private FloatingActionButton fabLogar, fabCancelar;
 
-    private String API = "http://192.168.25.8:8080/";
-    private String TAG = "TAGE";
     private Usuario usuario = null;
 
     @Override
@@ -63,39 +59,44 @@ public class Login extends AppCompatActivity {
         fabLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // SHOW USER - REQUEST
                 if (camposValidos(edtUsuario.getText().toString(), edtSenha.getText().toString())) {
-                    Gson gsonUser = new GsonBuilder().registerTypeAdapter(Usuario.class, new UsuarioDeserializer()).create();
+                    if (Util.ipOff(ConfiguracoesWS.API)) {
+                        Util.showAviso(ctx, R.string.aviso_erro_conexaows);
+                    } else {
+                        // LOGAR USUARIO - REQUEST
+                        Gson gsonUser = new GsonBuilder().registerTypeAdapter(Usuario.class,
+                                new UsuarioDeserializer()).create();
 
-                    Retrofit retroitUser = new Retrofit
-                            .Builder()
-                            .baseUrl(API)
-                            .addConverterFactory(GsonConverterFactory.create(gsonUser))
-                            .build();
-                    UsuarioAPI usuarioAPI = retroitUser.create(UsuarioAPI.class);
+                        Retrofit retroitUser = new Retrofit
+                                .Builder()
+                                .baseUrl(ConfiguracoesWS.API)
+                                .addConverterFactory(GsonConverterFactory.create(gsonUser))
+                                .build();
+                        UsuarioAPI usuarioAPI = retroitUser.create(UsuarioAPI.class);
 
-                    final Call<Usuario> callUser = usuarioAPI.logar(edtUsuario.getText().toString(),
-                            edtSenha.getText().toString());
+                        final Call<Usuario> callUser = usuarioAPI.logar(edtUsuario.getText().toString(),
+                                edtSenha.getText().toString());
 
-                    callUser.enqueue(new Callback<Usuario>() {
-                        @Override
-                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                            usuario = response.body();
-                            if (usuario != null) {
-                                new SessaoDAO(ctx).setUsuario(usuario);
+                        callUser.enqueue(new Callback<Usuario>() {
+                            @Override
+                            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                                usuario = response.body();
+                                if (usuario != null) {
+                                    new SessaoDAO(ctx).setUsuario(usuario);
 
-                                carregaLayout(ctx, ListaVisitaRecyclerView.class);
-                                limpaCampos();
-                            } else {
-                                Util.showAviso(ctx, R.string.aviso_login_invalido);
+                                    carregaLayout(ctx, ListaVisitaRecyclerView.class);
+                                    limpaCampos();
+                                } else {
+                                    Util.showAviso(ctx, R.string.aviso_login_invalido);
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<Usuario> call, Throwable t) {
-                            Log.i(TAG, "ErroShowMsg " + t.getMessage());
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<Usuario> call, Throwable t) {
+                                Log.i(ConfiguracoesWS.TAG, "ErroLogarUsuario " + t.getMessage());
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -132,17 +133,19 @@ public class Login extends AppCompatActivity {
 
     // validas os campos
     private boolean camposValidos(String usuario, String senha) {
+        boolean validacao = true;
+
         if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(usuario)) {
             edtUsuario.setError(Util.AVISO_CAMPO_OBRIGATORIO);
-            return false;
+            validacao = false;
         }
 
         if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(senha)) {
             edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
-            return false;
+            validacao = false;
         }
 
-        return true;
+        return validacao;
     }
 
 }
