@@ -57,6 +57,33 @@ public class UsuarioDAO {
         return (usuario != null);
     }
 
+    public Boolean Logar(Usuario user) {
+        Gson gson = new GsonBuilder().registerTypeAdapter(Usuario.class, new UsuarioDeserializer()).create();
+
+        Retrofit retrofit = new Retrofit
+                .Builder()
+                .baseUrl(API)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        UsuarioAPI usuarioAPI = retrofit.create(UsuarioAPI.class);
+
+        // GET USUARIO - REQUEST
+        final Call<Usuario> callUsuario = usuarioAPI.logar(user.getLogin(), user.getSenha());
+        callUsuario.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                usuario = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Log.i(TAG, "Error GET Usuario: " + t.getMessage());
+            }
+        });
+
+        return usuario != null;
+    }
+
     public Usuario usuarioLogado(Usuario user) {
         Usuario usuario = null;
         try {

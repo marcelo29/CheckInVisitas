@@ -160,7 +160,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="2c20bc04bdd759912298f4bf9cba93f5b655140d">
+        sha1="8a868725d6bb932bcedc4c76200d692a0afa7175">
         <dex dex="C:\Users\marcelo\StudioProjects\CheckIn\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_0918f647eb9711ba45dbf4543147a48ac8f7f50c\classes.dex" />
     </item>
     <item
@@ -313,7 +313,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="c71783177d866d7ef2ed2d1a5937ca1ab476e60d">
+        sha1="c318187f2ea45048845040269dbe082946e01a1a">
         <dex dex="C:\Users\marcelo\StudioProjects\CheckIn\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_ef253a646ab1e9fe23565f0e51ae022153ec2639\classes.dex" />
     </item>
     <item

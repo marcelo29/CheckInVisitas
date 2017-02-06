@@ -86,6 +86,8 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
                     carregaLayout(ctx, CadUsuario.class);
                     break;
             }
+        } else {
+            Util.showAviso(ctx, R.string.aviso_usuario_sem_permissao);
         }
 
         if (menuItem.getItemId() == R.id.itVerNoMapa) {

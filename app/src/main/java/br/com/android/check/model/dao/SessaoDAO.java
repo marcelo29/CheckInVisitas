@@ -26,7 +26,17 @@ public class SessaoDAO {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario, UsuarioDAO dao) {
+    public void setUsuario(Usuario user) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt(ID_USUARIO, user.getId());
+        editor.putString(PERFIL_USUARIO, user.getPerfil());
+        editor.putString(LOGIN_USUARIO, user.getLogin());
+
+        editor.commit();
+    }
+
+    /*public void setUsuario(Usuario usuario, UsuarioDAO dao) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         Usuario user = dao.usuarioLogado(usuario);
@@ -36,6 +46,5 @@ public class SessaoDAO {
         editor.putString(LOGIN_USUARIO, user.getLogin());
 
         editor.commit();
-    }
-
+    }*/
 }
