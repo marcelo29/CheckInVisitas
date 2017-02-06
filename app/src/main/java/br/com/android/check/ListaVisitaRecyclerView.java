@@ -70,8 +70,6 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        // Create a new fragment and specify the planet to show based on
-        // position
         Usuario usuarioLogado = new SessaoDAO(ctx).getUsuario();
 
         if (usuarioLogado.getPerfil().equals(usuarioLogado.PERFIL_ADM)) {
