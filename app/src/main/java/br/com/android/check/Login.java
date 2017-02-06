@@ -52,46 +52,10 @@ public class Login extends AppCompatActivity {
         edtSenha = (EditText) findViewById(R.id.edtSenha);
 
         fabLogar = (FloatingActionButton) findViewById(R.id.fabLogar);
-        //checaLogin();
 
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
         cancelar();
     }
-
-    /*private void checaLogin() {
-        fabLogar.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Usuario user = new Usuario(edtUsuario.getText().toString(), edtSenha.getText().toString());
-
-                // chama o dao
-                UsuarioDAO dao = new UsuarioDAO();
-
-                // testando ping
-                if (Util.ipOff(ConfiguracoesWS.IP)) {
-                    Util.showAviso(ctx, R.string.ip_fora_da_rede);
-                }
-
-                // valida os campos
-                boolean validacao = camposValidos(user.getLogin(), user.getSenha());
-                try {
-                    if (validacao) {
-                        if (dao.Logar(user)) {
-                            //if (usuario != null) {
-                            //new SessaoDAO(ctx).setUsuario(usuario, dao);
-
-                            carregaLayout(ctx, ListaVisitaRecyclerView.class);
-                            limpaCampos();
-                        } else {
-                            Util.showAviso(ctx, R.string.aviso_login_invalido);
-                        }
-                    }
-                } catch (SQLiteException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }*/
 
     @Override
     protected void onResume() {
@@ -100,37 +64,39 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // SHOW USER - REQUEST
-                Gson gsonUser = new GsonBuilder().registerTypeAdapter(Usuario.class, new UsuarioDeserializer()).create();
+                if (camposValidos(edtUsuario.getText().toString(), edtSenha.getText().toString())) {
+                    Gson gsonUser = new GsonBuilder().registerTypeAdapter(Usuario.class, new UsuarioDeserializer()).create();
 
-                Retrofit retroitUser = new Retrofit
-                        .Builder()
-                        .baseUrl(API)
-                        .addConverterFactory(GsonConverterFactory.create(gsonUser))
-                        .build();
-                UsuarioAPI usuarioAPI = retroitUser.create(UsuarioAPI.class);
+                    Retrofit retroitUser = new Retrofit
+                            .Builder()
+                            .baseUrl(API)
+                            .addConverterFactory(GsonConverterFactory.create(gsonUser))
+                            .build();
+                    UsuarioAPI usuarioAPI = retroitUser.create(UsuarioAPI.class);
 
-                final Call<Usuario> callUser = usuarioAPI.logar(edtUsuario.getText().toString(),
-                        edtSenha.getText().toString());
+                    final Call<Usuario> callUser = usuarioAPI.logar(edtUsuario.getText().toString(),
+                            edtSenha.getText().toString());
 
-                callUser.enqueue(new Callback<Usuario>() {
-                    @Override
-                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        usuario = response.body();
-                        if (usuario != null) {
-                            new SessaoDAO(ctx).setUsuario(usuario);
+                    callUser.enqueue(new Callback<Usuario>() {
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                            usuario = response.body();
+                            if (usuario != null) {
+                                new SessaoDAO(ctx).setUsuario(usuario);
 
-                            carregaLayout(ctx, ListaVisitaRecyclerView.class);
-                            limpaCampos();
-                        } else {
-                            Util.showAviso(ctx, R.string.aviso_login_invalido);
+                                carregaLayout(ctx, ListaVisitaRecyclerView.class);
+                                limpaCampos();
+                            } else {
+                                Util.showAviso(ctx, R.string.aviso_login_invalido);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Usuario> call, Throwable t) {
-                        Log.i(TAG, "ErroShowMsg " + t.getMessage());
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t) {
+                            Log.i(TAG, "ErroShowMsg " + t.getMessage());
+                        }
+                    });
+                }
             }
         });
     }

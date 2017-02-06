@@ -19,11 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UsuarioDAO {
 
-    // ws ok
-    private String API = "http://192.168.25.8:8080/";
-    private String TAG = "TAGE";
-    private Usuario usuario = null;
-
     public UsuarioDAO() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll()
                 .build();
@@ -44,54 +39,5 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
         return flag;
-    }
-
-    public Boolean logar(Usuario user) {
-        Usuario usuario = null;
-        try {
-            String link = "http://192.168.25.8:8080/CheckVisitaWS/usuario/logar/" + user.getLogin() + "/" + user.getSenha();
-            usuario = (Usuario) new DownloadJsonObjectWS().validaJson(link, user, DownloadJsonObjectWS.GET);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return (usuario != null);
-    }
-
-    public Boolean Logar(Usuario user) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(Usuario.class, new UsuarioDeserializer()).create();
-
-        Retrofit retrofit = new Retrofit
-                .Builder()
-                .baseUrl(API)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        UsuarioAPI usuarioAPI = retrofit.create(UsuarioAPI.class);
-
-        // GET USUARIO - REQUEST
-        final Call<Usuario> callUsuario = usuarioAPI.logar(user.getLogin(), user.getSenha());
-        callUsuario.enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                usuario = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.i(TAG, "Error GET Usuario: " + t.getMessage());
-            }
-        });
-
-        return usuario != null;
-    }
-
-    public Usuario usuarioLogado(Usuario user) {
-        Usuario usuario = null;
-        try {
-            String link = "http://192.168.25.8:8080/CheckVisitaWS/usuario/usuarioLogado/" + user.getLogin();
-            usuario = (Usuario) new DownloadJsonObjectWS().validaJson(link, user, DownloadJsonObjectWS.GET);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usuario;
     }
 }

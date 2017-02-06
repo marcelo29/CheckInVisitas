@@ -8,4 +8,8 @@ public class ConfiguracoesWS {
     private static final String PORTA = ":8080/";
     public static final String IP = "192.168.25.8";
     public static final String URL_APLICACAO = "http://" + IP + PORTA + NOME_WS;
+
+    //retrofit
+    public static final String API = "http://192.168.25.8:8080/";
+    public static final String TAG = "TAGE";
 }
