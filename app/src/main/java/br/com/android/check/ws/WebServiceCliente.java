@@ -37,11 +37,10 @@ public class WebServiceCliente {
                 InputStream instream = entity.getContent();
                 result[1] = toString(instream);
                 instream.close();
-                Log.i("marcarconsultas", "Result from post JsonPost : " + result[0]
-                        + " : " + result[1]);
+                Log.i("checkin", "Result from get JsonGet : " + result[0]);
             }
         } catch (Exception e) {
-            Log.i("marcarconsultas", "Falha ao conectar ws");
+            Log.i("checkin", "Falha ao conectar ws");
             result[0] = "0";
             result[1] = "Falha de rede!";
         }
@@ -68,11 +67,10 @@ public class WebServiceCliente {
                 InputStream instream = entity.getContent();
                 result[1] = toString(instream);
                 instream.close();
-                Log.i("marcarconsultas", "Result from post JsonPost : " + result[0]
-                        + " : " + result[1]);
+                Log.i("checkin", "Result from post JsonPost : " + result[0]);
             }
         } catch (Exception e) {
-            Log.i("marcarconsultas", "Falha ao conectar ws");
+            Log.i("checkin", "Falha ao conectar ws");
             result[0] = "0";
             result[1] = "Falha de rede!";
         }

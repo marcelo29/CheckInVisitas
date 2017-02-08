@@ -22,7 +22,7 @@
             android:id="@+id/edtCliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:drawableRight="@drawable/ic_contato"
             android:hint="@string/cliente" />
     </android.support.design.widget.TextInputLayout>
@@ -36,7 +36,7 @@
             android:id="@+id/edtData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:drawableRight="@drawable/ic_data"
             android:hint="@string/data"
             android:inputType="date" />
@@ -51,7 +51,8 @@
             android:id="@+id/edtHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableRight="@drawable/ic_relogio"
             android:hint="@string/hora"
             android:inputType="datetime" />
     </android.support.design.widget.TextInputLayout>
@@ -65,7 +66,7 @@
             android:id="@+id/edtEndereco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:drawableRight="@drawable/ic_endereco"
             android:hint="@string/endereco" />
     </android.support.design.widget.TextInputLayout>
@@ -79,7 +80,7 @@
             android:id="@+id/edtTelefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:drawableRight="@drawable/ic_telefone"
             android:hint="@string/telefone"
             android:inputType="phone" />
@@ -88,7 +89,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/vendedor"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -97,5 +98,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <include layout="@layout/componentes_cadastrar_cancelar" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:theme="@style/AppTheme.LoginFloatingActionBottom">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabCadastrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_cad_padrao_branco" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+    </LinearLayout>
 </LinearLayout>

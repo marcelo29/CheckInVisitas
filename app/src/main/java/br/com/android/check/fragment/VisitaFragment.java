@@ -2,13 +2,13 @@ package br.com.android.check.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class VisitaFragment extends Fragment {
 
     private RecyclerView recyclerViewVisita;
     private List<Visita> lista;
-    private FloatingActionButton fabMarcaVisita;
+    private Button btnMarcaVisita;
     private VisitaDAO vdao;
     private Usuario user;
     private Context ctx;
@@ -40,14 +40,14 @@ public class VisitaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_visita, container, false);
         this.ctx = view.getContext();
 
-        fabMarcaVisita = (FloatingActionButton) view.findViewById(R.id.fabMarcaVisita);
+        btnMarcaVisita = (Button) view.findViewById(R.id.btnMarcaVisita);
         recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
 
         vdao = new VisitaDAO();
         user = new SessaoDAO(ctx).getUsuario();
 
         if (user.getPerfil().equals(Usuario.PERFIL_VENDEDOR)) {
-            fabMarcaVisita.setVisibility(View.INVISIBLE);
+            btnMarcaVisita.setVisibility(View.INVISIBLE);
         }
 
         finalizaVisita();
@@ -83,7 +83,7 @@ public class VisitaFragment extends Fragment {
     }
 
     private void finalizaVisita() {
-        fabMarcaVisita.setOnClickListener(new View.OnClickListener() {
+        btnMarcaVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int qtdMarcada = 0;

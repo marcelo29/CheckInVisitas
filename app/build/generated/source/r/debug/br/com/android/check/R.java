@@ -2757,6 +2757,7 @@ containing a value of this type.
         public static final int beginning=0x7f0c002b;
         public static final int book_now=0x7f0c0050;
         public static final int bottom=0x7f0c001b;
+        public static final int btnMarcaVisita=0x7f0c00a8;
         public static final int buttonPanel=0x7f0c0074;
         public static final int buttons=0x7f0c00dc;
         public static final int buyButton=0x7f0c004d;
@@ -2796,7 +2797,7 @@ containing a value of this type.
         public static final int donate_with=0x7f0c0054;
         public static final int donate_with_google=0x7f0c0055;
         public static final int done_background=0x7f0c00bc;
-        public static final int drawer_layout_recycler=0x7f0c009f;
+        public static final int drawer_layout_recycler=0x7f0c00a1;
         public static final int dropdown=0x7f0c003e;
         public static final int edit_query=0x7f0c0080;
         public static final int edtCliente=0x7f0c0097;
@@ -2822,10 +2823,9 @@ containing a value of this type.
         public static final int exitUntilCollapsed=0x7f0c0017;
         public static final int expand_activities_button=0x7f0c0065;
         public static final int expanded_menu=0x7f0c0075;
-        public static final int fabCadastrar=0x7f0c00a5;
-        public static final int fabCancelar=0x7f0c00a4;
-        public static final int fabLogar=0x7f0c00a3;
-        public static final int fabMarcaVisita=0x7f0c00a8;
+        public static final int fabCadastrar=0x7f0c009f;
+        public static final int fabCancelar=0x7f0c00a0;
+        public static final int fabLogar=0x7f0c00a5;
         public static final int fill=0x7f0c0022;
         public static final int fill_horizontal=0x7f0c0023;
         public static final int fill_vertical=0x7f0c0024;
@@ -2871,7 +2871,7 @@ containing a value of this type.
         public static final int monochrome=0x7f0c005f;
         public static final int month_text_view=0x7f0c00cf;
         public static final int multiply=0x7f0c0042;
-        public static final int nav_view=0x7f0c00a0;
+        public static final int nav_view=0x7f0c00a2;
         public static final int never=0x7f0c0035;
         public static final int none=0x7f0c0010;
         public static final int normal=0x7f0c000c;
@@ -2953,10 +2953,10 @@ containing a value of this type.
         public static final int txtData=0x7f0c00ae;
         public static final int txtEndereco=0x7f0c00ac;
         public static final int txtHora=0x7f0c00af;
-        public static final int txtSenha=0x7f0c00a2;
+        public static final int txtSenha=0x7f0c00a4;
         public static final int txtSituacao=0x7f0c00b1;
         public static final int txtTelefone=0x7f0c00ad;
-        public static final int txtUsuario=0x7f0c00a1;
+        public static final int txtUsuario=0x7f0c00a3;
         public static final int txtVendedor=0x7f0c00b0;
         public static final int up=0x7f0c0009;
         public static final int useLogo=0x7f0c0014;

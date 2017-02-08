@@ -837,6 +837,7 @@ int id auto 0x7f0c003a
 int id beginning 0x7f0c002b
 int id book_now 0x7f0c0050
 int id bottom 0x7f0c001b
+int id btnMarcaVisita 0x7f0c00a8
 int id buttonPanel 0x7f0c0074
 int id buttons 0x7f0c00dc
 int id buyButton 0x7f0c004d
@@ -876,7 +877,7 @@ int id disconnect 0x7f0c00dd
 int id donate_with 0x7f0c0054
 int id donate_with_google 0x7f0c0055
 int id done_background 0x7f0c00bc
-int id drawer_layout_recycler 0x7f0c009f
+int id drawer_layout_recycler 0x7f0c00a1
 int id dropdown 0x7f0c003e
 int id edit_query 0x7f0c0080
 int id edtCliente 0x7f0c0097
@@ -902,10 +903,9 @@ int id enterAlwaysCollapsed 0x7f0c0016
 int id exitUntilCollapsed 0x7f0c0017
 int id expand_activities_button 0x7f0c0065
 int id expanded_menu 0x7f0c0075
-int id fabCadastrar 0x7f0c00a5
-int id fabCancelar 0x7f0c00a4
-int id fabLogar 0x7f0c00a3
-int id fabMarcaVisita 0x7f0c00a8
+int id fabCadastrar 0x7f0c009f
+int id fabCancelar 0x7f0c00a0
+int id fabLogar 0x7f0c00a5
 int id fill 0x7f0c0022
 int id fill_horizontal 0x7f0c0023
 int id fill_vertical 0x7f0c0024
@@ -951,7 +951,7 @@ int id minutes_space 0x7f0c00c4
 int id monochrome 0x7f0c005f
 int id month_text_view 0x7f0c00cf
 int id multiply 0x7f0c0042
-int id nav_view 0x7f0c00a0
+int id nav_view 0x7f0c00a2
 int id never 0x7f0c0035
 int id none 0x7f0c0010
 int id normal 0x7f0c000c
@@ -1033,10 +1033,10 @@ int id txtCliente 0x7f0c00ab
 int id txtData 0x7f0c00ae
 int id txtEndereco 0x7f0c00ac
 int id txtHora 0x7f0c00af
-int id txtSenha 0x7f0c00a2
+int id txtSenha 0x7f0c00a4
 int id txtSituacao 0x7f0c00b1
 int id txtTelefone 0x7f0c00ad
-int id txtUsuario 0x7f0c00a1
+int id txtUsuario 0x7f0c00a3
 int id txtVendedor 0x7f0c00b0
 int id up 0x7f0c0009
 int id useLogo 0x7f0c0014

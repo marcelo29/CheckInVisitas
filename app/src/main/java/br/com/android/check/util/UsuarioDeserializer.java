@@ -18,10 +18,6 @@ public class UsuarioDeserializer implements JsonDeserializer<Object> {
     public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonElement usuario = json.getAsJsonObject();
 
-        if (json.getAsJsonObject().get("usuario") != null) {
-            usuario = json.getAsJsonObject().get("usuario");
-        }
-
-        return (new Gson().fromJson(usuario, Usuario.class));
+        return new Gson().fromJson(usuario, Usuario.class);
     }
 }

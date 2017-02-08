@@ -7,7 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -22,20 +24,32 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import br.com.android.check.api.VendedorAPI;
+import br.com.android.check.controler.Mask;
 import br.com.android.check.library.Util;
 import br.com.android.check.model.bean.Vendedor;
 import br.com.android.check.model.bean.Visita;
 import br.com.android.check.model.dao.VendedorDAO;
 import br.com.android.check.model.dao.VisitaDAO;
+import br.com.android.check.util.VendedorDeserializer;
+import br.com.android.check.ws.ConfiguracoesWS;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener,
+        DatePickerDialog.OnDateSetListener {
 
     private EditText edtCliente, edtEnderedo, edtTelefone, edtData, edtHora;
+    //private MaskedEditText metData;
     private FloatingActionButton fabCadastrar, fabCancelar;
     private Spinner spnVendedores;
     private Context ctx;
     private String cliente, endereco, telefone, data, hora, vendedor;
     private Toolbar toolbar;
+    private Vendedor vendedorSelecionado = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +64,14 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
 
         edtCliente = (EditText) findViewById(R.id.edtCliente);
         edtEnderedo = (EditText) findViewById(R.id.edtEndereco);
+
         edtTelefone = (EditText) findViewById(R.id.edtTelefone);
+        edtTelefone.addTextChangedListener(Mask.insert("(##)#####-####", edtTelefone));
+
+        //adiciona mascara ao texto
         edtData = (EditText) findViewById(R.id.edtData);
+        edtData.addTextChangedListener(Mask.insert("##/##/####", edtData));
+
         edtHora = (EditText) findViewById(R.id.edtHora);
 
         ArrayList<String> strVendedores = populaVendedor();
@@ -63,35 +83,10 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         fabCadastrar = (FloatingActionButton) findViewById(R.id.fabCadastrar);
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
 
-        cadastrar();
+        //cadastrar();
         cancelar();
         exibeRelogio();
         exibeCalendario();
-    }
-
-    private void cadastrar() {
-        fabCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validacao()) {
-
-                    VisitaDAO dao = new VisitaDAO();
-
-                    Vendedor vendedor = new VendedorDAO().retornaVendedorPorNome(spnVendedores.getSelectedItem().toString());
-
-                    Visita visita = new Visita(Visita.EM_ANDAMENTO, cliente, endereco, telefone, hora);
-                    visita.setData(data);
-                    visita.setVendedor(vendedor);
-
-                    if (dao.inserirVisita(visita)) {
-                        Util.showAviso(ctx, R.string.visita_cadastrada);
-                        limparCampos();
-                    } else {
-                        Util.showAviso(ctx, R.string.aviso_erro_cadastro);
-                    }
-                }
-            }
-        });
     }
 
     private void cancelar() {
@@ -104,14 +99,6 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     }
 
     private void exibeCalendario() {
-        edtData.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Util.showAviso(ctx, R.string.aviso_clique_data);
-                edtData.setText("");
-                return false;
-            }
-        });
         edtData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,15 +119,23 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
             }
         });
 
+        edtData.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus == true) {
+                    Util.showAviso(ctx, R.string.aviso_clique_data);
+                }
+            }
+        });
     }
 
     private void exibeRelogio() {
-        edtHora.setOnKeyListener(new View.OnKeyListener() {
+        edtHora.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Util.showAviso(ctx, R.string.aviso_clique_hora);
-                edtHora.setText("");
-                return false;
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus == true) {
+                    Util.showAviso(ctx, R.string.aviso_clique_hora);
+                }
             }
         });
         edtHora.setOnClickListener(new View.OnClickListener() {
@@ -232,11 +227,54 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     @Override
     protected void onResume() {
         super.onResume();
+
         TimePickerDialog tpd = (TimePickerDialog) getFragmentManager().findFragmentByTag("Timepickerdialog");
         DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
 
         if (tpd != null) tpd.setOnTimeSetListener(this);
         if (dpd != null) dpd.setOnDateSetListener(this);
+
+        fabCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validacao()) {
+                    // CADASTRA VISITA - REQUEST
+                    Gson gson = new GsonBuilder().registerTypeAdapter(Vendedor.class,
+                            new VendedorDeserializer()).create();
+
+                    Retrofit retroit = new Retrofit
+                            .Builder()
+                            .baseUrl(ConfiguracoesWS.API)
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+                    VendedorAPI vendedorAPI = retroit.create(VendedorAPI.class);
+
+                    Call<Vendedor> call = vendedorAPI.retornaVendedorPorNome(spnVendedores.getSelectedItem().toString());
+                    call.enqueue(new Callback<Vendedor>() {
+                        @Override
+                        public void onResponse(Call<Vendedor> call, Response<Vendedor> response) {
+                            Vendedor v = response.body();
+                            vendedorSelecionado = v;
+
+                            Visita visita = new Visita(Visita.EM_ANDAMENTO, cliente, endereco, telefone, hora);
+                            visita.setData(data);
+                            visita.setVendedor(vendedorSelecionado);
+
+                            if (new VisitaDAO().inserirVisita(visita)) {
+                                Util.showAviso(ctx, R.string.visita_cadastrada);
+                                limparCampos();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Vendedor> call, Throwable t) {
+                            Log.i(ConfiguracoesWS.TAG, "ErroCadastrarVisita " + t.getMessage());
+                            Util.showAviso(ctx, R.string.aviso_erro_cadastro);
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
