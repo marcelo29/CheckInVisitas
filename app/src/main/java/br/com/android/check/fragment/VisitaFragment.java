@@ -42,7 +42,7 @@ import static com.google.android.gms.internal.zzip.runOnUiThread;
 public class VisitaFragment extends Fragment {
 
     private RecyclerView recyclerViewVisita;
-    private List<Visita> lista = new ArrayList<>();
+    private List<Visita> lista;
     private Visita visita;
     private Button btnMarcaVisita;
     private Usuario user;
@@ -54,6 +54,7 @@ public class VisitaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_visita, container, false);
         this.ctx = view.getContext();
+        lista = null;
 
         btnMarcaVisita = (Button) view.findViewById(R.id.btnMarcaVisita);
         recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
@@ -84,7 +85,7 @@ public class VisitaFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewVisita.setLayoutManager(llm);
 
-        atualizaLista();
+        //atualizaLista();
 
         return view;
     }
@@ -138,11 +139,7 @@ public class VisitaFragment extends Fragment {
                         }
                     });
 
-                    if (visita != null) {
-                        atualizaLista();
-                    } else {
-                        Util.showAviso(ctx, R.string.aviso_erro_conexaows);
-                    }
+                    onResume();
                 } else if (qtdMarcada > 1) {
                     Util.showAviso(ctx, R.string.aviso_apenas_uma_visita);
                 } else {
@@ -153,6 +150,9 @@ public class VisitaFragment extends Fragment {
     }
 
     private void atualizaLista() {
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
         // RETORNA VISITAS - REQUEST
         Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class,
                 new VisitaDeserializer()).create();
