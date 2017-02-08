@@ -25,13 +25,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import br.com.android.check.api.VendedorAPI;
+import br.com.android.check.api.VisitaAPI;
 import br.com.android.check.controler.Mask;
 import br.com.android.check.library.Util;
 import br.com.android.check.model.bean.Vendedor;
 import br.com.android.check.model.bean.Visita;
 import br.com.android.check.model.dao.VendedorDAO;
-import br.com.android.check.model.dao.VisitaDAO;
 import br.com.android.check.util.VendedorDeserializer;
+import br.com.android.check.util.VisitaDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,7 +50,9 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
     private Context ctx;
     private String cliente, endereco, telefone, data, hora, vendedor;
     private Toolbar toolbar;
+
     private Vendedor vendedorSelecionado = null;
+    private Visita visita, visitaCad = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,7 +241,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
             @Override
             public void onClick(View v) {
                 if (validacao()) {
-                    // CADASTRA VISITA - REQUEST
+                    // RETORNA VENDEDOR - REQUEST
                     Gson gson = new GsonBuilder().registerTypeAdapter(Vendedor.class,
                             new VendedorDeserializer()).create();
 
@@ -249,26 +252,52 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
                             .build();
                     VendedorAPI vendedorAPI = retroit.create(VendedorAPI.class);
 
-                    Call<Vendedor> call = vendedorAPI.retornaVendedorPorNome(spnVendedores.getSelectedItem().toString());
+                    Call<Vendedor> call = vendedorAPI.retornaVendedorPorNome(spnVendedores.getSelectedItem().
+                            toString());
+
                     call.enqueue(new Callback<Vendedor>() {
                         @Override
                         public void onResponse(Call<Vendedor> call, Response<Vendedor> response) {
                             Vendedor v = response.body();
                             vendedorSelecionado = v;
+                        }
 
-                            Visita visita = new Visita(Visita.EM_ANDAMENTO, cliente, endereco, telefone, hora);
-                            visita.setData(data);
-                            visita.setVendedor(vendedorSelecionado);
+                        @Override
+                        public void onFailure(Call<Vendedor> call, Throwable t) {
+                            Log.i(ConfiguracoesWS.TAG, "ErroRetornaVendedorPorNome " + t.getMessage());
+                            Util.showAviso(ctx, R.string.aviso_erro_cadastro);
+                        }
+                    });
 
-                            if (new VisitaDAO().inserirVisita(visita)) {
+                    // CADASTRA VISITA - REQUEST
+                    gson = new GsonBuilder().registerTypeAdapter(Visita.class, new VisitaDeserializer()).create();
+
+                    retroit = new Retrofit
+                            .Builder()
+                            .baseUrl(ConfiguracoesWS.API)
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+                    VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
+
+                    visita = new Visita(Visita.EM_ANDAMENTO, cliente, endereco, telefone, hora);
+                    visita.setData(data);
+                    visita.setVendedor(vendedorSelecionado);
+
+                    Call<Visita> callVisita = visitaAPI.inserir(visita);
+
+                    callVisita.enqueue(new Callback<Visita>() {
+                        @Override
+                        public void onResponse(Call<Visita> call, Response<Visita> response) {
+                            Visita visitaCad = response.body();
+                            if (visitaCad != null) {
                                 Util.showAviso(ctx, R.string.visita_cadastrada);
                                 limparCampos();
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<Vendedor> call, Throwable t) {
-                            Log.i(ConfiguracoesWS.TAG, "ErroCadastrarVisita " + t.getMessage());
+                        public void onFailure(Call<Visita> call, Throwable t) {
+                            Log.i(ConfiguracoesWS.TAG, "ErroCadastraVisita " + t.getMessage());
                             Util.showAviso(ctx, R.string.aviso_erro_cadastro);
                         }
                     });

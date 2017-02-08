@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 
 public interface VendedorAPI {
     @POST("CheckVisitaWS/vendedor/inserir")
-    Call<String> inserir(@Body Vendedor vendedor);
+    Call<Vendedor> inserir(@Body Vendedor vendedor);
 
     @GET("CheckVisitaWS/vendedor/retornaVendedorPorNome/{nome}")
     Call<Vendedor> retornaVendedorPorNome(@Path("nome") String nome);

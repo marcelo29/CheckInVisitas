@@ -90,7 +90,7 @@ public class CadVendedor extends AppCompatActivity {
 
                 if (camposValidos(vendedor.getNome(), vendedor.getSenha(), vendedor.getTelefone())) {
                     // CADASTRA VENDEDOR - POST
-                    Gson gson = new GsonBuilder().registerTypeAdapter(String.class,
+                    Gson gson = new GsonBuilder().registerTypeAdapter(Vendedor.class,
                             new VendedorDeserializer()).create();
 
                     Retrofit retroit = new Retrofit
@@ -100,17 +100,17 @@ public class CadVendedor extends AppCompatActivity {
                             .build();
                     VendedorAPI vendedorAPI = retroit.create(VendedorAPI.class);
 
-                    final Call<String> callVendedor = vendedorAPI.inserir(vendedor);
+                    final Call<Vendedor> callVendedor = vendedorAPI.inserir(vendedor);
 
-                    callVendedor.enqueue(new Callback<String>() {
+                    callVendedor.enqueue(new Callback<Vendedor>() {
                         @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
+                        public void onResponse(Call<Vendedor> call, Response<Vendedor> response) {
                             Util.showAviso(ctx, R.string.vendedor_cadastrado);
                             limpaCampos();
                         }
 
                         @Override
-                        public void onFailure(Call<String> call, Throwable t) {
+                        public void onFailure(Call<Vendedor> call, Throwable t) {
                             Log.i(ConfiguracoesWS.TAG, "ErroCadastroVendedor " + t.getMessage());
                             Util.showAviso(ctx, R.string.aviso_erro_cadastro);
                         }

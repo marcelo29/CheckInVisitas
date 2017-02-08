@@ -27,23 +27,6 @@ public class VisitaDAO {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public Boolean inserirVisita(Visita visita) {
-        Boolean flag = false;
-        try {
-            Gson gson = new Gson();
-
-            String vendedorJson = gson.toJson(visita);
-            String[] resposta = new WebServiceCliente().post(url + "inserir", vendedorJson);
-
-            if (resposta[0].equals("200")) {
-                flag = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
     public Boolean finalizaVisita(Visita visita) {
         Boolean flag = false;
         try {

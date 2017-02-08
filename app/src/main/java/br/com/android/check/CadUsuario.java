@@ -6,14 +6,25 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import br.com.android.check.api.UsuarioAPI;
 import br.com.android.check.library.Util;
 import br.com.android.check.model.bean.Usuario;
-import br.com.android.check.model.dao.UsuarioDAO;
+import br.com.android.check.util.UsuarioDeserializer;
+import br.com.android.check.ws.ConfiguracoesWS;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CadUsuario extends AppCompatActivity {
 
@@ -48,15 +59,34 @@ public class CadUsuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Usuario usuario = new Usuario(edtUsuario.getText().toString(), edtSenha.getText().toString());
+
                 boolean validacao = validacao(usuario.getLogin(), usuario.getSenha());
                 if (validacao) {
-                    UsuarioDAO dao = new UsuarioDAO();
-                    if (dao.insereUsuario(usuario)) {
-                        Util.showAviso(ctx, R.string.usuario_cadastrado);
-                        limpaCampos();
-                    } else {
-                        Util.showAviso(ctx, R.string.aviso_erro_cadastro);
-                    }
+                    // CADASTRA USUARIO - REQUEST
+                    Gson gson = new GsonBuilder().registerTypeAdapter(Usuario.class,
+                            new UsuarioDeserializer()).create();
+
+                    Retrofit retroit = new Retrofit
+                            .Builder()
+                            .baseUrl(ConfiguracoesWS.API)
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+                    UsuarioAPI usuarioAPI = retroit.create(UsuarioAPI.class);
+
+                    Call<Usuario> call = usuarioAPI.inserir(usuario);
+
+                    call.enqueue(new Callback<Usuario>() {
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                            Util.showAviso(ctx, R.string.usuario_cadastrado);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t) {
+                            Log.i(ConfiguracoesWS.TAG, "ErroCadastroUsuario " + t.getMessage());
+                            Util.showAviso(ctx, R.string.aviso_erro_conexaows);
+                        }
+                    });
                 }
             }
         });
