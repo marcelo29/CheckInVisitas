@@ -38,7 +38,7 @@
     <string name="data">Data</string>
     <string name="hora">Hora</string>
     <string name="aviso_clique_hora">Clique duplo para informar a hora.</string>
-    <string name="aviso_clique_data">Clique duplo para mostrar o calendário ou clique único para digitar a data.</string>
+    <string name="aviso_clique_data">Clique duplo para informar a data.</string>
     <string name="visita_cadastrada">Visita cadastra com sucesso</string>
 
     <!-- Tela Lista Visitas -->

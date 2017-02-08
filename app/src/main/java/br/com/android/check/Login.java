@@ -56,47 +56,45 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         fabLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (camposValidos(edtUsuario.getText().toString(), edtSenha.getText().toString())) {
-                    if (Util.ipOff(ConfiguracoesWS.API)) {
-                        Util.showAviso(ctx, R.string.aviso_erro_conexaows);
-                    } else {
-                        // LOGAR USUARIO - REQUEST
-                        Gson gsonUser = new GsonBuilder().registerTypeAdapter(Usuario.class,
-                                new UsuarioDeserializer()).create();
+                    // LOGAR USUARIO - REQUEST
+                    Gson gsonUser = new GsonBuilder().registerTypeAdapter(Usuario.class,
+                            new UsuarioDeserializer()).create();
 
-                        Retrofit retroitUser = new Retrofit
-                                .Builder()
-                                .baseUrl(ConfiguracoesWS.API)
-                                .addConverterFactory(GsonConverterFactory.create(gsonUser))
-                                .build();
-                        UsuarioAPI usuarioAPI = retroitUser.create(UsuarioAPI.class);
+                    Retrofit retroitUser = new Retrofit
+                            .Builder()
+                            .baseUrl(ConfiguracoesWS.API)
+                            .addConverterFactory(GsonConverterFactory.create(gsonUser))
+                            .build();
+                    UsuarioAPI usuarioAPI = retroitUser.create(UsuarioAPI.class);
 
-                        final Call<Usuario> callUser = usuarioAPI.logar(edtUsuario.getText().toString(),
-                                edtSenha.getText().toString());
+                    final Call<Usuario> callUser = usuarioAPI.logar(edtUsuario.getText().toString(),
+                            edtSenha.getText().toString());
 
-                        callUser.enqueue(new Callback<Usuario>() {
-                            @Override
-                            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                                usuario = response.body();
-                                if (usuario != null) {
-                                    new SessaoDAO(ctx).setUsuario(usuario);
+                    callUser.enqueue(new Callback<Usuario>() {
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                            usuario = response.body();
+                            if (usuario != null) {
+                                new SessaoDAO(ctx).setUsuario(usuario);
 
-                                    carregaLayout(ctx, ListaVisitaRecyclerView.class);
-                                    limpaCampos();
-                                } else {
-                                    Util.showAviso(ctx, R.string.aviso_login_invalido);
-                                }
+                                carregaLayout(ctx, ListaVisitaRecyclerView.class);
+                                limpaCampos();
+                            } else {
+                                Util.showAviso(ctx, R.string.aviso_login_invalido);
                             }
+                        }
 
-                            @Override
-                            public void onFailure(Call<Usuario> call, Throwable t) {
-                                Log.i(ConfiguracoesWS.TAG, "ErroLogarUsuario " + t.getMessage());
-                            }
-                        });
-                    }
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t) {
+                            Util.showAviso(ctx, R.string.aviso_erro_conexaows);
+                            Log.i("onFailureLogar", "ErroLogarUsuario " + t.getMessage());
+                        }
+                    });
                 }
             }
         });

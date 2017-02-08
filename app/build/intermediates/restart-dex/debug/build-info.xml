@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="22"
+    abi="x86"
+    api-level="19"
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="148545778918001"
+    timestamp="153249127756150"
     token="-7633209849349027974"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
@@ -22,15 +22,16 @@
         name="verifier"
         duration="0" />
 
+    <artifact
+        location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"
+        type="MAIN" />
+
     <build
-        timestamp="148169789980455"
-        verifier="MANIFEST_FILE_CHANGE" >
+        timestamp="153249127756150"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
-    <build
-        timestamp="148545778918001"
-        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

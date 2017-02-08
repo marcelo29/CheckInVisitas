@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.android.check.api.VendedorAPI;
+import br.com.android.check.controler.Mask;
 import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.library.Util;
 import br.com.android.check.model.bean.Vendedor;
@@ -54,7 +55,9 @@ public class CadVendedor extends AppCompatActivity {
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
         edtNome = (EditText) findViewById(R.id.edtNome);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
+
         edtTelefone = (EditText) findViewById(R.id.edtTelefone);
+        edtTelefone.addTextChangedListener(Mask.insert("(##)#####-####", edtTelefone));
 
         cancelar();
     }
