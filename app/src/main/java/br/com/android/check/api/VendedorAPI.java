@@ -1,6 +1,8 @@
 package br.com.android.check.api;
 
-import br.com.android.check.model.bean.Vendedor;
+import java.util.List;
+
+import br.com.android.check.domain.Vendedor;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,4 +19,7 @@ public interface VendedorAPI {
 
     @GET("CheckVisitaWS/vendedor/retornaVendedorPorNome/{nome}")
     Call<Vendedor> retornaVendedorPorNome(@Path("nome") String nome);
+
+    @GET("CheckVisitaWS/vendedor/lista")
+    Call<List<Vendedor>> listar();
 }

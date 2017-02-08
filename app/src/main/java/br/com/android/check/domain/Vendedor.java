@@ -1,4 +1,4 @@
-package br.com.android.check.model.bean;
+package br.com.android.check.domain;
 
 public class Vendedor {
 

@@ -21,16 +21,17 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import br.com.android.check.api.VendedorAPI;
 import br.com.android.check.api.VisitaAPI;
 import br.com.android.check.controler.Mask;
+import br.com.android.check.domain.Vendedor;
+import br.com.android.check.domain.Visita;
 import br.com.android.check.library.Util;
-import br.com.android.check.model.bean.Vendedor;
-import br.com.android.check.model.bean.Visita;
-import br.com.android.check.model.dao.VendedorDAO;
 import br.com.android.check.util.VendedorDeserializer;
 import br.com.android.check.util.VisitaDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
@@ -77,7 +78,7 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
 
         edtHora = (EditText) findViewById(R.id.edtHora);
 
-        ArrayList<String> strVendedores = populaVendedor();
+        List<String> strVendedores = populaVendedor();
         ArrayAdapter<String> adpVendedores = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
                 strVendedores);
         spnVendedores = (Spinner) findViewById(R.id.spnVendedor);
@@ -216,14 +217,54 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         return valido;
     }
 
-    private ArrayList<String> populaVendedor() {
-        VendedorDAO vdao = new VendedorDAO();
-        ArrayList<String> lista = new ArrayList<String>();
+    private List<String> populaVendedor() {
+        final List<String> lista = new ArrayList<String>();
         lista.add("");
-        ArrayList<Vendedor> vendedores = vdao.listaVendedores();
-        for (int i = 0; i < vendedores.size(); i++) {
-            lista.add(vendedores.get(i).getNome());
-        }
+
+        // RETORNA VENDEDORES - REQUEST
+        Gson gson = new GsonBuilder().registerTypeAdapter(Vendedor.class,
+                new VendedorDeserializer()).create();
+
+        Retrofit retroit = new Retrofit
+                .Builder()
+                .baseUrl(ConfiguracoesWS.API)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        VendedorAPI vendedorAPI = retroit.create(VendedorAPI.class);
+
+        final Call<List<Vendedor>> call = vendedorAPI.listar();
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                List<Vendedor> vendedores = null;
+                try {
+                    vendedores = call.execute().body();
+
+                    if (vendedores != null) {
+                        for (Vendedor v : vendedores) {
+                            lista.add(v.getNome());
+                        }
+                    }
+                } catch (IOException e) {
+                    Log.i(ConfiguracoesWS.TAG, "ErroListaVendedores " + e.getMessage().toString());
+                    Util.showAviso(ctx, R.string.aviso_erro_lista_vendedores);
+                    e.printStackTrace();
+                } finally {
+                    onStop();
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("onSucess", "RETORNA VENDEDORES - REQUEST ok");
+                    }
+                });
+            }
+        }.start();
+
         return lista;
     }
 

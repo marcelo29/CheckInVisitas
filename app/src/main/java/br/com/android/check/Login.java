@@ -16,9 +16,9 @@ import com.google.gson.GsonBuilder;
 
 import br.com.android.check.api.UsuarioAPI;
 import br.com.android.check.controler.ValidaCamposObrigatorios;
+import br.com.android.check.domain.Sessao;
+import br.com.android.check.domain.Usuario;
 import br.com.android.check.library.Util;
-import br.com.android.check.model.bean.Usuario;
-import br.com.android.check.model.dao.SessaoDAO;
 import br.com.android.check.util.UsuarioDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;
@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity {
                         public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                             usuario = response.body();
                             if (usuario != null) {
-                                new SessaoDAO(ctx).setUsuario(usuario);
+                                new Sessao(ctx).setUsuario(usuario);
 
                                 carregaLayout(ctx, ListaVisitaRecyclerView.class);
                                 limpaCampos();

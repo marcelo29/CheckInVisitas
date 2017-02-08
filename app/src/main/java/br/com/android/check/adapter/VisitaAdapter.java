@@ -16,7 +16,7 @@ import java.util.List;
 
 import br.com.android.check.R;
 import br.com.android.check.fragment.VisitaFragment;
-import br.com.android.check.model.bean.Visita;
+import br.com.android.check.domain.Visita;
 
 /**
  * Created by masasp29 on 04/12/15.

@@ -1,6 +1,6 @@
 package br.com.android.check.api;
 
-import br.com.android.check.model.bean.Usuario;
+import br.com.android.check.domain.Usuario;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

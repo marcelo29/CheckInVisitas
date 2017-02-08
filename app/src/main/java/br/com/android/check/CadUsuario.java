@@ -17,7 +17,7 @@ import com.google.gson.GsonBuilder;
 
 import br.com.android.check.api.UsuarioAPI;
 import br.com.android.check.library.Util;
-import br.com.android.check.model.bean.Usuario;
+import br.com.android.check.domain.Usuario;
 import br.com.android.check.util.UsuarioDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;

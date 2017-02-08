@@ -140,10 +140,10 @@ public final class R {
 		public static final int mdtp_year_label_text_view = 0x7f030031;
 	}
 	public static final class string {
-		public static final int mdtp_ampm_circle_radius_multiplier = 0x7f06007a;
-		public static final int mdtp_cancel = 0x7f06007b;
-		public static final int mdtp_circle_radius_multiplier = 0x7f06007c;
-		public static final int mdtp_circle_radius_multiplier_24HourMode = 0x7f06007d;
+		public static final int mdtp_ampm_circle_radius_multiplier = 0x7f06007c;
+		public static final int mdtp_cancel = 0x7f06007d;
+		public static final int mdtp_circle_radius_multiplier = 0x7f06007e;
+		public static final int mdtp_circle_radius_multiplier_24HourMode = 0x7f06007f;
 		public static final int mdtp_day_of_week_label_typeface = 0x7f06003f;
 		public static final int mdtp_day_picker_description = 0x7f06002d;
 		public static final int mdtp_deleted_key = 0x7f06002e;
@@ -151,24 +151,24 @@ public final class R {
 		public static final int mdtp_hour_picker_description = 0x7f060030;
 		public static final int mdtp_item_is_selected = 0x7f060031;
 		public static final int mdtp_minute_picker_description = 0x7f060032;
-		public static final int mdtp_numbers_radius_multiplier_inner = 0x7f06007e;
-		public static final int mdtp_numbers_radius_multiplier_normal = 0x7f06007f;
-		public static final int mdtp_numbers_radius_multiplier_outer = 0x7f060080;
-		public static final int mdtp_ok = 0x7f060081;
-		public static final int mdtp_radial_numbers_typeface = 0x7f060082;
-		public static final int mdtp_sans_serif = 0x7f060083;
-		public static final int mdtp_second_picker_description = 0x7f060084;
+		public static final int mdtp_numbers_radius_multiplier_inner = 0x7f060080;
+		public static final int mdtp_numbers_radius_multiplier_normal = 0x7f060081;
+		public static final int mdtp_numbers_radius_multiplier_outer = 0x7f060082;
+		public static final int mdtp_ok = 0x7f060083;
+		public static final int mdtp_radial_numbers_typeface = 0x7f060084;
+		public static final int mdtp_sans_serif = 0x7f060085;
+		public static final int mdtp_second_picker_description = 0x7f060086;
 		public static final int mdtp_select_day = 0x7f060033;
 		public static final int mdtp_select_hours = 0x7f060034;
 		public static final int mdtp_select_minutes = 0x7f060035;
-		public static final int mdtp_select_seconds = 0x7f060085;
+		public static final int mdtp_select_seconds = 0x7f060087;
 		public static final int mdtp_select_year = 0x7f060036;
-		public static final int mdtp_selection_radius_multiplier = 0x7f060086;
-		public static final int mdtp_text_size_multiplier_inner = 0x7f060087;
-		public static final int mdtp_text_size_multiplier_normal = 0x7f060088;
-		public static final int mdtp_text_size_multiplier_outer = 0x7f060089;
-		public static final int mdtp_time_placeholder = 0x7f06008a;
-		public static final int mdtp_time_separator = 0x7f06008b;
+		public static final int mdtp_selection_radius_multiplier = 0x7f060088;
+		public static final int mdtp_text_size_multiplier_inner = 0x7f060089;
+		public static final int mdtp_text_size_multiplier_normal = 0x7f06008a;
+		public static final int mdtp_text_size_multiplier_outer = 0x7f06008b;
+		public static final int mdtp_time_placeholder = 0x7f06008c;
+		public static final int mdtp_time_separator = 0x7f06008d;
 		public static final int mdtp_year_picker_description = 0x7f060037;
 	}
 	public static final class style {

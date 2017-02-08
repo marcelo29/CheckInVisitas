@@ -40,7 +40,7 @@
             android:id="@+id/edtSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_legenda"
+            android:drawableRight="@drawable/ic_senha"
             android:inputType="textPassword"
             android:text="admin" />
 

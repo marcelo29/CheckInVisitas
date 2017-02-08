@@ -18,7 +18,7 @@ import br.com.android.check.api.VendedorAPI;
 import br.com.android.check.controler.Mask;
 import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.library.Util;
-import br.com.android.check.model.bean.Vendedor;
+import br.com.android.check.domain.Vendedor;
 import br.com.android.check.util.VendedorDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;

@@ -18,11 +18,11 @@ import android.view.MenuItem;
 import java.util.List;
 
 import br.com.android.check.adapter.VisitaAdapter;
+import br.com.android.check.domain.Sessao;
+import br.com.android.check.domain.Usuario;
+import br.com.android.check.domain.Visita;
 import br.com.android.check.fragment.VisitaFragment;
 import br.com.android.check.library.Util;
-import br.com.android.check.model.bean.Usuario;
-import br.com.android.check.model.bean.Visita;
-import br.com.android.check.model.dao.SessaoDAO;
 
 public class ListaVisitaRecyclerView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -70,7 +70,7 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        Usuario usuarioLogado = new SessaoDAO(ctx).getUsuario();
+        Usuario usuarioLogado = new Sessao(ctx).getUsuario();
 
         if (menuItem.getItemId() == R.id.itVerNoMapa) {
             verNoMapa();

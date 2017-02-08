@@ -5,20 +5,35 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.android.check.R;
 import br.com.android.check.adapter.VisitaAdapter;
+import br.com.android.check.api.VisitaAPI;
+import br.com.android.check.domain.Sessao;
+import br.com.android.check.domain.Usuario;
+import br.com.android.check.domain.Visita;
 import br.com.android.check.library.Util;
-import br.com.android.check.model.bean.Usuario;
-import br.com.android.check.model.bean.Visita;
-import br.com.android.check.model.dao.SessaoDAO;
-import br.com.android.check.model.dao.VisitaDAO;
+import br.com.android.check.util.VisitaDeserializer;
+import br.com.android.check.ws.ConfiguracoesWS;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.google.android.gms.internal.zzip.runOnUiThread;
 
 
 /**
@@ -27,9 +42,9 @@ import br.com.android.check.model.dao.VisitaDAO;
 public class VisitaFragment extends Fragment {
 
     private RecyclerView recyclerViewVisita;
-    private List<Visita> lista;
+    private List<Visita> lista = new ArrayList<>();
+    private Visita visita;
     private Button btnMarcaVisita;
-    private VisitaDAO vdao;
     private Usuario user;
     private Context ctx;
     private VisitaAdapter adapter;
@@ -43,8 +58,7 @@ public class VisitaFragment extends Fragment {
         btnMarcaVisita = (Button) view.findViewById(R.id.btnMarcaVisita);
         recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
 
-        vdao = new VisitaDAO();
-        user = new SessaoDAO(ctx).getUsuario();
+        user = new Sessao(ctx).getUsuario();
 
         if (user.getPerfil().equals(Usuario.PERFIL_VENDEDOR)) {
             btnMarcaVisita.setVisibility(View.INVISIBLE);
@@ -98,8 +112,33 @@ public class VisitaFragment extends Fragment {
                 }
 
                 if (qtdMarcada == 1) {
+                    // FINALIZA VISITA - REQUEST
+                    Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class, new VisitaDeserializer()).create();
+
+                    Retrofit retroit = new Retrofit
+                            .Builder()
+                            .baseUrl(ConfiguracoesWS.API)
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+                    VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
+
                     lista.get(posicao).setSituacao(Visita.FINALIZADA);
-                    if (vdao.finalizaVisita(lista.get(posicao))) {
+                    Call<Visita> callVisita = visitaAPI.finalizar(lista.get(posicao));
+
+                    callVisita.enqueue(new Callback<Visita>() {
+                        @Override
+                        public void onResponse(Call<Visita> call, Response<Visita> response) {
+                            visita = response.body();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Visita> call, Throwable t) {
+                            Log.i("onFailure", "ErroFinalizaVisita " + t.getMessage());
+                            Util.showAviso(ctx, R.string.aviso_erro_finaliza_visita);
+                        }
+                    });
+
+                    if (visita != null) {
                         atualizaLista();
                     } else {
                         Util.showAviso(ctx, R.string.aviso_erro_conexaows);
@@ -114,7 +153,49 @@ public class VisitaFragment extends Fragment {
     }
 
     private void atualizaLista() {
-        lista = vdao.listar(user);
+        // RETORNA VISITAS - REQUEST
+        Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class,
+                new VisitaDeserializer()).create();
+
+        Retrofit retroit = new Retrofit
+                .Builder()
+                .baseUrl(ConfiguracoesWS.API)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
+
+        final Call<List<Visita>> call = visitaAPI.listar(user.getLogin(), user.getPerfil());
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                try {
+                    List<Visita> visitas = call.execute().body();
+
+                    if (visitas != null) {
+                        for (Visita v : visitas) {
+                            lista.add(v);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.i("IOException", "Erro Retorna Visitas " + e.getMessage().toString());
+                    Util.showAviso(ctx, R.string.aviso_erro_lista_visita);
+                } finally {
+                    onStop();
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("onSucess", "RETORNA VISITAS - REQUEST ok");
+                    }
+                });
+            }
+        }.start();
+
         adapter = null;
         adapter = new VisitaAdapter(ctx, lista);
         recyclerViewVisita.setAdapter(adapter);

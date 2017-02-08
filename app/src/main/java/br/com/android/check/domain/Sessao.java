@@ -1,17 +1,18 @@
-package br.com.android.check.model.dao;
+package br.com.android.check.domain;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import br.com.android.check.model.bean.Usuario;
-
-public class SessaoDAO {
+/**
+ * Created by masasp29 on 08/02/17.
+ */
+public class Sessao {
 
     private final String PREFERENCE_NAME = "LOGIN", PERFIL_USUARIO = "PERFIL_USUARIO", LOGIN_USUARIO = "LOGIN_USUARIO",
             ID_USUARIO = "ID_USUARIO", TELEFONE_USUARIO = "TELEFONE_USUARIO";
     private SharedPreferences sharedPreferences;
 
-    public SessaoDAO(Context activity) {
+    public Sessao(Context activity) {
         sharedPreferences = activity.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
@@ -35,16 +36,4 @@ public class SessaoDAO {
 
         editor.commit();
     }
-
-    /*public void setUsuario(Usuario usuario, UsuarioDAO dao) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        Usuario user = dao.usuarioLogado(usuario);
-
-        editor.putInt(ID_USUARIO, user.getId());
-        editor.putString(PERFIL_USUARIO, user.getPerfil());
-        editor.putString(LOGIN_USUARIO, user.getLogin());
-
-        editor.commit();
-    }*/
 }

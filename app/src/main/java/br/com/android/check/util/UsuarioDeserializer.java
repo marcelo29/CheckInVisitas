@@ -8,7 +8,7 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-import br.com.android.check.model.bean.Usuario;
+import br.com.android.check.domain.Usuario;
 
 /**
  * Created by marcelo on 02/02/2017.

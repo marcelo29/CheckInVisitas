@@ -8,7 +8,7 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-import br.com.android.check.model.bean.Vendedor;
+import br.com.android.check.domain.Vendedor;
 
 /**
  * Created by marcelo on 02/02/2017.
