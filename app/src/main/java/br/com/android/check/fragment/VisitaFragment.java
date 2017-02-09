@@ -174,7 +174,7 @@ public class VisitaFragment extends Fragment {
                 try {
                     List<Visita> visitas = call.execute().body();
 
-                    if (visitas != null) {
+                    if (visitas != null && lista.size() != visitas.size()) {
                         for (Visita v : visitas) {
                             lista.add(v);
                         }
