@@ -85,16 +85,14 @@ public class VisitaFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewVisita.setLayoutManager(llm);
 
-        //atualizaLista();
-
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        atualizaLista();
         posicao = -1;
+        lista = atualizaLista();
     }
 
     private void finalizaVisita() {
@@ -149,10 +147,11 @@ public class VisitaFragment extends Fragment {
         });
     }
 
-    private void atualizaLista() {
+    private List<Visita> atualizaLista() {
         if (lista == null) {
             lista = new ArrayList<>();
         }
+
         // RETORNA VISITAS - REQUEST
         Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class,
                 new VisitaDeserializer()).create();
@@ -199,6 +198,8 @@ public class VisitaFragment extends Fragment {
         adapter = null;
         adapter = new VisitaAdapter(ctx, lista);
         recyclerViewVisita.setAdapter(adapter);
+
+        return lista;
     }
 
 }

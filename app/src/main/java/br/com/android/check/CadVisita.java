@@ -311,14 +311,15 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
                     });
 
                     // CADASTRA VISITA - REQUEST
-                    gson = new GsonBuilder().registerTypeAdapter(Visita.class, new VisitaDeserializer()).create();
+                    Gson gsonVisita = new GsonBuilder().registerTypeAdapter(Visita.class,
+                            new VisitaDeserializer()).create();
 
-                    retroit = new Retrofit
+                    Retrofit retroitVisita = new Retrofit
                             .Builder()
                             .baseUrl(ConfiguracoesWS.API)
-                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .addConverterFactory(GsonConverterFactory.create(gsonVisita))
                             .build();
-                    VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
+                    VisitaAPI visitaAPI = retroitVisita.create(VisitaAPI.class);
 
                     visita = new Visita(Visita.EM_ANDAMENTO, cliente, endereco, telefone, hora);
                     visita.setData(data);
