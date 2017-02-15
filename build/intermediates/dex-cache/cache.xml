@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="389c562a632feb15d53755a674ae1386647b2f6e">
+        sha1="2596457b475dc6a839e0f677ac9b13e7007fb13b">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/instant-run_915e8549019525d44a55a72cc3ee51997e5ce750.jar" />
     </item>
     <item
@@ -115,7 +115,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="3c98851b0dbe1c6a0b83ea68990cc7da0df81ef0">
+        sha1="e63373ad0f03ed8e4c5cfd1f4b9fcff62831414f">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_1ef1342ef947482b2feaf15bd7d3d0b75ed0d567.jar" />
     </item>
     <item
@@ -207,6 +207,15 @@
         revision="25.0.1"
         sha1="27775d59b16610ac76f1b83693fedd9520396332">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-ads-8.3.0_df228e5b10ccf70881b050a928da3bdd3db27353.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/exploded-aar/com.makeramen/roundedimageview/2.3.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="fbaffbfc2a42fce3718dc9f52182810ad332b0ec">
+        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/com.makeramen-roundedimageview-2.3.0_ea6015320abebca3f958cbc75e701b4bac2a09be.jar" />
     </item>
     <item
         is-multidex="false"
@@ -369,6 +378,15 @@
         revision="25.0.1"
         sha1="c6d79137693d494dee16372d3921f919eb724ced">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-22.0.0_845b42c998b1aea7bdb009d4384f25bd99e6cd5a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/masasp29/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/picasso-2.5.2_66abd5a1fd1f89fed4ccf32968e537171ebb0602.jar" />
     </item>
     <item
         is-multidex="false"

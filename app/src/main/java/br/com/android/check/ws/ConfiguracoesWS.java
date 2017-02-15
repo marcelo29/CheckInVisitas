@@ -5,6 +5,6 @@ package br.com.android.check.ws;
  */
 public class ConfiguracoesWS {
     //retrofit
-    public static final String API = "http://192.168.25.9:8080/";
+    public static final String API = "http://192.168.25.80:8080/";
     public static final String TAG = "onFailure";
 }

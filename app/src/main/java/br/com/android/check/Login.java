@@ -48,8 +48,8 @@ public class Login extends AppCompatActivity {
         edtSenha = (EditText) findViewById(R.id.edtSenha);
 
         fabLogar = (FloatingActionButton) findViewById(R.id.fabLogar);
-
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
+
         cancelar();
     }
 
