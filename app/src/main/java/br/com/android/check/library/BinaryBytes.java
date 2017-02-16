@@ -1,6 +1,7 @@
 package br.com.android.check.library;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
@@ -16,5 +17,11 @@ public class BinaryBytes {
         byte[] byteArray = stream.toByteArray();
 
         return (byteArray);
+    }
+
+    public static Bitmap getResourceInBitmap(byte[] byteArray) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+        return (bitmap);
     }
 }

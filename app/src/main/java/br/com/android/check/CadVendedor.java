@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -42,7 +41,7 @@ public class CadVendedor extends AppCompatActivity {
     private FloatingActionButton fabCadastrar, fabCancelar, fabFotografar;
     private Toolbar toolbar;
     private EditText edtNome, edtSenha, edtTelefone;
-    private Bitmap foto;
+    private static Bitmap foto;
     private ImageView imgFoto;
 
     // componentes do request
@@ -73,6 +72,9 @@ public class CadVendedor extends AppCompatActivity {
 
         imgFoto = (ImageView) findViewById(R.id.rivFoto);
 
+        if (foto != null)
+            imgFoto.setImageBitmap(foto);
+
         cancelar();
         fotografar();
         cadastrar();
@@ -94,12 +96,6 @@ public class CadVendedor extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-
     }
 
     private void cancelar() {

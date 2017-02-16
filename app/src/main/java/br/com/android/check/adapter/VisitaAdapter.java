@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -15,8 +16,9 @@ import com.daimajia.androidanimations.library.YoYo;
 import java.util.List;
 
 import br.com.android.check.R;
-import br.com.android.check.fragment.VisitaFragment;
 import br.com.android.check.domain.Visita;
+import br.com.android.check.fragment.VisitaFragment;
+import br.com.android.check.library.BinaryBytes;
 
 /**
  * Created by masasp29 on 04/12/15.
@@ -74,6 +76,10 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
             }
         });
 
+        if (visita.getVendedor().getFoto() != null) {
+            vh.imgFoto.setImageBitmap(BinaryBytes.getResourceInBitmap(visita.getVendedor().getFoto()));
+        }
+
         if (visita.getSituacao() == Visita.FINALIZADA && !visita.getChkMarcado()) {
             if (VisitaFragment.posicao == position) {
                 try {
@@ -95,6 +101,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView txtCliente, txtEndereco, txtTelefone, txtHora, txtData, txtVendedor, txtSituacao;
         private CheckBox chkLstVisita;
+        private ImageView imgFoto;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -109,6 +116,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
 
             chkLstVisita = (CheckBox) itemView.findViewById(R.id.chkLstVisita);
 
+            imgFoto = (ImageView) itemView.findViewById(R.id.imgFotoVendedor);
             //itemView.setOnClickListener(this);
         }
     }
