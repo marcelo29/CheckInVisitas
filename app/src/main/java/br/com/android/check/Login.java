@@ -18,8 +18,8 @@ import br.com.android.check.api.UsuarioAPI;
 import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.domain.Sessao;
 import br.com.android.check.domain.Usuario;
-import br.com.android.check.library.Util;
 import br.com.android.check.library.UsuarioDeserializer;
+import br.com.android.check.library.Util;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,11 +51,6 @@ public class Login extends AppCompatActivity {
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
 
         cancelar();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         fabLogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +93,7 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void cancelar() {

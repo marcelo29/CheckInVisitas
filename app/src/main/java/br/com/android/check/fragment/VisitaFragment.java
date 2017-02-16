@@ -60,8 +60,6 @@ public class VisitaFragment extends Fragment {
 
         user = new Sessao(ctx).getUsuario();
 
-        lista = atualizaLista();
-
         if (user.getPerfil().equals(Usuario.PERFIL_VENDEDOR)) {
             btnMarcaVisita.setVisibility(View.INVISIBLE);
         }
@@ -86,14 +84,60 @@ public class VisitaFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewVisita.setLayoutManager(llm);
 
-        return view;
-    }
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+        // RETORNA VISITAS - REQUEST
+        Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class,
+                new VisitaDeserializer()).create();
+
+        Retrofit retroit = new Retrofit
+                .Builder()
+                .baseUrl(ConfiguracoesWS.API)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
+
+        final Call<List<Visita>> call = visitaAPI.listar(user.getLogin(), user.getPerfil());
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                try {
+                    List<Visita> visitas = call.execute().body();
+
+                    if (visitas != null && lista.size() != visitas.size()) {
+                        for (Visita v : visitas) {
+                            lista.add(v);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.i("IOException", "Erro Retorna Visitas " + e.getMessage().toString());
+                    Util.showAviso(ctx, R.string.aviso_erro_lista_visita);
+                } finally {
+                    onStop();
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("onSucess", "RETORNA VISITAS - REQUEST ok");
+                    }
+                });
+            }
+        }.start();
+
+        adapter = null;
+        adapter = new VisitaAdapter(ctx, lista);
+        recyclerViewVisita.setAdapter(adapter);
+
         posicao = -1;
-        lista = atualizaLista();
+
+        return view;
     }
 
     private void finalizaVisita() {
@@ -146,61 +190,6 @@ public class VisitaFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private List<Visita> atualizaLista() {
-        if (lista == null) {
-            lista = new ArrayList<>();
-        }
-
-        // RETORNA VISITAS - REQUEST
-        Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class,
-                new VisitaDeserializer()).create();
-
-        Retrofit retroit = new Retrofit
-                .Builder()
-                .baseUrl(ConfiguracoesWS.API)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
-
-        final Call<List<Visita>> call = visitaAPI.listar(user.getLogin(), user.getPerfil());
-
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-
-                try {
-                    List<Visita> visitas = call.execute().body();
-
-                    if (visitas != null && lista.size() != visitas.size()) {
-                        for (Visita v : visitas) {
-                            lista.add(v);
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.i("IOException", "Erro Retorna Visitas " + e.getMessage().toString());
-                    Util.showAviso(ctx, R.string.aviso_erro_lista_visita);
-                } finally {
-                    onStop();
-                }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i("onSucess", "RETORNA VISITAS - REQUEST ok");
-                    }
-                });
-            }
-        }.start();
-
-        adapter = null;
-        adapter = new VisitaAdapter(ctx, lista);
-        recyclerViewVisita.setAdapter(adapter);
-
-        return lista;
     }
 
 }

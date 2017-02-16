@@ -91,6 +91,8 @@ public class CadVisita extends AppCompatActivity implements TimePickerDialog.OnT
         cancelar();
         exibeRelogio();
         exibeCalendario();
+
+
     }
 
     private void cancelar() {
