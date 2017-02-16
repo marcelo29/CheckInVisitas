@@ -25,7 +25,7 @@ import br.com.android.check.domain.Sessao;
 import br.com.android.check.domain.Usuario;
 import br.com.android.check.domain.Visita;
 import br.com.android.check.library.Util;
-import br.com.android.check.util.VisitaDeserializer;
+import br.com.android.check.library.VisitaDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,12 +54,13 @@ public class VisitaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_visita, container, false);
         this.ctx = view.getContext();
-        lista = null;
 
         btnMarcaVisita = (Button) view.findViewById(R.id.btnMarcaVisita);
         recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
 
         user = new Sessao(ctx).getUsuario();
+
+        lista = atualizaLista();
 
         if (user.getPerfil().equals(Usuario.PERFIL_VENDEDOR)) {
             btnMarcaVisita.setVisibility(View.INVISIBLE);

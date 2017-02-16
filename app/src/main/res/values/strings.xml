@@ -30,6 +30,7 @@
     <string name="telefone">Telefone</string>
     <string name="vendedor_cadastrado">Vendedor cadastro com sucesso</string>
     <string name="aviso_erro_lista_vendedores">Erro ao listar vendedores</string>
+    <string name="foto_em_branco">Foto em branco</string>
 
     <!-- Tela Cadastro de Visitas -->
     <string name="title_activity_cad_visita">Cadastro de Visitas</string>

@@ -19,7 +19,7 @@ import br.com.android.check.controler.ValidaCamposObrigatorios;
 import br.com.android.check.domain.Sessao;
 import br.com.android.check.domain.Usuario;
 import br.com.android.check.library.Util;
-import br.com.android.check.util.UsuarioDeserializer;
+import br.com.android.check.library.UsuarioDeserializer;
 import br.com.android.check.ws.ConfiguracoesWS;
 import retrofit2.Call;
 import retrofit2.Callback;

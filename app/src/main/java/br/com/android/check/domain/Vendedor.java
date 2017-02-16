@@ -4,6 +4,7 @@ public class Vendedor {
 
     private int id;
     private String nome, telefone, senha;
+    private byte[] foto;
 
     public int getId() {
         return id;
@@ -37,4 +38,11 @@ public class Vendedor {
         this.senha = senha;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 }

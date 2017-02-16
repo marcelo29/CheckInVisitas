@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,6 +13,29 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:theme="@style/AppTheme.LoginFloatingActionBottom">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/rivFoto"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="4dp"
+            android:src="@color/colorPrimaryGreen"
+            app:riv_corner_radius="400dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabFotografar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/rivFoto"
+            android:layout_alignRight="@id/rivFoto"
+            android:src="@drawable/ic_camera_white" />
+    </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/edtNomeWrapper"
