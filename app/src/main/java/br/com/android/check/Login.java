@@ -51,7 +51,19 @@ public class Login extends AppCompatActivity {
         fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
 
         cancelar();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         fabLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +105,6 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void cancelar() {
@@ -115,14 +126,6 @@ public class Login extends AppCompatActivity {
     private void limpaCampos() {
         edtUsuario.setText("");
         edtSenha.setText("");
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     // validas os campos

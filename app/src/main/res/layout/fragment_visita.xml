@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@style/AppTheme.LoginFloatingActionBottom"
     tools:context="br.com.android.check.fragment.VisitaFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -14,21 +15,23 @@
         android:layout_height="wrap_content"
         android:scrollbars="horizontal" />
 
-    <!--android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabMarcaVisita"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/rv_lst"
-        android:layout_alignRight="@id/rv_lst"
-        android:src="@drawable/ic_finaliza_visita"
-        android:theme="@style/AppTheme.LoginFloatingActionBottom"
-    /-->
-
-    <Button
-        android:id="@+id/btnMarcaVisita"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabMostraVisitas"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignBottom="@id/rv_lst"
+        android:layout_alignEnd="@id/rv_lst"
         android:layout_alignRight="@id/rv_lst"
-        android:background="@drawable/ic_finaliza_visita" />
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="60dp"
+        android:src="@drawable/ic_playlist_white" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabMarcaVisita"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@id/rv_lst"
+        android:layout_alignEnd="@id/rv_lst"
+        android:layout_alignRight="@id/rv_lst"
+        android:src="@drawable/ic_cad_padrao_branco" />
 </RelativeLayout>

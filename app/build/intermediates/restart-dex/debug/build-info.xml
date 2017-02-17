@@ -5,29 +5,29 @@
     density="tvdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="218609633920256"
+    timestamp="18793959938338"
     token="-7633209849349027974"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="2739" />
+        duration="9320" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="352" />
+        duration="304" />
     <task
         name="verifier"
-        duration="6" />
+        duration="7" />
 
     <artifact
         location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="218609633920256"
+        timestamp="18793959938338"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"

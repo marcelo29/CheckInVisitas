@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="1db09cefd4f9b17e0ea30f10d81522823a77581b">
+        sha1="bbf70577ee1b69d14ef0becca363c6502ab1055c">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/instant-run_915e8549019525d44a55a72cc3ee51997e5ce750.jar" />
     </item>
     <item
@@ -111,11 +111,20 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/exploded-aar/com.android.databinding/library/1.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="957dc30b1495f8689271e00d56ab09cc9192df02">
+        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/com.android.databinding-library-1.2.1_5f851f4a0fd4c35822380e8e0a6d0ff8f02952d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="5cabea23b518452e7da152b2c61f40a10c417e3d">
+        sha1="7c5c92bf8b6194adbd13f103486c4afe032112bb">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_1ef1342ef947482b2feaf15bd7d3d0b75ed0d567.jar" />
     </item>
     <item
@@ -174,12 +183,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/masasp29/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jar="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/exploded-aar/com.android.databinding/adapters/1.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/library-2.4.0_17a5c6c08d654da5a88d12c25202bf7aab89a0ff.jar" />
+        sha1="c56d29136c2257f63f08c29c4e739efb03b06c7d">
+        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/com.android.databinding-adapters-1.2.1_5baf38416c50fe80406368ce820e8e2c6843f6f2.jar" />
     </item>
     <item
         is-multidex="false"
@@ -327,6 +336,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/databinding/baseLibrary/2.2.3/baseLibrary-2.2.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="b4b51d1925cdfda98fd861230c1ecb5855500129">
+        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/baseLibrary-2.2.3_474e89972d5faa940568625dac87a46c353c6a04.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/exploded-aar/com.daimajia.androidanimations/library/1.1.3/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -354,15 +372,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.3.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
-        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/com.melnykov-floatingactionbutton-1.3.0_d1ccabc14bc6cfd4d32adb80da00fd9a476d2368.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -378,15 +387,6 @@
         revision="25.0.1"
         sha1="c6d79137693d494dee16372d3921f919eb724ced">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-22.0.0_845b42c998b1aea7bdb009d4384f25bd99e6cd5a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/masasp29/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/pre-dexed/debug/picasso-2.5.2_66abd5a1fd1f89fed4ccf32968e537171ebb0602.jar" />
     </item>
     <item
         is-multidex="false"

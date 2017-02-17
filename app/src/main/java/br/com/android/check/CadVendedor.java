@@ -41,7 +41,7 @@ public class CadVendedor extends AppCompatActivity {
     private FloatingActionButton fabCadastrar, fabCancelar, fabFotografar;
     private Toolbar toolbar;
     private EditText edtNome, edtSenha, edtTelefone;
-    private static Bitmap foto;
+    private Bitmap foto;
     private ImageView imgFoto;
 
     // componentes do request
@@ -165,6 +165,7 @@ public class CadVendedor extends AppCompatActivity {
         edtNome.setText("");
         edtSenha.setText("");
         edtTelefone.setText("");
+        foto = null;
         imgFoto.setImageBitmap(null);
     }
 

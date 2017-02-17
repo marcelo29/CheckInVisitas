@@ -77,7 +77,7 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
             return true;
         }
 
-        if (usuarioLogado.getPerfil().equals(usuarioLogado.PERFIL_ADM)) {
+        if (usuarioLogado.getPerfil().equals(Usuario.PERFIL_ADM)) {
             switch (menuItem.getItemId()) {
                 case R.id.itCadVendedor:
                     carregaLayout(ctx, CadVendedor.class);
@@ -93,9 +93,7 @@ public class ListaVisitaRecyclerView extends AppCompatActivity implements Naviga
             Util.showAviso(ctx, R.string.aviso_usuario_sem_permissao);
         }
 
-        // Highlight the selected item, update the title, and close the drawer
         menuItem.setChecked(true);
-        // setTitle(menuItem.getTitle());
         drawer.closeDrawers();
 
         return true;

@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingStart="20dp"
     android:paddingTop="20dp">
 
     <LinearLayout
@@ -25,7 +27,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/rlDadosCliente"
+        android:id="@+id/rlDadosCliente0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/llCliente">
@@ -34,63 +36,68 @@
             android:id="@+id/txtEndereco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/llCliente"
             android:layout_marginLeft="33dp"
+            android:layout_marginStart="0dp"
             android:hint="@string/endereco" />
 
-        <TextView
-            android:id="@+id/txtTelefone"
+        <RelativeLayout
+            android:id="@+id/rlDadosCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtEndereco"
-            android:layout_marginLeft="33dp"
-            android:hint="@string/telefone" />
+            android:layout_below="@id/txtEndereco">
 
-        <TextView
-            android:id="@+id/txtData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtTelefone"
-            android:layout_marginLeft="33dp"
-            android:hint="@string/data" />
+            <TextView
+                android:id="@+id/txtTelefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="33dp"
+                android:layout_marginStart="0dp"
+                android:hint="@string/telefone" />
 
-        <TextView
-            android:id="@+id/txtHora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtData"
-            android:layout_marginLeft="33dp"
-            android:hint="@string/hora" />
+            <TextView
+                android:id="@+id/txtData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTelefone"
+                android:layout_marginLeft="33dp"
+                android:layout_marginStart="0dp"
+                android:hint="@string/data" />
 
-        <TextView
-            android:id="@+id/txtVendedor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtHora"
-            android:layout_marginLeft="33dp"
-            android:hint="@string/vendedor" />
+            <TextView
+                android:id="@+id/txtHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtData"
+                android:layout_marginLeft="33dp"
+                android:layout_marginStart="0dp"
+                android:hint="@string/hora" />
 
-        <TextView
-            android:id="@+id/txtSituacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtVendedor"
-            android:layout_marginLeft="33dp"
-            android:hint="@string/situacao" />
+            <TextView
+                android:id="@+id/txtVendedor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtHora"
+                android:layout_marginLeft="33dp"
+                android:layout_marginStart="0dp"
+                android:hint="@string/vendedor" />
+
+            <TextView
+                android:id="@+id/txtSituacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtVendedor"
+                android:layout_marginLeft="33dp"
+                android:layout_marginStart="0dp"
+                android:hint="@string/situacao" />
+        </RelativeLayout>
+
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/imgFotoVendedor"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_alignRight="@id/rlDadosCliente"
-        android:src="@null" />
 
     <View
         android:id="@+id/vw_divider"
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-        android:layout_below="@+id/rlDadosCliente"
+        android:layout_below="@+id/rlDadosCliente0"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary" />
 </RelativeLayout>

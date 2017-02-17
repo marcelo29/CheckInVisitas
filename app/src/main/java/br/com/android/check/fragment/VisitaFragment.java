@@ -2,6 +2,7 @@ package br.com.android.check.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,7 +44,7 @@ public class VisitaFragment extends Fragment {
     private RecyclerView recyclerViewVisita;
     private List<Visita> lista;
     private Visita visita;
-    private Button btnMarcaVisita;
+    private FloatingActionButton fabMarcaVisita, fabMostraVisitas;
     private Usuario user;
     private Context ctx;
     private VisitaAdapter adapter;
@@ -55,16 +55,15 @@ public class VisitaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_visita, container, false);
         this.ctx = view.getContext();
 
-        btnMarcaVisita = (Button) view.findViewById(R.id.btnMarcaVisita);
+        fabMarcaVisita = (FloatingActionButton) view.findViewById(R.id.fabMarcaVisita);
+        fabMostraVisitas = (FloatingActionButton) view.findViewById(R.id.fabMostraVisitas);
         recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
 
         user = new Sessao(ctx).getUsuario();
 
         if (user.getPerfil().equals(Usuario.PERFIL_VENDEDOR)) {
-            btnMarcaVisita.setVisibility(View.INVISIBLE);
+            fabMarcaVisita.setVisibility(View.INVISIBLE);
         }
-
-        finalizaVisita();
 
         recyclerViewVisita.setHasFixedSize(true);
 
@@ -84,6 +83,77 @@ public class VisitaFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewVisita.setLayoutManager(llm);
 
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        posicao = -1;
+
+        fabMostraVisitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                atualizaLista();
+            }
+        });
+
+        fabMarcaVisita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalizaVisita();
+            }
+        });
+    }
+
+    private void finalizaVisita() {
+        int qtdMarcada = 0;
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getChkMarcado()) {
+                if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
+                    qtdMarcada++;
+                    posicao = i;
+                }
+            }
+        }
+
+        if (qtdMarcada == 1) {
+            // FINALIZA VISITA - REQUEST
+            Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class, new VisitaDeserializer()).create();
+
+            Retrofit retroit = new Retrofit
+                    .Builder()
+                    .baseUrl(ConfiguracoesWS.API)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
+
+            lista.get(posicao).setSituacao(Visita.FINALIZADA);
+            Call<Visita> callVisita = visitaAPI.finalizar(lista.get(posicao));
+
+            callVisita.enqueue(new Callback<Visita>() {
+                @Override
+                public void onResponse(Call<Visita> call, Response<Visita> response) {
+                    visita = response.body();
+                }
+
+                @Override
+                public void onFailure(Call<Visita> call, Throwable t) {
+                    Log.i("onFailure", "ErroFinalizaVisita " + t.getMessage());
+                    Util.showAviso(ctx, R.string.aviso_erro_finaliza_visita);
+                }
+            });
+
+            atualizaLista();
+        } else if (qtdMarcada > 1) {
+            Util.showAviso(ctx, R.string.aviso_apenas_uma_visita);
+        } else {
+            Util.showAviso(ctx, R.string.aviso_marque_uma_visita);
+        }
+    }
+
+    private void atualizaLista() {
         if (lista == null) {
             lista = new ArrayList<>();
         }
@@ -116,7 +186,7 @@ public class VisitaFragment extends Fragment {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.i("IOException", "Erro Retorna Visitas " + e.getMessage().toString());
+                    Log.i("IOException", "Erro Retorna Visitas " + e.getMessage());
                     Util.showAviso(ctx, R.string.aviso_erro_lista_visita);
                 } finally {
                     onStop();
@@ -134,62 +204,6 @@ public class VisitaFragment extends Fragment {
         adapter = null;
         adapter = new VisitaAdapter(ctx, lista);
         recyclerViewVisita.setAdapter(adapter);
-
-        posicao = -1;
-
-        return view;
-    }
-
-    private void finalizaVisita() {
-        btnMarcaVisita.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int qtdMarcada = 0;
-
-                for (int i = 0; i < lista.size(); i++) {
-                    if (lista.get(i).getChkMarcado()) {
-                        if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
-                            qtdMarcada++;
-                            posicao = i;
-                        }
-                    }
-                }
-
-                if (qtdMarcada == 1) {
-                    // FINALIZA VISITA - REQUEST
-                    Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class, new VisitaDeserializer()).create();
-
-                    Retrofit retroit = new Retrofit
-                            .Builder()
-                            .baseUrl(ConfiguracoesWS.API)
-                            .addConverterFactory(GsonConverterFactory.create(gson))
-                            .build();
-                    VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
-
-                    lista.get(posicao).setSituacao(Visita.FINALIZADA);
-                    Call<Visita> callVisita = visitaAPI.finalizar(lista.get(posicao));
-
-                    callVisita.enqueue(new Callback<Visita>() {
-                        @Override
-                        public void onResponse(Call<Visita> call, Response<Visita> response) {
-                            visita = response.body();
-                        }
-
-                        @Override
-                        public void onFailure(Call<Visita> call, Throwable t) {
-                            Log.i("onFailure", "ErroFinalizaVisita " + t.getMessage());
-                            Util.showAviso(ctx, R.string.aviso_erro_finaliza_visita);
-                        }
-                    });
-
-                    onResume();
-                } else if (qtdMarcada > 1) {
-                    Util.showAviso(ctx, R.string.aviso_apenas_uma_visita);
-                } else {
-                    Util.showAviso(ctx, R.string.aviso_marque_uma_visita);
-                }
-            }
-        });
     }
 
 }
