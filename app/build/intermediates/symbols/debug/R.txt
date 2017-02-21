@@ -882,7 +882,7 @@ int id disconnect 0x7f0c00e9
 int id donate_with 0x7f0c005b
 int id donate_with_google 0x7f0c005c
 int id done_background 0x7f0c00c8
-int id drawer_layout_recycler 0x7f0c00aa
+int id drawer 0x7f0c00aa
 int id dropdown 0x7f0c0045
 int id edit_query 0x7f0c0087
 int id edtCliente 0x7f0c00a0

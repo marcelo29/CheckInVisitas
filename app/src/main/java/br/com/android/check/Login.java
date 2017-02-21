@@ -43,14 +43,13 @@ public class Login extends AppCompatActivity {
         // relaciona xml com codigo java
         usuario = new Usuario("admin", "admin");
         binding.setUsuario(usuario);
-
-        cancelar();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         logar();
+        cancelar();
     }
 
     @Override
@@ -120,7 +119,6 @@ public class Login extends AppCompatActivity {
     private void limpaCampos() {
         binding.edtUsuario.setText("");
         binding.edtSenha.setText("");
-        //return true;
     }
 
     private void carregaLayout(Context context, Class layoutDestino) {

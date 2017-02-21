@@ -2862,7 +2862,7 @@ containing a value of this type.
         public static final int donate_with=0x7f0c005b;
         public static final int donate_with_google=0x7f0c005c;
         public static final int done_background=0x7f0c00c8;
-        public static final int drawer_layout_recycler=0x7f0c00aa;
+        public static final int drawer=0x7f0c00aa;
         public static final int dropdown=0x7f0c0045;
         public static final int edit_query=0x7f0c0087;
         public static final int edtCliente=0x7f0c00a0;
