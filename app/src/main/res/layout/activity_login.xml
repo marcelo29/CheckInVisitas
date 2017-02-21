@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="br.com.android.check.Login">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="usuario" type="br.com.android.check.domain.Usuario" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +24,7 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_contato"
             android:ems="10"
-            android:text="admin" />
+            android:text="@{usuario.login}" />
 
         <TextView
             android:id="@+id/txtSenha"
@@ -42,7 +40,7 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_senha"
             android:inputType="textPassword"
-            android:text="admin" />
+            android:text="@{usuario.senha}" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,4 +65,4 @@
                 android:src="@drawable/abc_ic_clear_mtrl_alpha" />
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</layout>

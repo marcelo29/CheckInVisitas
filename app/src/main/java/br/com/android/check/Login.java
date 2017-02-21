@@ -2,20 +2,19 @@ package br.com.android.check;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.android.check.api.UsuarioAPI;
 import br.com.android.check.controler.ValidaCamposObrigatorios;
+import br.com.android.check.databinding.ActivityLoginBinding;
 import br.com.android.check.domain.Sessao;
 import br.com.android.check.domain.Usuario;
 import br.com.android.check.library.UsuarioDeserializer;
@@ -27,30 +26,31 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-// gerencia o login da aplicacoa
+// gerencia o login da aplicacao
 public class Login extends AppCompatActivity {
-
-    // componentes da tela /
-    private Context ctx;
-    private EditText edtUsuario, edtSenha;
-    private FloatingActionButton fabLogar, fabCancelar;
-
     private Usuario usuario = null;
+
+    // componentes da activity
+    private Context ctx;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.ctx = this;
-        setContentView(R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         // relaciona xml com codigo java
-        edtUsuario = (EditText) findViewById(R.id.edtUsuario);
-        edtSenha = (EditText) findViewById(R.id.edtSenha);
-
-        fabLogar = (FloatingActionButton) findViewById(R.id.fabLogar);
-        fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
+        usuario = new Usuario("admin", "admin");
+        binding.setUsuario(usuario);
 
         cancelar();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        logar();
     }
 
     @Override
@@ -61,13 +61,13 @@ public class Login extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        fabLogar.setOnClickListener(new View.OnClickListener() {
+    private void logar() {
+        binding.fabLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (camposValidos(edtUsuario.getText().toString(), edtSenha.getText().toString())) {
+                usuario = new Usuario(binding.edtUsuario.getText().toString(), binding.edtSenha.getText().toString());
+                binding.setUsuario(usuario);
+                if (camposValidos(binding.edtUsuario.getText().toString(), binding.edtSenha.getText().toString())) {
                     // LOGAR USUARIO - REQUEST
                     Gson gsonUser = new GsonBuilder().registerTypeAdapter(Usuario.class,
                             new UsuarioDeserializer()).create();
@@ -79,8 +79,8 @@ public class Login extends AppCompatActivity {
                             .build();
                     UsuarioAPI usuarioAPI = retroitUser.create(UsuarioAPI.class);
 
-                    final Call<Usuario> callUser = usuarioAPI.logar(edtUsuario.getText().toString(),
-                            edtSenha.getText().toString());
+                    Call<Usuario> callUser = usuarioAPI.logar(binding.edtUsuario.getText().toString(),
+                            binding.edtSenha.getText().toString());
 
                     callUser.enqueue(new Callback<Usuario>() {
                         @Override
@@ -108,7 +108,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void cancelar() {
-        fabCancelar.setOnClickListener(new OnClickListener() {
+        binding.fabCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 limpaCampos();
@@ -116,16 +116,17 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    // limpa os campos ao logar
+    private void limpaCampos() {
+        binding.edtUsuario.setText("");
+        binding.edtSenha.setText("");
+        //return true;
+    }
+
     private void carregaLayout(Context context, Class layoutDestino) {
         Intent intent = new Intent(context, layoutDestino);
         startActivity(intent);
-        limpaCampos();
-    }
-
-    // limpa os campos ao logar
-    private void limpaCampos() {
-        edtUsuario.setText("");
-        edtSenha.setText("");
+        //limpaCampos();
     }
 
     // validas os campos
@@ -133,12 +134,12 @@ public class Login extends AppCompatActivity {
         boolean validacao = true;
 
         if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(usuario)) {
-            edtUsuario.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            binding.edtUsuario.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             validacao = false;
         }
 
         if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(senha)) {
-            edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            binding.edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             validacao = false;
         }
 

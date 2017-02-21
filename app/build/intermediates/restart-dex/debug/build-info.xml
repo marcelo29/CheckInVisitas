@@ -1,37 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86"
-    api-level="19"
-    density="tvdpi"
+    abi="armeabi-v7a,armeabi"
+    api-level="22"
+    density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="18793959938338"
+    timestamp="227310186166405"
     token="-7633209849349027974"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="9320" />
+        duration="7378" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="304" />
+        duration="147" />
     <task
         name="verifier"
-        duration="7" />
+        duration="21" />
 
     <artifact
-        location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
+        type="DEX" />
 
     <build
-        timestamp="18793959938338"
+        timestamp="223539239147323"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="226796069112063"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="226886676490107"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
+    </build>
+    <build
+        timestamp="227310186166405"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_2/classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>

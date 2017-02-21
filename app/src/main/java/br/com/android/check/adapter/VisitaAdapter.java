@@ -24,7 +24,7 @@ import br.com.android.check.fragment.VisitaFragment;
 public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
-    public List<Visita> lista;
+    public static List<Visita> lista;
     private Context ctx;
 
     public VisitaAdapter(Context ctx, List<Visita> lista) {
