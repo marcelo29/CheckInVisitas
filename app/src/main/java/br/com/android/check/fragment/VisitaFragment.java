@@ -41,22 +41,24 @@ import static com.google.android.gms.internal.zzip.runOnUiThread;
  */
 public class VisitaFragment extends Fragment {
 
-    private RecyclerView recyclerViewVisita;
-    private List<Visita> lista;
     private Visita visita;
-    private FloatingActionButton fabMarcaVisita, fabMostraVisitas;
     private Usuario user;
-    private Context ctx;
-    private VisitaAdapter adapter;
+    private List<Visita> lista;
     public static int posicao = -1;
+
+    private Context ctx;
+    private RecyclerView recyclerViewVisita;
+    private FloatingActionButton fabMarcaVisita, fabAtualizaLista;
+    private VisitaAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_visita, container, false);
-        this.ctx = view.getContext();
+        ctx = view.getContext();
+        lista = null;
 
         fabMarcaVisita = (FloatingActionButton) view.findViewById(R.id.fabMarcaVisita);
-        fabMostraVisitas = (FloatingActionButton) view.findViewById(R.id.fabMostraVisitas);
+        fabAtualizaLista = (FloatingActionButton) view.findViewById(R.id.fabAtualizaLista);
         recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
 
         user = new Sessao(ctx).getUsuario();
@@ -91,7 +93,7 @@ public class VisitaFragment extends Fragment {
         super.onResume();
         posicao = -1;
 
-        fabMostraVisitas.setOnClickListener(new View.OnClickListener() {
+        fabAtualizaLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 atualizaLista();
@@ -107,53 +109,59 @@ public class VisitaFragment extends Fragment {
     }
 
     private void finalizaVisita() {
-        int qtdMarcada = 0;
+        if (lista.size() != 0) {
+            lista = VisitaAdapter.lista;
 
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getChkMarcado()) {
-                if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
-                    qtdMarcada++;
-                    posicao = i;
+            int qtdMarcada = 0;
+
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).getChkMarcado()) {
+                    if (lista.get(i).getSituacao() == Visita.EM_ANDAMENTO) {
+                        qtdMarcada++;
+                        posicao = i;
+                    }
                 }
             }
-        }
 
-        if (qtdMarcada == 1) {
-            // FINALIZA VISITA - REQUEST
-            Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class, new VisitaDeserializer()).create();
+            if (qtdMarcada == 1) {
+                // FINALIZA VISITA - REQUEST
+                Gson gson = new GsonBuilder().registerTypeAdapter(Visita.class, new VisitaDeserializer()).create();
 
-            Retrofit retroit = new Retrofit
-                    .Builder()
-                    .baseUrl(ConfiguracoesWS.API)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-            VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
+                Retrofit retroit = new Retrofit
+                        .Builder()
+                        .baseUrl(ConfiguracoesWS.API)
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+                VisitaAPI visitaAPI = retroit.create(VisitaAPI.class);
 
-            lista.get(posicao).setSituacao(Visita.FINALIZADA);
-            Call<Visita> callVisita = visitaAPI.finalizar(lista.get(posicao));
+                lista.get(posicao).setSituacao(Visita.FINALIZADA);
+                Call<Visita> callVisita = visitaAPI.finalizar(lista.get(posicao));
 
-            callVisita.enqueue(new Callback<Visita>() {
-                @Override
-                public void onResponse(Call<Visita> call, Response<Visita> response) {
-                    visita = response.body();
-                }
+                callVisita.enqueue(new Callback<Visita>() {
+                    @Override
+                    public void onResponse(Call<Visita> call, Response<Visita> response) {
+                        visita = response.body();
+                    }
 
-                @Override
-                public void onFailure(Call<Visita> call, Throwable t) {
-                    Log.i("onFailure", "ErroFinalizaVisita " + t.getMessage());
-                    Util.showAviso(ctx, R.string.aviso_erro_finaliza_visita);
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Visita> call, Throwable t) {
+                        Log.i("onFailure", "ErroFinalizaVisita " + t.getMessage());
+                        Util.showAviso(ctx, R.string.aviso_erro_finaliza_visita);
+                    }
+                });
 
-            atualizaLista();
-        } else if (qtdMarcada > 1) {
-            Util.showAviso(ctx, R.string.aviso_apenas_uma_visita);
+                atualizaLista();
+            } else if (qtdMarcada > 1) {
+                Util.showAviso(ctx, R.string.aviso_apenas_uma_visita);
+            } else {
+                Util.showAviso(ctx, R.string.aviso_marque_uma_visita);
+            }
         } else {
-            Util.showAviso(ctx, R.string.aviso_marque_uma_visita);
+            Util.showAviso(ctx, R.string.aviso_clique_duplo_botao_esquerdo);
         }
     }
 
-    private void atualizaLista() {
+    public void atualizaLista() {
         if (lista == null) {
             lista = new ArrayList<>();
         }

@@ -89,7 +89,6 @@ public class Login extends AppCompatActivity {
                                 new Sessao(ctx).setUsuario(usuario);
 
                                 carregaLayout(ctx, ListaVisitaRecyclerView.class);
-                                limpaCampos();
                             } else {
                                 Util.showAviso(ctx, R.string.aviso_login_invalido);
                             }

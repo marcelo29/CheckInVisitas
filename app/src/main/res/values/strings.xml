@@ -72,5 +72,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="ip_na_rede">WS esta on.</string>
     <string name="ip_fora_da_rede">WS esta off.</string>
+    <string name="aviso_clique_duplo_botao_esquerdo">Clique duplo no botão esquerdo para exibir a lista.</string>
 
 </resources>

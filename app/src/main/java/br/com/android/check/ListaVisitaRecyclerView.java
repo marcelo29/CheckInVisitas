@@ -120,6 +120,11 @@ public class ListaVisitaRecyclerView extends AppCompatActivity
     private void verNoMapa() {
         int marcadas = 0, posicaoMarcada = 0;
 
+        if (VisitaAdapter.lista == null) {
+            Util.showAviso(ctx, R.string.aviso_clique_duplo_botao_esquerdo);
+            return;
+        }
+
         List<Visita> lista = VisitaAdapter.lista;
 
         for (int i = 0; i < lista.size(); i++) {

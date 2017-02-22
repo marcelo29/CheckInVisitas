@@ -5,7 +5,7 @@ public class Visita {
     public static final int EM_ANDAMENTO = 0, REALIZADA = 1, FINALIZADA = 2;
 
     private int id, situacao;
-    private String cliente, endereco, telefone;
+    private String cliente, endereco, telefone, txtSituacao;
     private String data;
     private String hora;
     private Vendedor vendedor;
@@ -73,5 +73,13 @@ public class Visita {
 
     public void setChkMarcado(Boolean chkMarcado) {
         this.chkMarcado = chkMarcado;
+    }
+
+    public String getTxtSituacao() {
+        return txtSituacao;
+    }
+
+    public void setTxtSituacao(String txtSituacao) {
+        this.txtSituacao = txtSituacao;
     }
 }
