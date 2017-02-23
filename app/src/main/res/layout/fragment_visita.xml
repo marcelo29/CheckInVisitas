@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <data>
-
         <import type="android.view.View" />
     </data>
 
@@ -27,19 +25,15 @@
             android:id="@+id/fabAtualizaLista"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignBottom="@id/rv_lst"
-            android:layout_alignEnd="@id/rv_lst"
-            android:layout_alignRight="@id/rv_lst"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="60dp"
+            android:layout_below="@id/rv_lst"
             android:onClick="atualizaLista"
             android:src="@drawable/ic_playlist_white"
             android:visibility="invisible" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabFinalizaVisita"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@id/rv_lst"
             android:layout_alignEnd="@id/rv_lst"
             android:layout_alignRight="@id/rv_lst"

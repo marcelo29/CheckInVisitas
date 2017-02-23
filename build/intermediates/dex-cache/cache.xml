@@ -97,7 +97,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="85a90def92db46942bca4baf1b49ae111fb4142f">
+        sha1="919ee99c2e27d6d8fec17c85c8d27a474f15d4a4">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_915e8549019525d44a55a72cc3ee51997e5ce750/classes.dex" />
     </item>
     <item
@@ -358,7 +358,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="f5edcf2d230c740981ebe16e2d3770c61931e418">
+        sha1="b1d2ef26d5646fa5202b9665fe407f3c0458bf19">
         <dex dex="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_1ef1342ef947482b2feaf15bd7d3d0b75ed0d567/classes.dex" />
     </item>
     <item

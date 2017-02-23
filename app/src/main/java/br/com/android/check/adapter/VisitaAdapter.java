@@ -57,14 +57,6 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
 
         @UiThread
         public void bind(final Visita visita) {
-            if (visita.getSituacao() == Visita.EM_ANDAMENTO) {
-                binding.chkLstVisita.setEnabled(true);
-                visita.setTxtSituacao("Em andamento");
-            } else if (visita.getSituacao() == Visita.FINALIZADA) {
-                binding.chkLstVisita.setEnabled(false);
-                visita.setTxtSituacao("Finalizada");
-            }
-
             binding.chkLstVisita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -75,6 +67,16 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.ViewHolder
                     }
                 }
             });
+
+            if (visita.getSituacao() == Visita.EM_ANDAMENTO) {
+                binding.chkLstVisita.setEnabled(true);
+                visita.setTxtSituacao("Em andamento");
+            } else if (visita.getSituacao() == Visita.FINALIZADA) {
+                binding.chkLstVisita.setChecked(false);
+                //visita.setChkMarcado(false);
+                binding.chkLstVisita.setEnabled(false);
+                visita.setTxtSituacao("Finalizada");
+            }
 
             binding.setVisita(visita);
         }

@@ -88,11 +88,13 @@ public class VisitaFragment extends Fragment {
         super.onResume();
         posicao = -1;
 
+        // corrigir posteriormente
         atualizaLista();
 
         binding.fabFinalizaVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                atualizaLista();
                 finalizaVisita();
             }
         });
@@ -131,6 +133,7 @@ public class VisitaFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Visita> call, Response<Visita> response) {
                         visita = response.body();
+                        VisitaAdapter.lista.get(posicao).setChkMarcado(false);
                     }
 
                     @Override

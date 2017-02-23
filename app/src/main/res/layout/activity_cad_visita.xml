@@ -1,121 +1,141 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.android.check.CadVisita">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+        <variable name="visita" type="br.com.android.check.domain.Visita"/>
+    </data>
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/edtClienteWrapper"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="br.com.android.check.CadVisita">
 
-        <EditText
-            android:id="@+id/edtCliente"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:drawableRight="@drawable/ic_contato"
-            android:hint="@string/cliente" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/toolbar_rounded_corners"
+            android:elevation="4dp"
+            android:fitsSystemWindows="true"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/edtDataWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/edtClienteWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edtData"
+            <EditText
+                android:id="@+id/edtCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:drawableRight="@drawable/ic_contato"
+                android:hint="@string/cliente"
+                android:text="@{visita.cliente}" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/edtDataWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:drawableRight="@drawable/ic_data"
+                android:hint="@string/data"
+                android:inputType="date"
+                android:text="@{visita.data}" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/edtHoraWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:drawableRight="@drawable/ic_relogio"
+                android:hint="@string/hora"
+                android:inputType="datetime"
+                android:text="@{visita.hora}" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/edtEnderecoWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:drawableRight="@drawable/ic_endereco"
+                android:hint="@string/endereco"
+                android:text="@{visita.endereco}" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/edtTelefoneWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:drawableRight="@drawable/ic_telefone"
+                android:hint="@string/telefone"
+                android:inputType="phone"
+                android:text="@{visita.telefone}" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:drawableRight="@drawable/ic_data"
-            android:hint="@string/data"
-            android:inputType="date" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp"
+            android:text="@{visita.vendedor.nome}"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/edtHoraWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/spnVendedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/edtHora"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:drawableRight="@drawable/ic_relogio"
-            android:hint="@string/hora"
-            android:inputType="datetime" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/edtEnderecoWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edtEndereco"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:drawableRight="@drawable/ic_endereco"
-            android:hint="@string/endereco" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/edtTelefoneWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edtTelefone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:drawableRight="@drawable/ic_telefone"
-            android:hint="@string/telefone"
-            android:inputType="phone" />
-    </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/vendedor"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Spinner
-        android:id="@+id/spnVendedor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:theme="@style/AppTheme.LoginFloatingActionBottom">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabCadastrar"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_cad_padrao_branco" />
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:theme="@style/AppTheme.LoginFloatingActionBottom">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabCadastrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_cad_padrao_branco" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>
