@@ -911,9 +911,9 @@ int id expanded_menu 0x7f0c007c
 int id fabAtualizaLista 0x7f0c00b1
 int id fabCadastrar 0x7f0c00a8
 int id fabCancelar 0x7f0c00a9
+int id fabFinalizaVisita 0x7f0c00b2
 int id fabFotografar 0x7f0c009a
 int id fabLogar 0x7f0c00ae
-int id fabMarcaVisita 0x7f0c00b2
 int id fill 0x7f0c0026
 int id fill_horizontal 0x7f0c0027
 int id fill_vertical 0x7f0c0028

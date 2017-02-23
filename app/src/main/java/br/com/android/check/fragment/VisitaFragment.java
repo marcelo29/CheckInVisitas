@@ -1,8 +1,8 @@
 package br.com.android.check.fragment;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +21,7 @@ import java.util.List;
 import br.com.android.check.R;
 import br.com.android.check.adapter.VisitaAdapter;
 import br.com.android.check.api.VisitaAPI;
+import br.com.android.check.databinding.FragmentVisitaBinding;
 import br.com.android.check.domain.Sessao;
 import br.com.android.check.domain.Usuario;
 import br.com.android.check.domain.Visita;
@@ -35,7 +36,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.google.android.gms.internal.zzip.runOnUiThread;
 
-
 /**
  * Created by masasp29 on 04/12/15.
  */
@@ -47,29 +47,24 @@ public class VisitaFragment extends Fragment {
     public static int posicao = -1;
 
     private Context ctx;
-    private RecyclerView recyclerViewVisita;
-    private FloatingActionButton fabMarcaVisita, fabAtualizaLista;
     private VisitaAdapter adapter;
+    private FragmentVisitaBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_visita, container, false);
-        ctx = view.getContext();
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_visita, container, false);
+        ctx = binding.getRoot().getContext();
         lista = null;
-
-        fabMarcaVisita = (FloatingActionButton) view.findViewById(R.id.fabMarcaVisita);
-        fabAtualizaLista = (FloatingActionButton) view.findViewById(R.id.fabAtualizaLista);
-        recyclerViewVisita = (RecyclerView) view.findViewById(R.id.rv_lst);
 
         user = new Sessao(ctx).getUsuario();
 
         if (user.getPerfil().equals(Usuario.PERFIL_VENDEDOR)) {
-            fabMarcaVisita.setVisibility(View.INVISIBLE);
+            binding.fabFinalizaVisita.setVisibility(View.INVISIBLE);
         }
 
-        recyclerViewVisita.setHasFixedSize(true);
+        binding.rvLst.setHasFixedSize(true);
 
-        recyclerViewVisita.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        binding.rvLst.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -83,9 +78,9 @@ public class VisitaFragment extends Fragment {
 
         LinearLayoutManager llm = new LinearLayoutManager(ctx);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewVisita.setLayoutManager(llm);
+        binding.rvLst.setLayoutManager(llm);
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -93,14 +88,9 @@ public class VisitaFragment extends Fragment {
         super.onResume();
         posicao = -1;
 
-        fabAtualizaLista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                atualizaLista();
-            }
-        });
+        atualizaLista();
 
-        fabMarcaVisita.setOnClickListener(new View.OnClickListener() {
+        binding.fabFinalizaVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finalizaVisita();
@@ -161,7 +151,7 @@ public class VisitaFragment extends Fragment {
         }
     }
 
-    public void atualizaLista() {
+    private void atualizaLista() {
         if (lista == null) {
             lista = new ArrayList<>();
         }
@@ -187,7 +177,7 @@ public class VisitaFragment extends Fragment {
                 try {
                     List<Visita> visitas = call.execute().body();
 
-                    if (visitas != null && lista.size() != visitas.size()) {
+                    if (lista.size() != visitas.size()) {
                         for (Visita v : visitas) {
                             lista.add(v);
                         }
@@ -211,7 +201,7 @@ public class VisitaFragment extends Fragment {
 
         adapter = null;
         adapter = new VisitaAdapter(ctx, lista);
-        recyclerViewVisita.setAdapter(adapter);
+        binding.rvLst.setAdapter(adapter);
     }
 
 }

@@ -2891,9 +2891,9 @@ containing a value of this type.
         public static final int fabAtualizaLista=0x7f0c00b1;
         public static final int fabCadastrar=0x7f0c00a8;
         public static final int fabCancelar=0x7f0c00a9;
+        public static final int fabFinalizaVisita=0x7f0c00b2;
         public static final int fabFotografar=0x7f0c009a;
         public static final int fabLogar=0x7f0c00ae;
-        public static final int fabMarcaVisita=0x7f0c00b2;
         public static final int fill=0x7f0c0026;
         public static final int fill_horizontal=0x7f0c0027;
         public static final int fill_vertical=0x7f0c0028;
