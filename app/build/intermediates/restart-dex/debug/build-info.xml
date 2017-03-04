@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="22"
-    density="xhdpi"
+    abi="x86"
+    api-level="19"
+    density="tvdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="379486830436053"
+    timestamp="426964803034676"
     token="-7633209849349027974"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="11515" />
+        duration="9189" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="11385" />
+        duration="250" />
     <task
         name="verifier"
-        duration="231" />
+        duration="2" />
 
     <artifact
         location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="379486830436053"
+        timestamp="426964803034676"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/masasp29/StudioProjects/CheckInVisitas/app/build/outputs/apk/app-debug.apk"

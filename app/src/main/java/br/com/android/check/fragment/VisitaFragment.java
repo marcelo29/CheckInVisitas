@@ -88,7 +88,6 @@ public class VisitaFragment extends Fragment {
         super.onResume();
         posicao = -1;
 
-        // corrigir posteriormente
         atualizaLista();
 
         binding.fabFinalizaVisita.setOnClickListener(new View.OnClickListener() {

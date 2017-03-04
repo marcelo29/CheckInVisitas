@@ -2,18 +2,15 @@ package br.com.android.check;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import br.com.android.check.api.VendedorAPI;
 import br.com.android.check.controler.Mask;
 import br.com.android.check.controler.ValidaCamposObrigatorios;
+import br.com.android.check.databinding.ActivityCadVendedorBinding;
 import br.com.android.check.domain.Vendedor;
 import br.com.android.check.library.BinaryBytes;
 import br.com.android.check.library.Util;
@@ -35,45 +33,42 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CadVendedor extends AppCompatActivity {
     // constantes
     private static final int ESTADO_IMAGEM_CAPTURADA = 1;
+    private static final String NOME = "nome", TELEFONE = "telefone", SENHA = "senha";
 
     // componentes da tela /
     private Context ctx;
-    private FloatingActionButton fabCadastrar, fabCancelar, fabFotografar;
-    private Toolbar toolbar;
-    private EditText edtNome, edtSenha, edtTelefone;
-    private Bitmap foto;
-    private ImageView imgFoto;
+    private static Bitmap foto;
 
     // componentes do request
     private Vendedor vendedor = null;
+    private ActivityCadVendedorBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ctx = this;
-        setContentView(R.layout.activity_cad_vendedor);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_cad_vendedor);
 
         // construindo toolbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        // recebendo componentes do xhtml
-        fabCadastrar = (FloatingActionButton) findViewById(R.id.fabCadastrar);
-        fabCancelar = (FloatingActionButton) findViewById(R.id.fabCancelar);
-        fabFotografar = (FloatingActionButton) findViewById(R.id.fabFotografar);
-
-        edtNome = (EditText) findViewById(R.id.edtNome);
-        edtSenha = (EditText) findViewById(R.id.edtSenha);
-
-        edtTelefone = (EditText) findViewById(R.id.edtTelefone);
-        edtTelefone.addTextChangedListener(Mask.insert("(##)#####-####", edtTelefone));
-
-        imgFoto = (ImageView) findViewById(R.id.rivFoto);
+        binding.edtTelefone.addTextChangedListener(Mask.insert("(##)#####-####", binding.edtTelefone));
 
         if (foto != null)
-            imgFoto.setImageBitmap(foto);
+            binding.rivFoto.setImageBitmap(foto);
+
+        if (savedInstanceState != null) {
+            if (vendedor == null)
+                vendedor = new Vendedor();
+
+            vendedor.setNome(savedInstanceState.getString(NOME, ""));
+            vendedor.setTelefone(savedInstanceState.getString(TELEFONE, ""));
+            vendedor.setSenha(savedInstanceState.getString(SENHA, ""));
+
+            binding.setVendedor(vendedor);
+        }
 
         cancelar();
         fotografar();
@@ -81,11 +76,20 @@ public class CadVendedor extends AppCompatActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(NOME, binding.edtNome.getText().toString());
+        outState.putString(TELEFONE, binding.edtTelefone.getText().toString());
+        outState.putString(SENHA, binding.edtSenha.getText().toString());
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onActivityResult(int codigo_requistado, int resultado_codigo, Intent data) {
         if (codigo_requistado == ESTADO_IMAGEM_CAPTURADA && resultado_codigo == RESULT_OK) {
             Bundle extras = data.getExtras();
             foto = (Bitmap) extras.get("data");
-            imgFoto.setImageBitmap(foto);
+            binding.rivFoto.setImageBitmap(foto);
         }
     }
 
@@ -99,7 +103,7 @@ public class CadVendedor extends AppCompatActivity {
     }
 
     private void cancelar() {
-        fabCancelar.setOnClickListener(new View.OnClickListener() {
+        binding.fabCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 limpaCampos();
@@ -108,7 +112,7 @@ public class CadVendedor extends AppCompatActivity {
     }
 
     private void fotografar() {
-        fabFotografar.setOnClickListener(new View.OnClickListener() {
+        binding.fabFotografar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent capturaFoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -120,14 +124,18 @@ public class CadVendedor extends AppCompatActivity {
     }
 
     private void cadastrar() {
-        fabCadastrar.setOnClickListener(new View.OnClickListener() {
+        binding.fabCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vendedor = new Vendedor();
-                vendedor.setNome(edtNome.getText().toString());
-                vendedor.setSenha(edtSenha.getText().toString());
-                vendedor.setTelefone(edtTelefone.getText().toString());
-                vendedor.setFoto(BinaryBytes.getResourceInBytes(foto));
+                if (vendedor == null)
+                    vendedor = new Vendedor();
+
+                vendedor.setNome(binding.edtNome.getText().toString());
+                vendedor.setSenha(binding.edtSenha.getText().toString());
+                vendedor.setTelefone(binding.edtTelefone.getText().toString());
+
+                if (foto != null)
+                    vendedor.setFoto(BinaryBytes.getResourceInBytes(foto));
 
                 if (camposValidos(vendedor.getNome(), vendedor.getSenha(), vendedor.getTelefone())) {
                     // CADASTRA VENDEDOR - POST
@@ -146,8 +154,10 @@ public class CadVendedor extends AppCompatActivity {
                     callVendedor.enqueue(new Callback<Vendedor>() {
                         @Override
                         public void onResponse(Call<Vendedor> call, Response<Vendedor> response) {
+                            binding.fabCadastrar.setEnabled(false);
                             Util.showAviso(ctx, R.string.vendedor_cadastrado);
                             limpaCampos();
+                            binding.fabCadastrar.setEnabled(true);
                         }
 
                         @Override
@@ -162,11 +172,11 @@ public class CadVendedor extends AppCompatActivity {
     }
 
     private void limpaCampos() {
-        edtNome.setText("");
-        edtSenha.setText("");
-        edtTelefone.setText("");
+        binding.edtNome.setText("");
+        binding.edtSenha.setText("");
+        binding.edtTelefone.setText("");
+        binding.rivFoto.setImageBitmap(null);
         foto = null;
-        imgFoto.setImageBitmap(null);
     }
 
     // validas os campos
@@ -174,17 +184,17 @@ public class CadVendedor extends AppCompatActivity {
         boolean validacao = true;
 
         if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(nome)) {
-            edtNome.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            binding.edtNome.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             validacao = false;
         }
 
         if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(senha)) {
-            edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            binding.edtSenha.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             validacao = false;
         }
 
         if (ValidaCamposObrigatorios.seCampoEstaNuloOuEmBranco(telefone)) {
-            edtTelefone.setError(Util.AVISO_CAMPO_OBRIGATORIO);
+            binding.edtTelefone.setError(Util.AVISO_CAMPO_OBRIGATORIO);
             validacao = false;
         }
 
